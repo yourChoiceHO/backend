@@ -13,3 +13,5 @@ yarn-error.log
 .env
 
 composer\.lock
+
+\.DS_Store
