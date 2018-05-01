@@ -27,6 +27,9 @@ class Party extends Model
     //jede Partei MUSS GENAU EINE election haben
     //Gegenstück zu $this->hasMany('App\Party') in election
     //erwartet, dass es in election eine id gibt,die in party dann als FK eingetragen wird
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function election() {
         return $this->belongsTo('App\Election');
     }
