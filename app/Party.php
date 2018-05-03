@@ -7,6 +7,7 @@ use App\Election;
 
 class Party extends Model
 {
+    //const something= 5;
     //es werden keine timestamps benötigt
     //public $timestamps = false;
 

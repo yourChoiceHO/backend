@@ -11,6 +11,8 @@ class ElectionTableSeeder extends Seeder
      */
     public function run()
     {
+
+        //\App\Party::something
         DB::table('elections')->insert([
             'typ' => 'Bundestagswahl',
             'text' => 'ich bin ein kleiner test text zur bundestagswahl',

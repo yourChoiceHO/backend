@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Election extends Model
 {
+    public $timestamps = true;
+
     protected $table = 'elections';
     // protected $fillable = ['typ'];// white list, wenn blacklist vorhanden, dann nicht erforderlich (laravel eloquent)
     protected $guarded = ['id_election', 'client_id'];//blacklist
