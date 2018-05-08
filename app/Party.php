@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Election;
 
 class Party extends Model
 {
@@ -20,28 +19,25 @@ class Party extends Model
     protected $fillable = ['name', 'text', 'consituency', 'vote'];
     //election_id und id nicht, sollen generiert werden beim erstellen
     //und nur automatisch gesetzt werden können
-    protected $guarded = ['id', 'election_id'];
+    protected $guarded = ['id_party', 'election_id'];
 
 
     // DEFINE RELATIONSHIPS --------------------------------------------------
 
-    //jede Partei MUSS GENAU EINE election haben
-    //Gegenstück zu $this->hasMany('App\Party') in election
-    //erwartet, dass es in election eine id gibt,die in party dann als FK eingetragen wird
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function election() {
-        return $this->belongsTo('App\Election');
-    }
+        //jede Partei MUSS GENAU EINE election haben
+        //Gegenstück zu $this->hasMany('App\Party') in election
+        //erwartet, dass es in election eine id gibt,die in party dann als FK eingetragen wird
+        /**
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+         */
+        public function election() {
+            return $this->belongsTo('App\Election');
+        }
 
     //jede Partei KANN KEINEN, EINEN ODER MEHRERE(???, laut DB-Modell nicht) Kandidaten haben
-    //Tabelle candidate noch nicht vorhanden
-    /*
     public function candidates() {
         return $this->hasMany('App\Candidate');
     }
-    */
 
     //FUNCTIONS-------------------------------------------------------------
 
@@ -63,5 +59,4 @@ class Party extends Model
             return $party->name;
         }
     }
-
 }

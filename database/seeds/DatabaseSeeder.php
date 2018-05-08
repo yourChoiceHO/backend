@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             ReferendumTableSeeder::class
             ElectionTableSeeder::class,
             PartyTableSeeder::class,
+            CandidateTableSeeder::class,
+            VoteTableSeeder::class,
+            VoterTableSeeder::class
         ]);
     }
 }
