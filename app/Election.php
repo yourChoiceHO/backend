@@ -32,7 +32,14 @@ class Election extends Model
         return $this->hasMany('App\Party');
     }
 
+    //Eine election KANN MEHRERE candidates haben
+    //trägt meine id als FK in candidate ein
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function candidates() {
+        return $this->hasMany('App\Candidate');
+    }
 
-
-
+    //FUNCTIONS-------------------------------------------------------------
 }
