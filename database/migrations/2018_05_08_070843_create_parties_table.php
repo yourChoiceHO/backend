@@ -17,7 +17,7 @@ class CreatePartiesTable extends Migration
             $table->increments('id_party');
             $table->string('name')->unique();
             $table->text('text')->nullable();
-            $table->integer('consituency');
+            $table->integer('constituency');
             $table->unsignedInteger('election_id');
             $table->bigInteger('vote');
             $table->timestamps();

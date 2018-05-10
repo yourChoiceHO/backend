@@ -22,7 +22,7 @@ class CandidateTableSeeder extends Seeder
             'last_name' => 'Westerwelle',
             'first_name' => 'Guido',
             'party_id' => null,
-            'consituency' => 6,
+            'constituency' => 6,
             //FK
             //Alternative:
             //'election_id' => \App\Election::first()->id_election,
@@ -35,7 +35,7 @@ class CandidateTableSeeder extends Seeder
             'last_name' => 'Merkel',
             'first_name' => 'Angela',
             'party_id' => $faker->randomElement($partiesIDs),
-            'consituency' => 1,
+            'constituency' => 1,
             //FK
             //Alternative:
             //'election_id' => \App\Election::first()->id_election,

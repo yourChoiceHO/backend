@@ -23,7 +23,7 @@ class CreateVotersTable extends Migration
             //Fingerprint ist alt, neu vermutlich userID
             //$table->string('finger_print');
             $table->string('userID');
-            $table->integer('consituency');
+            $table->integer('constituency');
             $table->timestamps();
 
             //noch nicht klar

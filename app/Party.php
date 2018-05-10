@@ -16,7 +16,7 @@ class Party extends Model
     protected $table = 'parties';
 
     //Spalten auf die zugegriffen werden darf
-    protected $fillable = ['name', 'text', 'consituency', 'vote'];
+    protected $fillable = ['name', 'text', 'constituency', 'vote'];
     //election_id und id nicht, sollen generiert werden beim erstellen
     //und nur automatisch gesetzt werden können
     protected $guarded = ['id_party', 'election_id'];

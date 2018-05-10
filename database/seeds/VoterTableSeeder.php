@@ -20,7 +20,7 @@ class VoterTableSeeder extends Seeder
             'last_name' => 'Wurst',
             'first_name' => 'Hans',
             'userID' => 'hsg65r65raghdvhgadhgav',
-            'consituency' => 4
+            'constituency' => 4
         ]);
     }
 }

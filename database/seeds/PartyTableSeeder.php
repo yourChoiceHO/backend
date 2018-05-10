@@ -20,7 +20,7 @@ class PartyTableSeeder extends Seeder
         DB::table('parties')->insert([
             'name' => 'SPD',
             'text' => 'ich bin ein kleiner test text zur SPD',
-            'consituency' => 4,
+            'constituency' => 4,
             //FK
             //Alternative:
             // 'election_id' => $faker->randomElement($electionsIDs),
@@ -33,7 +33,7 @@ class PartyTableSeeder extends Seeder
         DB::table('parties')->insert([
             'name' => 'CDU',
             'text' => 'ich bin ein kleiner test text zur CDU',
-            'consituency' => 4,
+            'constituency' => 4,
             //FK
             //nimm ein beliebiges Element aus dem oben erzeugten Array
             //Möglicherweise gleiche ID gewählt wie bei anderem gleichen Aufruf
