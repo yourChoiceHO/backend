@@ -21,6 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/election/{id}','ElectionController@show');
 Route::post('/election', 'ElectionController@store');
 
+
+Route::get('/election/{id}','ElectionController@show');
+Route::post('/election', 'ElectionController@store');
+
 Route::get('/client/{id}','ClientController@show');
 Route::post('/client', 'ClientController@store');
 

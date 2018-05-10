@@ -30,4 +30,20 @@ class ElectionController extends Controller
         Election::create($array);
     }
 
+    public function show($id){
+        return Election::findOrFail($id);
+    }
+
+    public function store(Request $request)
+    {
+        $array = array(
+            'typ' => $request->input('typ'),
+            'text' => $request->input('text'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'state' => $request->input('state')
+        );
+        Election::create($array);
+    }
+
 }
