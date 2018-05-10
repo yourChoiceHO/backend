@@ -19,10 +19,6 @@ Route::get('/client', 'ClientController@index');
 
 Route::post('/client', 'ClientController@index');
 
-Route::get('/user', 'User1Controller@index');
-
-Route::post('/user', 'User1Controller@index');
-
 Route::get('/election', 'ElectionController@index');
 
 Route::post('/election', 'ElectionController@index');

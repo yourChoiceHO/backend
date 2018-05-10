@@ -14,9 +14,9 @@ class CreateReferendumsTable extends Migration
     public function up()
     {
         Schema::create('referendums', function (Blueprint $table) {
-            $table->bigIncrements('id_referendum')->primary();//unsigned bigInteger, primary key
+            $table->bigIncrements('id_referendum');//unsigned bigInteger, primary key
             $table->string('text');
-            $table->integer('consistuency');
+            $table->integer('constituency');
             $table->bigInteger('election_id');
             $table->bigInteger('yes');
             $table->bigInteger('no');

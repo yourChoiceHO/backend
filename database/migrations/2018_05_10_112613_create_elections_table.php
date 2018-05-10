@@ -16,7 +16,7 @@ class CreateElectionsTable extends Migration
 
         Schema::create('elections', function (Blueprint $table) {
 
-            $table->bigIncrements('id_election')->primary();//unsigned bigInteger, primary key
+            $table->bigIncrements('id_election');//unsigned bigInteger, primary key
             $table->bigInteger('client_id');
             $table->string('typ');
             $table->string('text')->nullable();//oder anstatt string besser text

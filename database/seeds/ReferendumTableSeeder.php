@@ -18,7 +18,7 @@ class ReferendumTableSeeder extends Seeder
 
         DB::table('elections')->insert([
             'text' => 'Darum geht es in diesem Referendum',
-            'consistuency' => '228',
+            'constituency' => '228',
             'election_id' => $faker->randomElement($ElectionIDs),
             'yes' => '1234',
             'no' => '1285'
