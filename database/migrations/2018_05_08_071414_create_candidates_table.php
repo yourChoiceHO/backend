@@ -19,7 +19,7 @@ class CreateCandidatesTable extends Migration
             $table->string('first_name');
             //FK
             $table->unsignedInteger('party_id')->nullable();
-            $table->integer('consituency');
+            $table->integer('constituency');
             //FK
             $table->unsignedInteger('election_id');
             $table->bigInteger('vote');

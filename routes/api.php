@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use \App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/election/{id}','ElectionController@show');
-Route::post('/election', 'ElectionController@store');
+Route::get('/party/{id}','PartyController@show');
+Route::post('/party', 'PartyController@store');
 
