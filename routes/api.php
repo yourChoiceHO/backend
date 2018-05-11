@@ -20,13 +20,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/party/{id}','PartyController@show');
 Route::post('/party', 'PartyController@store');
 
-
-Route::get('/election/{id}','ElectionController@show');
+Route::get('/election/{id}', 'ElectionController@show');
 Route::post('/election', 'ElectionController@store');
+
+Route::get('/candidate/{id}', 'CandidateController@show');
+Route::post('/candidate', 'CandidateController@store');
+
+Route::get('/vote/{id}', 'VoteController@show');
+Route::post('/vote', 'VoteController@store');
+
+Route::get('/voter', 'VoterController@show');
+Route::post('/voter', 'VoterController@store');
+
+
 
 Route::get('/client/{id}','ClientController@show');
 Route::post('/client', 'ClientController@store');
-
 Route::get('/referendum/{id}','ReferendumController@show');
 Route::post('/referendum', 'ReferendumController@store');
-

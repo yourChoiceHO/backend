@@ -15,25 +15,11 @@ class CreateVotersTable extends Migration
     {
         Schema::create('voters', function (Blueprint $table) {
             $table->increments('id_voter');
-            //noch nicht klar
-            //FK
-            //$table->unsignedInteger('vote_id');
             $table->string('last_name');
             $table->string('first_name');
-            //Fingerprint ist alt, neu vermutlich userID
-            //$table->string('finger_print');
-            $table->string('userID');
+            $table->string('hash');
             $table->integer('constituency');
             $table->timestamps();
-
-            //noch nicht klar
-            //Voter belongs to Vote
-            /*
-            $table->foreign('vote_id')
-                ->references('id_vote')
-                ->on('votes')
-                ->onDelete('cascade');
-            */
         });
     }
 

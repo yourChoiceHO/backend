@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Election extends Model
 {
+    const STATE_INAKTIVE = 0;
+    const STATE_AKTIVE = 1;
+
     public $timestamps = true;
 
     protected $table = 'elections';
     // protected $fillable = ['typ'];// white list, wenn blacklist vorhanden, dann nicht erforderlich (laravel eloquent)
     protected $guarded = ['id_election', 'client_id'];//blacklist
 
-    protected $primaryKey = 'id_election';
+    protected $fillable = ['client_id', 'typ', 'text', 'start_date', 'end_date', 'state'];
 
     //Relationships
 
@@ -30,7 +33,7 @@ class Election extends Model
 
     //Election KANN MEHRERE candidates enthalten
     public function candidates() {
-        return $this->hasMany('App\Candidate');
+        return $this->hasOne('App\Candidate');
     }
 
     //Election KANN MEHRERE votes enthalten
@@ -45,4 +48,10 @@ class Election extends Model
 
 
     //FUNCTIONS-------------------------------------------------------------
+
+    //hab ich noch nicht wirklich verstanden...
+    //kommt doch jetzt immer 1 zurück, und ist nicht mit state "verbunden"?
+    public function isAktive(){
+        return self::STATE_AKTIVE;
+    }
 }

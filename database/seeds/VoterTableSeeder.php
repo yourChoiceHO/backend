@@ -19,7 +19,7 @@ class VoterTableSeeder extends Seeder
         DB::table('voters')->insert([
             'last_name' => 'Wurst',
             'first_name' => 'Hans',
-            'userID' => 'hsg65r65raghdvhgadhgav',
+            'hash' => 'hsg65r65raghdvhgadhgav',
             'constituency' => 4
         ]);
     }

@@ -25,7 +25,7 @@ class PartyController extends Controller
             'text' => $request->input('text'),
             'constituency' => $request->input('constituency'),
             'election_id' => $request->input('election_id'),
-            'vote' => $request->input('state')
+            'vote' => $request->input('vote')
         );
         return Party::create($array);
     }
