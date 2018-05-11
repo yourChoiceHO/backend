@@ -15,8 +15,10 @@ class VoteTableSeeder extends Seeder
         $faker = Faker::create();
         //hole alle Elemente in Election/id_election
         $electionsIDs = DB::table('elections')->pluck('id_election')->toArray();
+        $voterIDs = DB::table('voters')->pluck('id_voter')->toArray();
 
         DB::table('votes')->insert([
+            'voter_id' => $faker->randomElement($voterIDs),
             'election_id' => $faker->randomElement($electionsIDs),
             'first_vote' => '1',
             'second_vote' => null,

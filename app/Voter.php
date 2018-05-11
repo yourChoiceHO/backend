@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Voter extends Model
 {
     protected $table = 'voters';
-    protected $fillable = ['last_name', 'first_name', 'UserID'];
-    protected $guarded = ['id_voter', 'vote_id'];
+    protected $fillable = ['last_name', 'first_name', 'hash', 'constituency'];
+    protected $guarded = ['id_voter'];
 
-    //jeder Voter MUSS GENAU EINE vote haben
-    //Gegenstück zu $this->hasOne('App\Voter') in vote
-    //erwartet, dass es in vote eine id gibt,die in voter dann als FK eingetragen wird
+// DEFINE RELATIONSHIPS --------------------------------------------------
+
+//jeder Voter hat mehrere votes
+//Gegenstück zu $this->belongsTo('App\Voter') in vote
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    /*
-    public function election() {
-        return $this->belongsTo('App\Vote');
+    public function vote()
+    {
+        return $this->hasMany('App\Vote');
     }
-    */
 }

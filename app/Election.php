@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Election extends Model
 {
+    const STATE_INAKTIVE = 0;
+    const STATE_AKTIVE = 1;
+
     public $timestamps = true;
 
     protected $table = 'elections';
 
-    protected $fillable = ['typ', 'text', 'start_date', 'end_date', 'state'];
-    protected $guarded = ['id_election', 'client_id'];
+    protected $fillable = ['client_id', 'typ', 'text', 'start_date', 'end_date', 'state'];
+    protected $guarded = ['id_election'];
 
 
     // DEFINE RELATIONSHIPS --------------------------------------------------
@@ -32,14 +35,20 @@ class Election extends Model
         return $this->hasMany('App\Party');
     }
 
-    //Eine election KANN MEHRERE candidates haben
+    //Eine election KANN GENAU EINEN candidates haben
     //trägt meine id als FK in candidate ein
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function candidates() {
-        return $this->hasMany('App\Candidate');
+        return $this->hasOne('App\Candidate');
     }
 
     //FUNCTIONS-------------------------------------------------------------
+
+    //hab ich noch nicht wirklich verstanden...
+    //kommt doch jetzt immer 1 zurück, und ist nicht mit state "verbunden"?
+    public function isAktive(){
+        return self::STATE_AKTIVE;
+    }
 }

@@ -16,4 +16,21 @@ class ElectionController extends Controller
         $election = DB::table('elections')->get();
         return $election;//view('viewapp')->with('elections', $election);
     }
+
+    public function show($id){
+        return Election::findOrFail($id);
+    }
+
+    public function store(Request $request)
+    {
+        $array = array(
+            'client_id'=> $request->input('client_id'),
+            'typ' => $request->input('typ'),
+            'text' => $request->input('text'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'state' => $request->input('state')
+        );
+        return Election::create($array);
+    }
 }

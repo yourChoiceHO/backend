@@ -24,6 +24,7 @@ class CreateElectionsTable extends Migration
             $table->text('text')->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            //TinyInt = 0/1
             $table->tinyInteger('state');
             $table->timestamps();
 
