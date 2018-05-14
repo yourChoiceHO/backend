@@ -9,6 +9,7 @@ class Candidate extends Model
     protected $table = 'candidates';
     protected $fillable = ['last_name', 'first_name', 'party_id', 'constituency', 'election_id', 'vote'];
     protected $guarded = ['id_candidate'];
+    protected $primaryKey = 'id_candidate';
 
     // DEFINE RELATIONSHIPS --------------------------------------------------
 

@@ -28,6 +28,7 @@ class CreateCandidatesTable extends Migration
 
 
 
+
             //Candidate may be belongs to Party
             $table->foreign('party_id')
                 ->references('id_party')

@@ -16,6 +16,8 @@ class Election extends Model
     protected $guarded = ['id_election', 'client_id'];//blacklist
 
     protected $fillable = ['client_id', 'typ', 'text', 'start_date', 'end_date', 'state'];
+    protected $guarded = ['id_election'];
+    protected $primaryKey = 'id_election';
 
     //Relationships
 

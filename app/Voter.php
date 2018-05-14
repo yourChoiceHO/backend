@@ -9,6 +9,8 @@ class Voter extends Model
     protected $table = 'voters';
     protected $fillable = ['last_name', 'first_name', 'hash', 'constituency'];
     protected $guarded = ['id_voter'];
+    protected $primaryKey = 'id_voter';
+
 
 // DEFINE RELATIONSHIPS --------------------------------------------------
 

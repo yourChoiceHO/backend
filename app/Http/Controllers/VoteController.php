@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Vote;
 
 class VoteController extends Controller
 {
@@ -12,7 +13,7 @@ class VoteController extends Controller
         return $vote;//view('viewapp')->with('elections', $election);
     }
     public function show($id){
-        return Vote::findOrFail($id);
+        return Vote::findByCompositeKey($voter['id'],$election['id']);
     }
     public function store(Request $request)
     {
