@@ -34,4 +34,12 @@ class ElectionController extends Controller
         );
         return Election::create($array);
     }
-}
+
+
+    public function evaluate($id){
+        $result = new Election();
+        return $result->evaluate($id);
+    }
+
+
+    }

@@ -63,4 +63,85 @@ class Election extends Model
     public function isAktive(){
         return self::STATE_AKTIVE;
     }
+
+
+    /**
+     * bisher alles nur als Gesamtergebnis
+     * @param $id
+     * @throws \Exception
+     */
+    public function evaluate($id){
+
+        //find the election with the given id
+        $electionToEvaluate = Election::findOrFail($id);
+
+        //check its type
+        if($electionToEvaluate->type == 'Europawahl'){
+            //just candidate
+            return Election::getVotesForCandidate($id);
+        }
+        else if($electionToEvaluate->type == 'Bundestagswahl'){
+
+            //parties
+            $resultPartiesBTW = Election::getVotesForParties($id);
+
+            //candidates
+            $resultCandidatesBTW = Election::getVotesForCandidate($id);
+
+            //$resultCandidateAndParty = $resultParties->concat($resultCandidates);
+            //return $resultCandidateAndParty;
+            return $resultPartiesBTW->concat($resultCandidatesBTW);
+        }
+        else if($electionToEvaluate->type == 'Landtagswahl'){
+            //parties
+            $resultPartiesLTW = Election::getVotesForParties($id);
+
+            //candidates
+            $resultCandidatesLTW = Election::getVotesForCandidate($id);
+
+            return $resultPartiesLTW->concat($resultCandidatesLTW);
+        }
+        else if($electionToEvaluate->type == 'Bürgermeisterwahl'){
+            //just candidate
+            return Election::getVotesForCandidate($id);
+        }
+        else if($electionToEvaluate->type == 'Referendum'){
+            //wird gemacht sobald Referedum verfügbar ist
+        }
+        else{
+            throw new \Exception('No votes for this election');
+        }
+    }
+
+    /**
+     * Hilfsfunktion für evaluate($id)
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function getVotesForCandidate($id){
+        $collection = collect(['CandidateOrParty','name', 'votes']);
+        //get all candidates for this election
+        $candidates = Candidate::where('election_id', $id);
+        //get the name and the votes for each candidate
+        foreach($candidates as $candidate){
+            $allResults = $collection->combine(['Candidate', $candidate->name, $candidate->vote]);
+        }
+        return $allResults;
+    }
+
+    /**
+     * Hilfsfunktion für evaluate($id)
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function getVotesForParties($id){
+        $collection = collect(['CandidateOrParty','name', 'votes']);
+        //get all parties for this election
+        $parties = Party::where('election_id', $id);
+        //get the name and the votes of each party
+        foreach($parties as $party){
+            $allResults = $collection->combine(['Party', $party->name, $party->vote]);
+        }
+        return $allResults;
+    }
 }

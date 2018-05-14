@@ -21,7 +21,7 @@ class VoteTableSeeder extends Seeder
             'voter_id' => $faker->randomElement($voterIDs),
             'election_id' => $faker->randomElement($electionsIDs),
             'first_vote' => '1',
-            'second_vote' => null,
+            'second_vote' => '1',
             'valid'=> 0
         ]);
     }
