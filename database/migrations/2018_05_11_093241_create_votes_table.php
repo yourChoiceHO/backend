@@ -14,9 +14,10 @@ class CreateVotesTable extends Migration
     public function up()
     {
         Schema::create('votes', function (Blueprint $table) {
-            //PK_part1
+            $table->increments('id_vote');
+            //FK
             $table->unsignedInteger('voter_id');
-            //PK_part2
+            //FK
             $table->unsignedInteger('election_id');
             //client existiert noch nicht
             //$table->unsignedInteger('client_id');
@@ -25,15 +26,15 @@ class CreateVotesTable extends Migration
             $table->tinyInteger('second_vote')->nullable();
             $table->tinyInteger('valid');
             $table->timestamps();
-            $table->primary(['voter_id', 'election_id']);
-            //trotz composite Pk noch nötig?
-            /*
+
+
+
             //Vote belongs to Election
             $table->foreign('election_id')
                 ->references('id_election')
                 ->on('elections')
                 ->onDelete('cascade');
-            */
+
             //Vote belongs to Client
             /*
             $table->foreign('client_id')
@@ -41,14 +42,14 @@ class CreateVotesTable extends Migration
                 ->on('clients')
                 ->onDelete('cascade');
             */
-            //trotz composite Pk noch nötig?
-            /*
+
+
             //Vote belongs to Voter
             $table->foreign('voter_id')
                 ->references('id_voter')
                 ->on('voters')
                 ->onDelete('cascade');
-            */
+
         });
     }
 

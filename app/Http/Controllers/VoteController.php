@@ -13,7 +13,7 @@ class VoteController extends Controller
         return $vote;//view('viewapp')->with('elections', $election);
     }
     public function show($id){
-        return Vote::findByCompositeKey($voter['id'],$election['id']);
+        return Vote::findOrFail($id);
     }
     public function store(Request $request)
     {

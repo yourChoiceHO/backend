@@ -15,6 +15,8 @@ class Vote extends JsonResource
     public function toArray($request)
     {
         return [
+            'voter_id' => $this->voter_id,
+            'election_id' => $this->election_id,
             'first_vote' => $this->first_vote,
             'second_vote' => $this->second_vote,
             'valid' => $this->valid
