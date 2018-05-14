@@ -20,6 +20,8 @@ class Party extends Model
     //election_id und id nicht, sollen generiert werden beim erstellen
     //und nur automatisch gesetzt werden können
     protected $guarded = ['id_party'];
+    protected $primaryKey = 'id_party';
+
 
 
     // DEFINE RELATIONSHIPS --------------------------------------------------

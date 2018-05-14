@@ -8,6 +8,8 @@ class Vote extends Model
 {
     protected $table = 'votes';
     protected $fillable = ['voter_id',  'election_id',  'client_id', 'first_vote', 'second_vote', 'valid'];
+    protected $primaryKey = 'id_vote';
+
 
 // DEFINE RELATIONSHIPS --------------------------------------------------
 
