@@ -45,6 +45,17 @@ class Election extends Model
         return $this->hasOne('App\Candidate');
     }
 
+    //Eine election KANN MEHRERE votes haben
+    //trägt meine id als FK in vote ein
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function votes() {
+        return $this->hasMany('App\Vote');
+    }
+
+
+
     //FUNCTIONS-------------------------------------------------------------
 
     //hab ich noch nicht wirklich verstanden...

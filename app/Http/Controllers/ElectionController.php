@@ -24,7 +24,8 @@ class ElectionController extends Controller
     public function store(Request $request)
     {
         $array = array(
-            'client_id'=> $request->input('client_id'),
+            //client doesn't exists yet'
+            //'client_id'=> $request->input('client_id'),
             'typ' => $request->input('typ'),
             'text' => $request->input('text'),
             'start_date' => $request->input('start_date'),
