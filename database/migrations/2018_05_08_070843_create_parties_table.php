@@ -22,7 +22,7 @@ class CreatePartiesTable extends Migration
             $table->bigInteger('vote');
             $table->timestamps();
 
-            // FK ------> FEHLER
+            // FK
             //election_id ist FK, referenziert id in elections
 
             $table->foreign('election_id')
