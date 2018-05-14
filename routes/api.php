@@ -29,7 +29,7 @@ Route::post('/candidate', 'CandidateController@store');
 Route::get('/vote/{id}', 'VoteController@show');
 Route::post('/vote', 'VoteController@store');
 
-Route::get('/voter', 'VoterController@show');
+Route::get('/voter/{id}', 'VoterController@show');
 Route::post('/voter', 'VoterController@store');
 
 
