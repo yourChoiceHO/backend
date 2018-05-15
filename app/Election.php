@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Election extends Model
@@ -35,7 +36,7 @@ class Election extends Model
 
     //Election KANN MEHRERE candidates enthalten
     public function candidates() {
-        return $this->hasOne('App\Candidate');
+        return $this->hasMany('App\Candidate');
     }
 
     //Election KANN MEHRERE votes enthalten
@@ -67,14 +68,15 @@ class Election extends Model
 
         //find the election with the given id
         $electionToEvaluate = Election::findOrFail($id);
+       // dd($electionToEvaluate);
 
         //check its type
-        if($electionToEvaluate->type == 'Europawahl'){
+        if($electionToEvaluate->typ == 'Europawahl'){
             //just candidate
             return Election::getVotesForCandidate($id);
         }
-        else if($electionToEvaluate->type == 'Bundestagswahl'){
-
+        else if($electionToEvaluate->typ == 'Bundestagswahl'){
+            //dd('bundestagswahl');
             //parties
             $resultPartiesBTW = Election::getVotesForParties($id);
 
@@ -85,20 +87,20 @@ class Election extends Model
             //return $resultCandidateAndParty;
             return $resultPartiesBTW->concat($resultCandidatesBTW);
         }
-        else if($electionToEvaluate->type == 'Landtagswahl'){
+        else if($electionToEvaluate->typ == 'Landtagswahl'){
             //parties
-            $resultPartiesLTW = Election::getVotesForParties($id);
+            $resultPartiesLTW = $this->getVotesForParties($id);
 
             //candidates
             $resultCandidatesLTW = Election::getVotesForCandidate($id);
 
             return $resultPartiesLTW->concat($resultCandidatesLTW);
         }
-        else if($electionToEvaluate->type == 'Bürgermeisterwahl'){
+        else if($electionToEvaluate->typ == 'Bürgermeisterwahl'){
             //just candidate
             return Election::getVotesForCandidate($id);
         }
-        else if($electionToEvaluate->type == 'Referendum'){
+        else if($electionToEvaluate->typ == 'Referendum'){
             //wird gemacht sobald Referedum verfügbar ist
         }
         else{
@@ -112,13 +114,16 @@ class Election extends Model
      * @return \Illuminate\Support\Collection
      */
     public function getVotesForCandidate($id){
+        $allResults = new Collection();
         $collection = collect(['CandidateOrParty','name', 'votes']);
         //get all candidates for this election
         $candidates = Candidate::where('election_id', $id);
+        //dd($candidates);
         //get the name and the votes for each candidate
         foreach($candidates as $candidate){
             $allResults = $collection->combine(['Candidate', $candidate->name, $candidate->vote]);
         }
+        //dd($allResults);
         return $allResults;
     }
 
@@ -128,13 +133,16 @@ class Election extends Model
      * @return \Illuminate\Support\Collection
      */
     public function getVotesForParties($id){
+        $allResults = new Collection();
         $collection = collect(['CandidateOrParty','name', 'votes']);
         //get all parties for this election
         $parties = Party::where('election_id', $id);
+        //dd($parties);
         //get the name and the votes of each party
         foreach($parties as $party){
             $allResults = $collection->combine(['Party', $party->name, $party->vote]);
         }
+        //dd($allResults);
         return $allResults;
     }
 }
