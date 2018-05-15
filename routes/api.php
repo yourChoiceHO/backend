@@ -22,7 +22,7 @@ Route::post('/party', 'PartyController@store');
 
 Route::get('/election/{id}', 'ElectionController@show');
 Route::post('/election', 'ElectionController@store');
-Route::post('/election/{id}/evaluate', 'ElectionController@evaluate');
+Route::get('/election/{id}/evaluate', 'ElectionController@evaluate');
 
 
 Route::get('/candidate/{id}', 'CandidateController@show');
