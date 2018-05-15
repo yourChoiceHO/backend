@@ -46,7 +46,7 @@ class ElectionController extends Controller
          * @var Election $result
          */
         $result = Election::findOrFail($id);
-        return $result->evaluate($id);
+        return $result->evaluate();
     }
 
 
