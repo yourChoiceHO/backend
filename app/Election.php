@@ -91,7 +91,7 @@ class Election extends Model
             //candidates
             $result['Candidates']= $this->getVotesForCandidate();
 
-            //$resultCandidateAndParty = $resultPartiesBTW->concat($resultCandidatesBTW);
+            $resultCandidateAndParty = array_merge($resultPartiesBTW, $resultCandidatesBTW);
             //dd($resultCandidateAndParty);
             //return $resultCandidateAndParty;
             return $result;
@@ -118,6 +118,8 @@ class Election extends Model
         }
     }
 
+    //Hilfsfunktion für evaluate($id)
+
     /**
      * Hilfsfunktion für evaluate($id)
      * @return array
@@ -136,6 +138,7 @@ class Election extends Model
         //dd($allResults);
         return $result;
     }
+
 
     /**
      * Hilfsfunktion für evaluate($id)
