@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Election extends Model
 {
@@ -90,7 +91,8 @@ class Election extends Model
             //candidates
             $resultCandidatesBTW = Election::getVotesForCandidate($id);
 
-            //$resultCandidateAndParty = $resultParties->concat($resultCandidates);
+            //$resultCandidateAndParty = $resultPartiesBTW->concat($resultCandidatesBTW);
+            //dd($resultCandidateAndParty);
             //return $resultCandidateAndParty;
             return $resultPartiesBTW->concat($resultCandidatesBTW);
         }
@@ -124,11 +126,11 @@ class Election extends Model
         $allResults = new Collection();
         $collection = collect(['CandidateOrParty','name', 'votes']);
         //get all candidates for this election
-        $candidates = Candidate::where('election_id', $id);
+        $candidates = Candidate::where('election_id', $id)->get();
         //dd($candidates);
         //get the name and the votes for each candidate
         foreach($candidates as $candidate){
-            $allResults = $collection->combine(['Candidate', $candidate->name, $candidate->vote]);
+            $allResults = $collection->combine(['Candidate', $candidate->last_name, $candidate->vote]);
         }
         //dd($allResults);
         return $allResults;
@@ -143,7 +145,7 @@ class Election extends Model
         $allResults = new Collection();
         $collection = collect(['CandidateOrParty','name', 'votes']);
         //get all parties for this election
-        $parties = Party::where('election_id', $id);
+        $parties = Party::where('election_id', $id)->get();
         //dd($parties);
         //get the name and the votes of each party
         foreach($parties as $party){
