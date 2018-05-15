@@ -84,7 +84,6 @@ class Election extends Model
             //candidates
             $result['Candidates']= $this->getVotesForCandidate();
 
-            $resultCandidateAndParty = array_merge($resultPartiesBTW, $resultCandidatesBTW);
             //dd($resultCandidateAndParty);
             //return $resultCandidateAndParty;
             return $result;
