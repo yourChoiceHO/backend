@@ -26,7 +26,8 @@ class CandidateTableSeeder extends Seeder
             //FK
             //Alternative:
             //'election_id' => \App\Election::first()->id_election,
-            'election_id' => $faker->randomElement($electionsIDs),
+            //'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' =>1,
             'vote' => 2
         ]);
 
@@ -39,7 +40,8 @@ class CandidateTableSeeder extends Seeder
             //FK
             //Alternative:
             //'election_id' => \App\Election::first()->id_election,
-            'election_id' => $faker->randomElement($electionsIDs),
+            //'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' =>1,
             'vote' => 5
         ]);
     }

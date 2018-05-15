@@ -76,7 +76,6 @@ class Election extends Model
 
         //find the election with the given id
         $electionToEvaluate = Election::findOrFail($id);
-       // dd($electionToEvaluate);
 
         //check its type
         if($electionToEvaluate->typ == 'Europawahl'){
@@ -84,17 +83,17 @@ class Election extends Model
             return Election::getVotesForCandidate($id);
         }
         else if($electionToEvaluate->typ == 'Bundestagswahl'){
-            //dd('bundestagswahl');
             //parties
             $resultPartiesBTW = Election::getVotesForParties($id);
 
             //candidates
             $resultCandidatesBTW = Election::getVotesForCandidate($id);
 
-            //$resultCandidateAndParty = $resultPartiesBTW->concat($resultCandidatesBTW);
+            $resultCandidateAndParty = array_merge($resultPartiesBTW, $resultCandidatesBTW);
             //dd($resultCandidateAndParty);
-            //return $resultCandidateAndParty;
-            return $resultPartiesBTW->concat($resultCandidatesBTW);
+            return $resultCandidateAndParty;
+            //return $resultPartiesBTW->concat($resultCandidatesBTW);
+            //return $resultPartiesBTW->union($resultCandidatesBTW);
         }
         else if($electionToEvaluate->typ == 'Landtagswahl'){
             //parties
@@ -103,7 +102,8 @@ class Election extends Model
             //candidates
             $resultCandidatesLTW = Election::getVotesForCandidate($id);
 
-            return $resultPartiesLTW->concat($resultCandidatesLTW);
+            $resultCandidateAndParty = array_merge($resultPartiesLTW, $resultCandidatesLTW);
+            return $resultCandidateAndParty;
         }
         else if($electionToEvaluate->typ == 'Bürgermeisterwahl'){
             //just candidate
@@ -117,41 +117,52 @@ class Election extends Model
         }
     }
 
+    //Hilfsfunktion für evaluate($id)
+
     /**
-     * Hilfsfunktion für evaluate($id)
      * @param $id
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
     public function getVotesForCandidate($id){
-        $allResults = new Collection();
+        //like to create keys
         $collection = collect(['CandidateOrParty','name', 'votes']);
+
         //get all candidates for this election
         $candidates = Candidate::where('election_id', $id)->get();
-        //dd($candidates);
+
         //get the name and the votes for each candidate
+        //tryed some ways
         foreach($candidates as $candidate){
-            $allResults = $collection->combine(['Candidate', $candidate->last_name, $candidate->vote]);
+            /*$collection['CandidateOrParty'] = 'Candidate';
+            $collection['name'] = $candidate->last_name;
+            $collection['votes'] = $candidate->vote;*/
+            $allResults[] = $collection->combine(['Candidate', $candidate->last_name, $candidate->vote]);
+            //$allResults = $collection->push(['Candidate', $candidate->last_name, $candidate->vote]);
+            //$allResults = collect(['CandidateOrParty'=>'Candidate', 'name'=>$candidate->last_name, 'votes'=>$candidate->vote]);
         }
-        //dd($allResults);
         return $allResults;
+        //return $collection;
     }
+
 
     /**
      * Hilfsfunktion für evaluate($id)
      * @param $id
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
     public function getVotesForParties($id){
-        $allResults = new Collection();
+        //like to create keys
         $collection = collect(['CandidateOrParty','name', 'votes']);
+
         //get all parties for this election
         $parties = Party::where('election_id', $id)->get();
-        //dd($parties);
+
         //get the name and the votes of each party
         foreach($parties as $party){
-            $allResults = $collection->combine(['Party', $party->name, $party->vote]);
+            $allResults[] = $collection->combine(['Party', $party->name, $party->vote]);
+            //$allResults = $collection->push(['Party', $party->name, $party->vote]);
+            //$allResults = collect(['CandidateOrParty'=>'Party', 'name'=>$party->name, 'votes'=>$party->vote]);
         }
-        //dd($allResults);
         return $allResults;
     }
 }
