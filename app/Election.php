@@ -69,47 +69,48 @@ class Election extends Model
 
     /**
      * bisher alles nur als Gesamtergebnis
-     * @param $id
      * @throws \Exception
      */
-    public function evaluate($id){
+    public function evaluate(){
 
         //find the election with the given id
-        $electionToEvaluate = Election::findOrFail($id);
        // dd($electionToEvaluate);
 
         //check its type
-        if($electionToEvaluate->typ == 'Europawahl'){
+        if($this->typ == 'Europawahl'){
             //just candidate
-            return Election::getVotesForCandidate($id);
+            $result['Candidates']= $this->getVotesForCandidate();
+            return $result;
         }
-        else if($electionToEvaluate->typ == 'Bundestagswahl'){
+        else if($this->typ == 'Bundestagswahl'){
             //dd('bundestagswahl');
             //parties
-            $resultPartiesBTW = Election::getVotesForParties($id);
+            //parties
+            $result['Parties'] = $this->getVotesForParties();
 
             //candidates
-            $resultCandidatesBTW = Election::getVotesForCandidate($id);
+            $result['Candidates']= $this->getVotesForCandidate();
 
             //$resultCandidateAndParty = $resultPartiesBTW->concat($resultCandidatesBTW);
             //dd($resultCandidateAndParty);
             //return $resultCandidateAndParty;
-            return $resultPartiesBTW->concat($resultCandidatesBTW);
+            return $result;
         }
-        else if($electionToEvaluate->typ == 'Landtagswahl'){
+        else if($this->typ == 'Landtagswahl'){
             //parties
-            $resultPartiesLTW = $this->getVotesForParties($id);
+            $result['Parties'] = $this->getVotesForParties();
 
             //candidates
-            $resultCandidatesLTW = Election::getVotesForCandidate($id);
+            $result['Candidates']= $this->getVotesForCandidate();
 
-            return $resultPartiesLTW->concat($resultCandidatesLTW);
+            return $result;
         }
-        else if($electionToEvaluate->typ == 'Bürgermeisterwahl'){
+        else if($this->typ == 'Bürgermeisterwahl'){
             //just candidate
-            return Election::getVotesForCandidate($id);
+            $result['Candidates']= $this->getVotesForCandidate();
+            return $result;
         }
-        else if($electionToEvaluate->typ == 'Referendum'){
+        else if($this->typ == 'Referendum'){
             //wird gemacht sobald Referedum verfügbar ist
         }
         else{
@@ -119,39 +120,38 @@ class Election extends Model
 
     /**
      * Hilfsfunktion für evaluate($id)
-     * @param $id
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
-    public function getVotesForCandidate($id){
-        $allResults = new Collection();
-        $collection = collect(['CandidateOrParty','name', 'votes']);
+    public function getVotesForCandidate(){
+
         //get all candidates for this election
-        $candidates = Candidate::where('election_id', $id)->get();
+        $candidates = Candidate::where('election_id', '=', $this->id_election)->get();
         //dd($candidates);
         //get the name and the votes for each candidate
-        foreach($candidates as $candidate){
-            $allResults = $collection->combine(['Candidate', $candidate->last_name, $candidate->vote]);
+        $result = array();
+        foreach($candidates as $key => $candidate){
+            $result[$key]['name'] = $candidate->last_name;
+            $result[$key]['votes'] = $candidate->vote;
         }
         //dd($allResults);
-        return $allResults;
+        return $result;
     }
 
     /**
      * Hilfsfunktion für evaluate($id)
-     * @param $id
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
-    public function getVotesForParties($id){
-        $allResults = new Collection();
-        $collection = collect(['CandidateOrParty','name', 'votes']);
+    public function getVotesForParties(){
         //get all parties for this election
-        $parties = Party::where('election_id', $id)->get();
+        $parties = Party::where('election_id', '=', $this->id_election)->get();
         //dd($parties);
         //get the name and the votes of each party
-        foreach($parties as $party){
-            $allResults = $collection->combine(['Party', $party->name, $party->vote]);
+        $result = array();
+        foreach($parties as $key => $party){
+            $result[$key]['name'] = $party->name;
+            $result[$key]['vote'] = $party->vote;
         }
         //dd($allResults);
-        return $allResults;
+        return $result;
     }
 }

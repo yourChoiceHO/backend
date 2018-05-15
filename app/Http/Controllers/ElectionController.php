@@ -36,8 +36,16 @@ class ElectionController extends Controller
     }
 
 
+    /**
+     * @param $id
+     * @return Election|array
+     * @throws \Exception
+     */
     public function evaluate($id){
-        $result = new Election();
+        /**
+         * @var Election $result
+         */
+        $result = Election::findOrFail($id);
         return $result->evaluate($id);
     }
 
