@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use App\Vote;
 
 class Election extends Model
 {
@@ -73,9 +74,6 @@ class Election extends Model
      */
     public function evaluate(){
 
-        //find the election with the given id
-       // dd($electionToEvaluate);
-
         //check its type
         if($this->typ == 'Europawahl'){
             //just candidate
@@ -83,16 +81,12 @@ class Election extends Model
             return $result;
         }
         else if($this->typ == 'Bundestagswahl'){
-            //dd('bundestagswahl');
-            //parties
             //parties
             $result['Parties'] = $this->getVotesForParties();
 
             //candidates
             $result['Candidates']= $this->getVotesForCandidate();
 
-            //dd($resultCandidateAndParty);
-            //return $resultCandidateAndParty;
             return $result;
         }
         else if($this->typ == 'Landtagswahl'){
@@ -117,8 +111,6 @@ class Election extends Model
         }
     }
 
-    //Hilfsfunktion für evaluate($id)
-
     /**
      * Hilfsfunktion für evaluate($id)
      * @return array
@@ -126,15 +118,13 @@ class Election extends Model
     public function getVotesForCandidate(){
 
         //get all candidates for this election
-        $candidates = Candidate::where('election_id', '=', $this->id_election)->get();
-        //dd($candidates);
+        $candidates = Candidate::where('election_id', '=', $this->id_election)->get();;
         //get the name and the votes for each candidate
         $result = array();
         foreach($candidates as $key => $candidate){
             $result[$key]['name'] = $candidate->last_name;
             $result[$key]['votes'] = $candidate->vote;
         }
-        //dd($allResults);
         return $result;
     }
 
@@ -146,14 +136,39 @@ class Election extends Model
     public function getVotesForParties(){
         //get all parties for this election
         $parties = Party::where('election_id', '=', $this->id_election)->get();
-        //dd($parties);
         //get the name and the votes of each party
         $result = array();
         foreach($parties as $key => $party){
             $result[$key]['name'] = $party->name;
             $result[$key]['vote'] = $party->vote;
         }
-        //dd($allResults);
         return $result;
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     * @throws \Exception
+     */
+    public function vote(Request $request){
+        $myVote = new Vote();
+        if($request->valid == 0){
+            $myVote->valid = 0;
+            return true;
+        }
+        else{
+            if($request->first_vote == 1){
+                $myVote->first_vote = 1;
+            }
+            else{
+                //Stimme soll gültig sein, aber enthält keine Erststimme
+                throw new \InvalidArgumentException('vote is valid, but there is no valid first_vote');
+            }
+            if($request->second_vote == 1){
+                $myVote->second_vote = 1;
+            }
+        }
+        $myVote->save();
+        return true;
     }
 }
