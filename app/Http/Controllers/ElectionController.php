@@ -64,6 +64,7 @@ class ElectionController extends Controller
 
     /**
      * @param $id
+     * @param Request $request
      * @return mixed
      */
     public function vote($id, Request $request){
@@ -71,6 +72,4 @@ class ElectionController extends Controller
         return $result->vote($request);
 
     }
-
-
-    }
+}
