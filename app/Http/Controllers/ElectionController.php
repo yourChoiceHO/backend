@@ -62,5 +62,15 @@ class ElectionController extends Controller
         return $result->evaluate();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function vote($id, Request $request){
+        $result = Election::findOrFail($id);
+        return $result->vote($request);
+
+    }
+
 
     }
