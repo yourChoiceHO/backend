@@ -12,19 +12,21 @@ class ElectionTableSeeder extends Seeder
     public function run()
     {
 
-        $faker = Faker::create();
-
-        //FK
-        $ClientIDs = DB::table('clients')->pluck('id_client')->toArray();
+        //\App\Party::something
+        DB::table('elections')->insert([
+            'typ' => 'Bundestagswahl',
+            'text' => 'ich bin ein kleiner test text zur bundestagswahl',
+            'start_date' => date("Y-m-d H:i:s"),
+            'end_date' => date("Y-m-d H:i:s"),
+            'state' => 2
+        ]);
 
         DB::table('elections')->insert([
-            'client_id' => $faker->randomElement($ClientIDs),
             'typ' => 'Landtagswahl',
-            'text' => 'Beschreibung der Wahl',
+            'text' => 'ich bin ein kleiner test text zur Landtagswahl',
             'start_date' => date("Y-m-d H:i:s"),
             'end_date' => date("Y-m-d H:i:s"),
             'state' => 1
         ]);
-
     }
 }

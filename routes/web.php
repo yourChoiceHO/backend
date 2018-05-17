@@ -14,15 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('/election', 'ElectionController@index');
 
-Route::get('/client', 'ClientController@index');
+//Route::get('/candidate', 'CandidateController@index');
 
-Route::post('/client', 'ClientController@index');
+//Route::get('/party', 'PartyController@index');
 
-Route::get('/election', 'ElectionController@index');
+//Route::get('/vote', 'VoteController@index');
 
-Route::post('/election', 'ElectionController@index');
+//Route::get('/voter', 'VoterController@index');
 
-Route::get('/referendum', 'ReferendumController@index');
+//Route::post('/election', 'ElectionController@index');
 
-Route::post('/referendum', 'ReferendumController@index');
+//Route::post('/candidate', 'CandidateController@index');
+
+//Route::post('/party', 'PartyController@index');
+
+//Route::post('/vote', 'VoteController@index');
+
+//Route::post('/voter', 'VoterController@index');
+
+
+
+
