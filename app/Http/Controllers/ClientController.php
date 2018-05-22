@@ -20,8 +20,17 @@ class ClientController extends Controller
     {
         $array = array(
             'typ' => $request->input('typ')
-
         );
         Client::create($array);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $newTyp = $request->get('typ');
+
+        $client = Client::findOrFail($id);
+        $client->typ = $newTyp ? $newTyp: $client->typ;
+
+        $client->save();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Election;
+use App\Http\Resources\Candidate;
 use App\User;
 use App\Vote;
 use Illuminate\Http\Request;
@@ -35,6 +36,25 @@ class ElectionController extends Controller
         return Election::create($array);
     }
 
+    public function update(Request $request, $id)
+    {
+        $newClientId = $request->get('client_id');
+        $newTyp = $request->get('typ');
+        $newText = $request->get('text');
+        $newStartDate = $request->get('start_date');
+        $newEndDate = $request->get('end_date');
+        $newState = $request->get('state');
+
+        $election = Election::findOrFail($id);
+        $election->client_id = $newClientId ? $newClientId : $election->client_id;
+        $election->typ = $newTyp ? $newTyp : $election->typ;
+        $election->text = $newText? $newText : $election->text;
+        $election->start_date = $newStartDate ? $newStartDate : $election->start_date;
+        $election->end_date = $newEndDate ? $newEndDate: $election->end_date;
+        $election->state = $newState ? $newState: $election->state;
+
+        $election->save();
+    }
 
     /**
      * @param $id

@@ -28,4 +28,20 @@ class VoterController extends Controller
         );
         return Voter::create($array);
     }
+
+    public function update(Request $request, $id)
+    {
+        $newLastName = $request->get('last_name');
+        $newFirstName = $request->get('first_name');
+        $newHash = $request->get('hash');
+        $newConstituency = $request->get('constituency');
+
+        $voter = Voter::findOrFail($id);
+        $voter->last_name = $newLastName ? $newLastName : $voter->last_name;
+        $voter->first_name = $newFirstName ? $newFirstName : $voter->first_name;
+        $voter->hash = $newHash ? $newHash : $voter->party_id;
+        $voter->constituency = $newConstituency ? $newConstituency : $voter->constituency;
+
+        $voter->save();
+    }
 }

@@ -30,4 +30,24 @@ class CandidateController extends Controller
         );
         return Candidate::create($array);
     }
+
+    public function update(Request $request, $id)
+    {
+        $newLastName = $request->get('last_name');
+        $newFirstName = $request->get('first_name');
+        $newPartyId = $request->get('party_id');
+        $newConstituency = $request->get('constituency');
+        $newElectionId = $request->get('election_id');
+        $newVote = $request->get('vote');
+
+        $candidate = Candidate::findOrFail($id);
+        $candidate->last_name = $newLastName ? $newLastName : $candidate->last_name;
+        $candidate->first_name = $newFirstName ? $newFirstName : $candidate->first_name;
+        $candidate->party_id = $newPartyId ? $newPartyId : $candidate->party_id;
+        $candidate->constituency = $newConstituency ? $newConstituency : $candidate->constituency;
+        $candidate->election_id = $newElectionId ? $newElectionId : $candidate->election_id;
+        $candidate->vote = $newVote ? $newVote: $candidate->vote;
+
+        $candidate->save();
+    }
 }

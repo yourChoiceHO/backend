@@ -27,4 +27,22 @@ class VoteController extends Controller
         );
         return Vote::create($array);
     }
+
+    public function update(Request $request, $id)
+    {
+        $newElectionId = $request->get('election_id');
+        $newClientId = $request->get('client_id');
+        $newFirstVote = $request->get('first_vote');
+        $newSecondVote = $request->get('second_vote');
+        $newValid = $request->get('valid');
+
+        $vote = Vote::findOrFail($id);
+        $vote->election_id = $newElectionId ? $newElectionId : $vote->election_id;
+        $vote->client_id = $newClientId ? $newClientId : $vote->client_id;
+        $vote->first_vote = $newFirstVote ? $newFirstVote : $vote->first_vote;
+        $vote->second_vote = $newSecondVote ? $newSecondVote : $vote->second_vote;
+        $vote->valid = $newValid ? $newValid : $vote->valid;
+
+        $vote->save();
+    }
 }

@@ -29,4 +29,22 @@ class PartyController extends Controller
         );
         return Party::create($array);
     }
+
+    public function update(Request $request, $id)
+    {
+        $newName = $request->get('name');
+        $newText = $request->get('text');
+        $newConstituency = $request->get('constituency');
+        $newElectionId = $request->get('election_id');
+        $newVote = $request->get('vote');
+
+        $party = Party::findOrFail($id);
+        $party->name = $newName ? $newName : $party->name;
+        $party->text = $newText ? $newText : $party->text;
+        $party->constituency = $newConstituency ? $newConstituency : $party->constituency;
+        $party->election_id = $newElectionId ? $newElectionId : $party->election_id;
+        $party->vote = $newVote ? $newVote: $party->vote;
+
+        $party->save();
+    }
 }
