@@ -50,4 +50,12 @@ class CandidateController extends Controller
 
         $candidate->save();
     }
+
+    public function destroy($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+
+        $destroyflag = $candidate->delete();
+    }
+
 }

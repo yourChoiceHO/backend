@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 use App\Voter;
@@ -43,5 +44,12 @@ class VoterController extends Controller
         $voter->constituency = $newConstituency ? $newConstituency : $voter->constituency;
 
         $voter->save();
+    }
+
+    public function destroy($id)
+    {
+        $voter = Voter::findOrFail($id);
+
+        $destroyflag = $voter->delete();
     }
 }

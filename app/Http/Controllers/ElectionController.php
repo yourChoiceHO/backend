@@ -56,6 +56,14 @@ class ElectionController extends Controller
         $election->save();
     }
 
+    public function destroy($id)
+    {
+        $election = Election::findOrFail($id);
+
+        $destroyflag = $election->delete();
+    }
+
+
     /**
      * @param $id
      * @return Election|array

@@ -47,4 +47,12 @@ class PartyController extends Controller
 
         $party->save();
     }
+
+    public function destroy($id)
+    {
+        $party = Party::findOrFail($id);
+
+        $destroyflag = $party->delete();
+    }
+
 }

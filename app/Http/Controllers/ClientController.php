@@ -33,4 +33,12 @@ class ClientController extends Controller
 
         $client->save();
     }
+
+    public function destroy($id)
+    {
+        $client = Client::findOrFail($id);
+
+        $destroyflag = $client->delete();
+    }
+
 }

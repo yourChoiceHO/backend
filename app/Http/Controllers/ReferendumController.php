@@ -44,4 +44,13 @@ class ReferendumController extends Controller
 
         $referendum->save();
     }
+
+    public function destroy($id)
+    {
+        $referendum = Referendum::findOrFail($id);
+
+        $destroyflag = $referendum->delete();
+    }
+
+
 }

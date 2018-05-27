@@ -45,4 +45,12 @@ class VoteController extends Controller
 
         $vote->save();
     }
+
+    public function destroy($id)
+    {
+        $vote = Vote::findOrFail($id);
+
+        $destroyflag = $vote->delete();
+    }
+
 }
