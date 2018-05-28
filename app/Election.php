@@ -168,20 +168,54 @@ class Election extends Model
         //TODO Inhalt von first_vote und second_vote? Nur 1 und 0? Wie erfolgt Zuordnung zu Kandidaten und Partei?
         //TODO Unterteilung nach Wahltyp um zu wissen, ob nur eine Stimme z.B. nur Kandidaten erforderlich ist
         $myVote = new Vote();
+
+
+
         $id_election = $this->id_election;
         $voter_id = $request->get('voter_id');
         $voter = Voter::where('election_id', '=', $id_election)->andWhere('voter_id', '=', $voter_id);
         if(!$voter){
-            $valid = $request->get('valid');
-            if($valid){
-                $vote = new Vote();
-                $vote->election_id = $id_election;
-                $vote->voter_id = $voter_id;
-                $vote->first_vote = true;
-                $vote->second_vote = true;
-                $vote->valid = $valid;
-            }
+                $valid = $request->get('valid');
+                $first_vote = $request->get('first_vote');
+                $second_vote= $request->get('second_vote');
+                if($valid && $first_vote && $second_vote){
+                    if($this->typ == "Bundestagswahl") {
+                        $party_id = $request->get('party_id');
+                        $party = Party::where('id_party', '=', $party_id);
+                        $party->vote++;
+                        $party->save();
+                        $candidate_id = $request->get("candidate_id");
+                        $candidate = Candidate::where("id_candidate", '=', $candidate_id);
+                        $candidate->vote++;
+                        $candidate->save();
+                      }
+                    $vote = new Vote();
+                    $vote->election_id = $id_election;
+                    $vote->voter_id = $voter_id;
+                    $vote->first_vote = true;
+                    $vote->second_vote = true;
+                    $vote->valid = true;
+                    $vote->save();
+                }elseif($first_vote && $second_vote){
+                    $vote = new Vote();
+                    $vote->election_id = $id_election;
+                    $vote->voter_id = $voter_id;
+                    $vote->first_vote = true;
+                    $vote->second_vote = true;
+                    $vote->valid = false;
+                    $vote->save();
+                }else{
+                    //throw new Exception
+                }
+
+
         }
+
+
+
+
+
+
 
         //vote not valid
         if($request->valid == 0){
