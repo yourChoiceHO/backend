@@ -25,7 +25,7 @@ Route::delete('/party/{id}', 'PartyController@destroy');
 Route::get('/election/{id}', 'ElectionController@show');
 Route::post('/election', 'ElectionController@store');
 Route::post('/election/{id}/evaluate', 'ElectionController@evaluate');
-Route::post('/election/{id}/vote)', 'ElectionController@vote');
+Route::post('/election/{id}/vote', 'ElectionController@vote');
 Route::put('/election/{id}', 'ElectionController@update');
 Route::delete('/election/{id}', 'ElectionController@destroy');
 

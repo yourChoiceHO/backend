@@ -164,14 +164,21 @@ class Election extends Model
      * @throws \Exception
      */
     public function vote(Request $request){
+        //TODO Wie komme ich an die election_id (nicht im request enthalten) oder bereits wg route (s. api.php) selektiert? Oder Route::pattern(???)
+        //TODO Inhalt von first_vote und second_vote? Nur 1 und 0? Wie erfolgt Zuordnung zu Kandidaten und Partei?
+        //TODO Unterteilung nach Wahltyp um zu wissen, ob nur eine Stimme z.B. nur Kandidaten erforderlich ist
         $myVote = new Vote();
+
+        //vote not valid
         if($request->valid == 0){
             $myVote->valid = 0;
             return true;
         }
+        //vote valid
         else{
             if($request->first_vote == 1){
                 $myVote->first_vote = 1;
+
             }
             else{
                 //Stimme soll gültig sein, aber enthält keine Erststimme
@@ -179,10 +186,35 @@ class Election extends Model
             }
             if($request->second_vote == 1){
                 $myVote->second_vote = 1;
+
+               // $this->updateVotesForParties($request);
+            }
+
+            else{
+                //Stimme soll gültig sein, aber enthält keine Zweitstimme
+                throw new \InvalidArgumentException('vote is valid, but there is no valid second_vote');
             }
         }
         $myVote->save();
         return true;
+    }
+
+    //TODO Update Wahlstimme wie?
+    //TODO Bezeichnung election_id oder id_election
+    //TODO Welchen Übergabeparameter $request oder $myVote? Welchen Übergabeparameter bei update
+    //TODO same for candidate
+    public function updateVotesForParties(Request $request){
+        //get party
+        $party=Party::where('election_id', '=', $this->id_election, 'AND', 'id_party', '=', $this->id_party)->get();
+        $party->vote++;
+        $this->update($party);
+    }
+
+    public function updateVotesForCandidates(Request $request){
+        //get party
+        $candidate=Candidate::where('election_id', '=', $this->id_election, 'AND', 'id_candidate', '=', $this->id_candidate)->get();
+        $candidate->vote++;
+        $this->update($candidate);
     }
 
 }
