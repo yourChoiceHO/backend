@@ -208,6 +208,9 @@ class Election extends Model
                     //throw new Exception
                 }
 
+                $this->voteFor(null, null, "yes");
+                $this->voteFor($candidate_id);
+
 
         }
 
@@ -263,6 +266,10 @@ class Election extends Model
         $candidate=Candidate::where('election_id', '=', $this->id_election, 'AND', 'id_candidate', '=', $this->id_candidate)->get();
         $candidate->vote++;
         $this->update($candidate);
+    }
+
+    private function voteFor($candidate_id = null, $party_id = null, $referendum = null){
+
     }
 
 }
