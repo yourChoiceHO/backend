@@ -168,6 +168,20 @@ class Election extends Model
         //TODO Inhalt von first_vote und second_vote? Nur 1 und 0? Wie erfolgt Zuordnung zu Kandidaten und Partei?
         //TODO Unterteilung nach Wahltyp um zu wissen, ob nur eine Stimme z.B. nur Kandidaten erforderlich ist
         $myVote = new Vote();
+        $id_election = $this->id_election;
+        $voter_id = $request->get('voter_id');
+        $voter = Voter::where('election_id', '=', $id_election)->andWhere('voter_id', '=', $voter_id);
+        if(!$voter){
+            $valid = $request->get('valid');
+            if($valid){
+                $vote = new Vote();
+                $vote->election_id = $id_election;
+                $vote->voter_id = $voter_id;
+                $vote->first_vote = true;
+                $vote->second_vote = true;
+                $vote->valid = $valid;
+            }
+        }
 
         //vote not valid
         if($request->valid == 0){
