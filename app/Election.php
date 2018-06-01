@@ -38,6 +38,15 @@ class Election extends Model
     const STATE_INAKTIVE = 0;
     const STATE_AKTIVE = 1;
 
+    const Europawahl = "Europawahl";
+    const Bundestagswahl = "Bundestagswahl";
+    const Landtagswahl = "Landtagswahl";
+    const Buergermeisterwahl = "Buergermeisterwahl";
+    const Referendum = "Referendum";
+    const Kommunalwahl = "Kommunalwahl";
+    const LandtagswahlBW = "LandtagswahlBW";
+    const LandtagswahlSL = "LandtagswahlSL";
+
     public $timestamps = true;
 
     protected $table = 'elections';
@@ -145,12 +154,14 @@ class Election extends Model
 
     public function evaluate(){
         $result = null;
-        if($this->typ == "Bundestagswahl" || $this->typ == "Landtagswahl"){
+        if($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl){
             $result['general'] = $this->getVotesForParties();
             $result['general'] = $this->getVotesForCandidates();
             $result['constituency'] = $this->getVotesForConstituency();
-        } elseif($this->typ == "Buergermeisterwahl" || $this->typ == "Europawahl"){
+        } elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW){
             $result['general'] = $this->getVotesForConstituency(false);
+        } elseif ($this->typ == self::LandtagswahlSL){
+            $result['general'] = $this->getVotesForConstituency(true, false);
         } elseif ($this->typ == "Referendum") {
             $max_vote = Referendum::whereElectionId($this->id_election)->selectRaw("(yes + no) as votes")->get()->get(0)->getAttribute('votes');
             $referendum = Referendum::whereElectionId($this->id_election)->get()->get(0);
@@ -160,96 +171,6 @@ class Election extends Model
             $result['general']['no']['vote_number'] = $referendum->getAttribute("no");
             $result['general']['no']['vote_percent'] = number_format((($referendum->getAttribute("no") / $max_vote) * 100), 2);
         }
-        return $result;
-    }
-
-    /**
-     * bisher alles nur als Gesamtergebnis
-     * @throws \Exception
-     */
-    public function evaluateLagcy(){
-
-        //find the election with the given id
-       // dd($electionToEvaluate);
-
-        //check its type
-        if($this->typ == 'Europawahl'){
-            //just candidate
-            $result['Candidates']= $this->getVotesForCandidate();
-            return $result;
-        }
-        else if($this->typ == 'Bundestagswahl'){
-            //dd('bundestagswahl');
-            //parties
-            //parties
-            $result['Parties'] = $this->getVotesForParties();
-
-            //candidates
-            $result['Candidates']= $this->getVotesForCandidate();
-
-            //dd($resultCandidateAndParty);
-            //return $resultCandidateAndParty;
-            return $result;
-        }
-        else if($this->typ == 'Landtagswahl'){
-            //parties
-            $result['Parties'] = $this->getVotesForParties();
-
-            //candidates
-            $result['Candidates']= $this->getVotesForCandidate();
-
-            return $result;
-        }
-        else if($this->typ == 'Bürgermeisterwahl'){
-            //just candidate
-            $result['Candidates']= $this->getVotesForCandidate();
-            return $result;
-        }
-        else if($this->typ == 'Referendum'){
-            //wird gemacht sobald Referedum verfügbar ist
-        }
-        else{
-            throw new \Exception('No votes for this election');
-        }
-    }
-
-    //Hilfsfunktion für evaluate($id)
-
-    /**
-     * Hilfsfunktion für evaluate($id)
-     * @return array
-     */
-    public function getVotesForCandidateLagacy(){
-
-        //get all candidates for this election
-        $candidates = Candidate::where('election_id', '=', $this->id_election)->get();
-        //dd($candidates);
-        //get the name and the votes for each candidate
-        $result = array();
-        foreach($candidates as $key => $candidate){
-            $result[$key]['name'] = $candidate->last_name;
-            $result[$key]['votes'] = $candidate->vote;
-        }
-        //dd($allResults);
-        return $result;
-    }
-
-
-    /**
-     * Hilfsfunktion für evaluate($id)
-     * @return array
-     */
-    public function getVotesForPartiesLagacy(){
-        //get all parties for this election
-        $parties = Party::where('election_id', '=', $this->id_election)->get();
-        //dd($parties);
-        //get the name and the votes of each party
-        $result = array();
-        foreach($parties as $key => $party){
-            $result[$key]['name'] = $party->name;
-            $result[$key]['vote'] = $party->vote;
-        }
-        //dd($allResults);
         return $result;
     }
 
