@@ -4,6 +4,31 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Candidate
+ *
+ * @property-read \App\Election $election
+ * @property-read \App\Party $parties
+ * @mixin \Eloquent
+ * @property int $id_candidate
+ * @property string $last_name
+ * @property string $first_name
+ * @property int|null $party_id
+ * @property int $constituency
+ * @property int $election_id
+ * @property int $vote
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereConstituency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereElectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereIdCandidate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate wherePartyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereVote($value)
+ */
 class Candidate extends Model
 {
     protected $table = 'candidates';

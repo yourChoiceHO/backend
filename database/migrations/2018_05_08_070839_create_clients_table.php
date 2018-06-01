@@ -14,7 +14,7 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->bigIncrements('id_client');//unsigned bigInteger, primary key
+            $table->increments('id_client');//unsigned bigInteger, primary key
             $table->string('typ');//Änderung von tinyInteger zu string lt. Tobin
             $table->timestamps();
 

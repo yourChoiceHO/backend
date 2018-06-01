@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class ElectionTableSeeder extends Seeder
 {
@@ -12,21 +13,18 @@ class ElectionTableSeeder extends Seeder
     public function run()
     {
 
-        //\App\Party::something
+        $faker = Faker::create();
+        //hole alle Elemente in Election/id_election
+        $clientsIDs = DB::table('clients')->pluck('id_client')->toArray();
+        //1
+        //noch nicht begonnene Bundestagswahl
         DB::table('elections')->insert([
+            'client_id' =>  $faker->randomElement($clientsIDs),
             'typ' => 'Bundestagswahl',
-            'text' => 'ich bin ein kleiner test text zur bundestagswahl',
+            'text' => 'noch nicht begonnene Bundestagswahl',
             'start_date' => date("Y-m-d H:i:s"),
             'end_date' => date("Y-m-d H:i:s"),
-            'state' => 2
-        ]);
-
-        DB::table('elections')->insert([
-            'typ' => 'Landtagswahl',
-            'text' => 'ich bin ein kleiner test text zur Landtagswahl',
-            'start_date' => date("Y-m-d H:i:s"),
-            'end_date' => date("Y-m-d H:i:s"),
-            'state' => 1
+            'state' => 0
         ]);
     }
 }

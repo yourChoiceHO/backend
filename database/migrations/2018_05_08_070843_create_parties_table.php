@@ -14,27 +14,32 @@ class CreatePartiesTable extends Migration
     public function up()
     {
         Schema::create('parties', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id_party');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('text')->nullable();
             $table->integer('constituency');
-            $table->unsignedInteger('election_id');
+            $table->integer('election_id')->unsigned();
             $table->bigInteger('vote');
             $table->timestamps();
 
             // FK
             //election_id ist FK, referenziert id in elections
 
-            $table->foreign('election_id')
+            /*$table->foreign('election_id')
                 ->references('id_election')
-                ->on('elections')
-                ->onDelete('cascade');
+                ->on('elections');*/
 
 
             //erlaube Fremdschlüssel
-            Schema::enableForeignKeyConstraints();
+            /*Schema::table('parties', function($table) {
+                $table->foreign('election_id')->references('id_election')->on('elections');
+            });*/
 
         });
+        Schema::table('parties', function($table) {
+                $table->foreign('election_id')->references('id_election')->on('elections');
+            });
     }
 
     /**

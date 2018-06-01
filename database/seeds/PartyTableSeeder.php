@@ -24,9 +24,31 @@ class PartyTableSeeder extends Seeder
             //FK
             //Alternative:
             // 'election_id' => $faker->randomElement($electionsIDs),
-            'election_id' => \App\Election::first()->id_election,
-            'vote' => 2
+            'election_id' => 100,
+            'vote' => 20
         ]);
+        DB::table('parties')->insert([
+            'name' => 'SPD',
+            'text' => 'ich bin ein kleiner test text zur SPD',
+            'constituency' => 10,
+            //FK
+            //Alternative:
+            // 'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' => 100,
+            'vote' => 30
+        ]);
+        DB::table('parties')->insert([
+            'name' => 'SPD',
+            'text' => 'ich bin ein kleiner test text zur SPD',
+            'constituency' => 67,
+            //FK
+            //Alternative:
+            // 'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' => 100,
+            'vote' => 50
+        ]);
+
+
 
 
 
@@ -38,8 +60,44 @@ class PartyTableSeeder extends Seeder
             //nimm ein beliebiges Element aus dem oben erzeugten Array
             //Möglicherweise gleiche ID gewählt wie bei anderem gleichen Aufruf
             //hier ok, da mehrere Party-Election many to one-Beziehung ist
-            'election_id' => $faker->randomElement($electionsIDs),
-            'vote' => 8
+            'election_id' => 100,
+            'vote' => 20
+        ]);
+
+        DB::table('parties')->insert([
+            'name' => 'CDU',
+            'text' => 'ich bin ein kleiner test text zur CDU',
+            'constituency' => 2,
+            //FK
+            //nimm ein beliebiges Element aus dem oben erzeugten Array
+            //Möglicherweise gleiche ID gewählt wie bei anderem gleichen Aufruf
+            //hier ok, da mehrere Party-Election many to one-Beziehung ist
+            'election_id' => 100,
+            'vote' => 30
+        ]);
+
+        DB::table('parties')->insert([
+            'name' => 'CDU',
+            'text' => 'ich bin ein kleiner test text zur CDU',
+            'constituency' => 55,
+            //FK
+            //nimm ein beliebiges Element aus dem oben erzeugten Array
+            //Möglicherweise gleiche ID gewählt wie bei anderem gleichen Aufruf
+            //hier ok, da mehrere Party-Election many to one-Beziehung ist
+            'election_id' => 100,
+            'vote' => 100
+        ]);
+
+        DB::table('parties')->insert([
+            'name' => 'CDU',
+            'text' => 'ich bin ein kleiner test text zur CDU',
+            'constituency' => 65,
+            //FK
+            //nimm ein beliebiges Element aus dem oben erzeugten Array
+            //Möglicherweise gleiche ID gewählt wie bei anderem gleichen Aufruf
+            //hier ok, da mehrere Party-Election many to one-Beziehung ist
+            'election_id' => 100,
+            'vote' => 20
         ]);
     }
 }

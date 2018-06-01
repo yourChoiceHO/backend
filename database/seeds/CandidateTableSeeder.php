@@ -27,8 +27,21 @@ class CandidateTableSeeder extends Seeder
             //Alternative:
             //'election_id' => \App\Election::first()->id_election,
             //'election_id' => $faker->randomElement($electionsIDs),
-            'election_id' =>1,
+            'election_id' =>100,
             'vote' => 2
+        ]);
+
+        DB::table('candidates')->insert([
+            'last_name' => 'Misterson',
+            'first_name' => 'Mister',
+            'party_id' => null,
+            'constituency' => 6,
+            //FK
+            //Alternative:
+            //'election_id' => \App\Election::first()->id_election,
+            //'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' =>100,
+            'vote' => 100
         ]);
 
         //Kandidat 2
@@ -41,8 +54,21 @@ class CandidateTableSeeder extends Seeder
             //Alternative:
             //'election_id' => \App\Election::first()->id_election,
             //'election_id' => $faker->randomElement($electionsIDs),
-            'election_id' =>1,
+            'election_id' =>100,
             'vote' => 5
+        ]);
+
+        DB::table('candidates')->insert([
+            'last_name' => 'Last',
+            'first_name' => 'First',
+            'party_id' => $faker->randomElement($partiesIDs),
+            'constituency' => 1,
+            //FK
+            //Alternative:
+            //'election_id' => \App\Election::first()->id_election,
+            //'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' =>100,
+            'vote' => 30
         ]);
     }
 }

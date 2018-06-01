@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClientTableSeeder::class,
             ElectionTableSeeder::class,
-            ReferendumTableSeeder::class
+            ReferendumTableSeeder::class,
             ElectionTableSeeder::class,
             PartyTableSeeder::class,
             CandidateTableSeeder::class,

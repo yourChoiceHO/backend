@@ -13,24 +13,24 @@ class CreateElectionsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('elections', function (Blueprint $table) {
-            //increments ist unsigned int,
-            $table->increments('id_election');
 
-            //muss unsigned da id increments unsigned int ist
-            //$table->unsignedInteger('client_id');
-
+            $table->increments('id_election');//unsigned bigInteger, primary key
+            $table->integer('client_id')->unsigned()->nullable();
             $table->string('typ');
-            $table->text('text')->nullable();
+            $table->string('text')->nullable();//oder anstatt string besser text
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            //TinyInt = 0/1
             $table->tinyInteger('state');
             $table->timestamps();
 
             //FK
-            //client existiert noch nicht
-            //$table->foreign('client_id')->references('id_client')->on('client');
+            $table->foreign('client_id')//FK
+            ->references('id_client')//PK
+            ->on('clients')//Table
+            ->onDelete('cascade');
+
         });
     }
 

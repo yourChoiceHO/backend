@@ -7,6 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Vote;
 
+/**
+ * App\Election
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Candidate[] $candidates
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Party[] $parties
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Vote[] $votes
+ * @mixin \Eloquent
+ * @property int $id_election
+ * @property int|null $client_id
+ * @property string $typ
+ * @property string|null $text
+ * @property string $start_date
+ * @property string $end_date
+ * @property int $state
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereIdElection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereTyp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereUpdatedAt($value)
+ */
 class Election extends Model
 {
     const STATE_INAKTIVE = 0;
@@ -68,11 +94,47 @@ class Election extends Model
     }
 
 
+    public function evaluate(){
+        if($this->typ == "Bundestagswahl"){
+            $result['general']['votes_parties'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
+            //$result['general']['votes_candidates'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
+            $result['general']['parties'] = Party::whereElectionId($this->id_election)->groupBy("name")->selectRaw('*, sum(vote) as vote_number')->get();
+            foreach ($result['general']['parties'] as $party){
+                $party['vote_percent'] = number_format((($party->getAttribute('vote_number') / $result['general']['votes_parties']) * 100), 2);
+                $test = null;
+            }
+            $candidates = Candidate::whereElectionId($this->id_election)->orderBy("constituency")->get();
+            $result['general']['candidates'] = array();
+            foreach ($candidates as $candidate){
+                $constituency = $candidate->getAttribute('constituency');
+                $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
+                $candidate['vote_percent'] = number_format( (($candidate->getAttribute('vote') / $max_vote )* 100), 2);
+                if(key_exists($constituency,$result['general']['candidates'])){
+                    if($candidate->getAttribute('vote') > $result['general']['candidates'][$constituency]->getAttribute('vote')){
+                        $result['general']['candidates'][$constituency] = $candidate;
+                    }
+                }else{
+                    $result['general']['candidates'][$constituency] = $candidate;
+                }
+                $result['constituency'][$constituency]['candidates'][] = $candidate;
+            }
+            $parties = Party::whereElectionId($this->id_election)->orderBy("constituency")->get();
+            foreach ($parties as $party){
+
+                $constituency = $party->getAttribute('constituency');
+                $max_vote = Party::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
+                $party['vote_percent'] = number_format( (($party->getAttribute('vote') / $max_vote )* 100), 2);
+                $result['constituency'][$constituency]['parties'][] = $party;
+            }
+            return $result;
+        }
+    }
+
     /**
      * bisher alles nur als Gesamtergebnis
      * @throws \Exception
      */
-    public function evaluate(){
+    public function evaluateLagcy(){
 
         //find the election with the given id
        // dd($electionToEvaluate);

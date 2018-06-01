@@ -20,7 +20,7 @@ class ClientTableSeeder extends Seeder
 
 
         DB::table('clients')->insert([
-            'typ' => 'Landtagswahl',
+            'typ' => 'Landtagswahl'
         ]);
     }
 }

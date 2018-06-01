@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class ReferendumTableSeeder extends Seeder
 {
@@ -14,14 +15,14 @@ class ReferendumTableSeeder extends Seeder
         $faker = Faker::create();
 
         //FK
-        $ElectionIDs = DB::table('elections')->pluck('id_elections')->toArray();
+        $ElectionIDs = DB::table('elections')->pluck('id_election')->toArray();
 
-        DB::table('elections')->insert([
+        DB::table('referendums')->insert([
             'text' => 'Darum geht es in diesem Referendum',
-            'constituency' => '228',
+            'constituency' => 228,
             'election_id' => $faker->randomElement($ElectionIDs),
-            'yes' => '1234',
-            'no' => '1285'
+            'yes' => 1234,
+            'no' => 1285
         ]);
     }
 }

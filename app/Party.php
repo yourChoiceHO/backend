@@ -4,6 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Party
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Candidate[] $candidates
+ * @property-read \App\Election $election
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party partyGTFive()
+ * @mixin \Eloquent
+ * @property int $id_party
+ * @property string $name
+ * @property string|null $text
+ * @property int $constituency
+ * @property int $election_id
+ * @property int $vote
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereConstituency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereElectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereIdParty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereVote($value)
+ */
 class Party extends Model
 {
     //const something= 5;

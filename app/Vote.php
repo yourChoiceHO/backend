@@ -4,6 +4,29 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Vote
+ *
+ * @property-read \App\Election $election
+ * @property-read \App\Voter $voter
+ * @mixin \Eloquent
+ * @property int $id_vote
+ * @property int $voter_id
+ * @property int $election_id
+ * @property int $first_vote
+ * @property int|null $second_vote
+ * @property int $valid
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereElectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereFirstVote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereIdVote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereSecondVote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereValid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Vote whereVoterId($value)
+ */
 class Vote extends Model
 {
     protected $table = 'votes';
