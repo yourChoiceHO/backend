@@ -162,7 +162,7 @@ class Election extends Model
             $result['general'] = $this->getVotesForConstituency(false);
         } elseif ($this->typ == self::LandtagswahlSL){
             $result['general'] = $this->getVotesForConstituency(true, false);
-        } elseif ($this->typ == "Referendum") {
+        } elseif ($this->typ == self::Referendum) {
             $max_vote = Referendum::whereElectionId($this->id_election)->selectRaw("(yes + no) as votes")->get()->get(0)->getAttribute('votes');
             $referendum = Referendum::whereElectionId($this->id_election)->get()->get(0);
             $result['general']['text'] = $referendum->getAttribute("text");
@@ -185,6 +185,16 @@ class Election extends Model
         //TODO Unterteilung nach Wahltyp um zu wissen, ob nur eine Stimme z.B. nur Kandidaten erforderlich ist
         $myVote = new Vote();
 
+        if($this->typ == self::Kommunalwahl) {
+            $candidates = $request->get('candidates');
+            foreach ($candidates as $candidate) {
+                $candidate_edit = Candidate::whereIdCandidate($candidate['id_candidate']);
+                $candidate_edit->setAttribute("vote", ($candidate_edit->getAttribute("vote") + 1));
+                $candidate_edit->save();
+                $party = Party::whereIdParty($candidate['party_id']);
+                $party->setAttribute("vote", $party->getAttribute("vote") + 1);
+            }
+        }
 
 
         $id_election = $this->id_election;
