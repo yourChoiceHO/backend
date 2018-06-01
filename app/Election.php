@@ -93,39 +93,65 @@ class Election extends Model
         return self::STATE_AKTIVE;
     }
 
+    private function getVotesForParties(){
+        $result['votes_parties'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
+        $result['parties'] = Party::whereElectionId($this->id_election)->groupBy("name")->selectRaw('*, sum(vote) as vote_number')->get();
+        foreach ($result['parties'] as $party){
+            $party['vote_percent'] = number_format((($party->getAttribute('vote_number') / $result['votes_parties']) * 100), 2);
+            $test = null;
+        }
+        return $result;
+    }
+
+
+    private function getVotesForCandidates(){
+        $candidates = Candidate::whereElectionId($this->id_election)->orderBy("constituency")->get();
+        $result['candidates'] = array();
+        foreach ($candidates as $candidate){
+            $constituency = $candidate->getAttribute('constituency');
+            $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
+            $candidate['vote_percent'] = number_format( (($candidate->getAttribute('vote') / $max_vote )* 100), 2);
+            if(key_exists($constituency,$result['candidates'])){
+                if($candidate->getAttribute('vote') > $result['candidates'][$constituency]->getAttribute('vote')){
+                    $result['candidates'][$constituency] = $candidate;
+                }
+            }else{
+                $result['candidates'][$constituency] = $candidate;
+            }
+            //$result['constituency'][$constituency]['candidates'][] = $candidate;
+        }
+        return $result;
+    }
+    private function getVotesForConstituency($withParty = true, $withCandidate = true){
+        $result = null;
+        if($withCandidate) {
+            $candidates = Candidate::whereElectionId($this->id_election)->orderBy("constituency")->get();
+            foreach ($candidates as $candidate) {
+                $constituency = $candidate->getAttribute('constituency');
+                $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=',
+                    $constituency)->sum('vote');
+                $candidate['vote_percent'] = number_format((($candidate->getAttribute('vote') / $max_vote) * 100), 2);
+                $result[$constituency]['candidate'][] = $candidate;
+            }
+        }
+        if($withParty) {
+            $parties = Party::whereElectionId($this->id_election)->orderBy("constituency")->get();
+            foreach ($parties as $party) {
+                $constituency = $party->getAttribute('constituency');
+                $max_vote = Party::whereElectionId($this->id_election)->where('constituency', '=',
+                    $constituency)->sum('vote');
+                $party['vote_percent'] = number_format((($party->getAttribute('vote') / $max_vote) * 100), 2);
+                $result[$constituency]['parties'][] = $party;
+            }
+        }
+        return $result;
+    }
 
     public function evaluate(){
         if($this->typ == "Bundestagswahl"){
-            $result['general']['votes_parties'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
-            //$result['general']['votes_candidates'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
-            $result['general']['parties'] = Party::whereElectionId($this->id_election)->groupBy("name")->selectRaw('*, sum(vote) as vote_number')->get();
-            foreach ($result['general']['parties'] as $party){
-                $party['vote_percent'] = number_format((($party->getAttribute('vote_number') / $result['general']['votes_parties']) * 100), 2);
-                $test = null;
-            }
-            $candidates = Candidate::whereElectionId($this->id_election)->orderBy("constituency")->get();
-            $result['general']['candidates'] = array();
-            foreach ($candidates as $candidate){
-                $constituency = $candidate->getAttribute('constituency');
-                $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
-                $candidate['vote_percent'] = number_format( (($candidate->getAttribute('vote') / $max_vote )* 100), 2);
-                if(key_exists($constituency,$result['general']['candidates'])){
-                    if($candidate->getAttribute('vote') > $result['general']['candidates'][$constituency]->getAttribute('vote')){
-                        $result['general']['candidates'][$constituency] = $candidate;
-                    }
-                }else{
-                    $result['general']['candidates'][$constituency] = $candidate;
-                }
-                $result['constituency'][$constituency]['candidates'][] = $candidate;
-            }
-            $parties = Party::whereElectionId($this->id_election)->orderBy("constituency")->get();
-            foreach ($parties as $party){
-
-                $constituency = $party->getAttribute('constituency');
-                $max_vote = Party::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
-                $party['vote_percent'] = number_format( (($party->getAttribute('vote') / $max_vote )* 100), 2);
-                $result['constituency'][$constituency]['parties'][] = $party;
-            }
+            $result['general'] = $this->getVotesForParties();
+            $result['general'] = $this->getVotesForCandidates();
+            $result['constituency'] = $this->getVotesForConstituency();
             return $result;
         }
     }
@@ -186,7 +212,7 @@ class Election extends Model
      * Hilfsfunktion für evaluate($id)
      * @return array
      */
-    public function getVotesForCandidate(){
+    public function getVotesForCandidateLagacy(){
 
         //get all candidates for this election
         $candidates = Candidate::where('election_id', '=', $this->id_election)->get();
@@ -206,7 +232,7 @@ class Election extends Model
      * Hilfsfunktion für evaluate($id)
      * @return array
      */
-    public function getVotesForParties(){
+    public function getVotesForPartiesLagacy(){
         //get all parties for this election
         $parties = Party::where('election_id', '=', $this->id_election)->get();
         //dd($parties);

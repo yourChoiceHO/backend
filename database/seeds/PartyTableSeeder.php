@@ -91,7 +91,7 @@ class PartyTableSeeder extends Seeder
         DB::table('parties')->insert([
             'name' => 'CDU',
             'text' => 'ich bin ein kleiner test text zur CDU',
-            'constituency' => 65,
+            'constituency' => 1,
             //FK
             //nimm ein beliebiges Element aus dem oben erzeugten Array
             //Möglicherweise gleiche ID gewählt wie bei anderem gleichen Aufruf
