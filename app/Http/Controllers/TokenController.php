@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class TokenController extends Controller
 {
-    //
+    public function auth(Request $request){
+              
+    }
 }
