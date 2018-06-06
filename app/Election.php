@@ -174,47 +174,50 @@ class Election extends Model
         return $result;
     }
 
-    /**
-     * @param Request $request
-     * @return bool
-     * @throws \Exception
-     */
+
     public function vote(Request $request){
-        //TODO Wie komme ich an die election_id (nicht im request enthalten) oder bereits wg route (s. api.php) selektiert? Oder Route::pattern(???)
-        //TODO Inhalt von first_vote und second_vote? Nur 1 und 0? Wie erfolgt Zuordnung zu Kandidaten und Partei?
-        //TODO Unterteilung nach Wahltyp um zu wissen, ob nur eine Stimme z.B. nur Kandidaten erforderlich ist
-        $myVote = new Vote();
-
-        if($this->typ == self::Kommunalwahl) {
-            $candidates = $request->get('candidates');
-            foreach ($candidates as $candidate) {
-                $candidate_edit = Candidate::whereIdCandidate($candidate['id_candidate']);
-                $candidate_edit->setAttribute("vote", ($candidate_edit->getAttribute("vote") + 1));
-                $candidate_edit->save();
-                $party = Party::whereIdParty($candidate['party_id']);
-                $party->setAttribute("vote", $party->getAttribute("vote") + 1);
-            }
-        }
-
 
         $id_election = $this->id_election;
         $voter_id = $request->get('voter_id');
         $voter = Voter::where('election_id', '=', $id_election)->andWhere('voter_id', '=', $voter_id);
-        if(!$voter){
+        if(!$voter){ //check if first vote for election
                 $valid = $request->get('valid');
                 $first_vote = $request->get('first_vote');
                 $second_vote= $request->get('second_vote');
                 if($valid && $first_vote && $second_vote){
-                    if($this->typ == "Bundestagswahl") {
+                    // save vote Model candidate / party
+                    if($this->typ == self::Bundestagswahl|| $this->typ == self::Landtagswahl) { //candiates and party
                         $party_id = $request->get('party_id');
-                        $party = Party::where('id_party', '=', $party_id);
-                        $party->vote++;
-                        $party->save();
                         $candidate_id = $request->get("candidate_id");
-                        $candidate = Candidate::where("id_candidate", '=', $candidate_id);
-                        $candidate->vote++;
-                        $candidate->save();
+                        $this->voteFor($candidate_id,$party_id);
                       }
+
+                      elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW || $this->typ == self::Kommunalwahl){//candidates
+                          $candidate_id = $request->get("candidate_id");
+                          $this->voteFor($candidate_id);
+                      }
+
+                    elseif ($this->typ == self::LandtagswahlSL){//party
+                        $party_id = $request->get('party_id');
+                        $this->voteFor(null,$party_id);
+                    }
+                    elseif ($this->typ == self::Referendum) {//referendum
+                        $referendum=$request->get('referendum');
+                        $referendum_model=Referendum::where ('election_id','=',$id_election);
+
+
+                        if($referendum=='yes'){
+                            $referendum_model->yes++;
+                        }
+                        elseif($referendum=='no'){
+                            $referendum_model->no++;
+                        }
+                        else{
+                            throw new \InvalidArgumentException('referendum vote is null');
+                        }
+                    }
+
+                      //save vote Model vote
                     $vote = new Vote();
                     $vote->election_id = $id_election;
                     $vote->voter_id = $voter_id;
@@ -222,7 +225,7 @@ class Election extends Model
                     $vote->second_vote = true;
                     $vote->valid = true;
                     $vote->save();
-                }elseif($first_vote && $second_vote){
+                }elseif($first_vote && $second_vote){//vote is not valid
                     $vote = new Vote();
                     $vote->election_id = $id_election;
                     $vote->voter_id = $voter_id;
@@ -231,70 +234,26 @@ class Election extends Model
                     $vote->valid = false;
                     $vote->save();
                 }else{
-                    //throw new Exception
+                    throw new \InvalidArgumentException('vote not saved');
                 }
+        }
 
-                $this->voteFor(null, null, "yes");
-                $this->voteFor($candidate_id);
+    }
 
+
+    private function voteFor($candidate_id = null, $party_id = null){
+        if($candidate_id){
+            $candidate = Candidate::where("id_candidate", '=', $candidate_id);
+            $candidate->vote++;
+            $candidate->save();
 
         }
 
-
-
-
-
-
-
-        //vote not valid
-        if($request->valid == 0){
-            $myVote->valid = 0;
-            return true;
+        if($party_id){
+            $party = Party::where('id_party', '=', $party_id);
+            $party->vote++;
+            $party->save();
         }
-        //vote valid
-        else{
-            if($request->first_vote == 1){
-                $myVote->first_vote = 1;
-
-            }
-            else{
-                //Stimme soll gültig sein, aber enthält keine Erststimme
-                throw new \InvalidArgumentException('vote is valid, but there is no valid first_vote');
-            }
-            if($request->second_vote == 1){
-                $myVote->second_vote = 1;
-
-               // $this->updateVotesForParties($request);
-            }
-
-            else{
-                //Stimme soll gültig sein, aber enthält keine Zweitstimme
-                throw new \InvalidArgumentException('vote is valid, but there is no valid second_vote');
-            }
-        }
-        $myVote->save();
-        return true;
-    }
-
-    //TODO Update Wahlstimme wie?
-    //TODO Bezeichnung election_id oder id_election
-    //TODO Welchen Übergabeparameter $request oder $myVote? Welchen Übergabeparameter bei update
-    //TODO same for candidate
-    public function updateVotesForParties(Request $request){
-        //get party
-        $party=Party::where('election_id', '=', $this->id_election, 'AND', 'id_party', '=', $this->id_party)->get();
-        $party->vote++;
-        $this->update($party);
-    }
-
-    public function updateVotesForCandidates(Request $request){
-        //get party
-        $candidate=Candidate::where('election_id', '=', $this->id_election, 'AND', 'id_candidate', '=', $this->id_candidate)->get();
-        $candidate->vote++;
-        $this->update($candidate);
-    }
-
-    private function voteFor($candidate_id = null, $party_id = null, $referendum = null){
 
     }
 
