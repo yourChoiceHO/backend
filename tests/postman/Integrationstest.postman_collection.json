@@ -1,0 +1,3355 @@
+{
+	"info": {
+		"_postman_id": "f7c2b643-5581-40b1-bdea-e66fdedbc925",
+		"name": "Integrationstest Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "election",
+			"description": null,
+			"item": [
+				{
+					"name": "election Bundestag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "81e0a194-dac4-43a9-a5df-6bbc21790cc6",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"pm.test('Has client_id', function() {",
+									"    pm.expect(jsonData.client_id).to.eql(pm.globals.get(\"client_id\"));",
+									"});",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"asd\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"asd\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"asd\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"asd\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"asd\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_bundestag\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"client_id\": {{election_id}},\n  \"typ\": \"asd\",\n  \"text\": \"asd\",\n  \"start_date\": \"asd\",\n  \"end_date\": \"asd\",\n  \"state\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Bundestag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ba415cb-f4fe-413f-b6bb-1bea084916b7",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Bundestagswahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Bundestagswahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_bundestag}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_bundestag}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Landtag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1e5c3e1a-0877-421d-9085-825d6e2802d3",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Landtagswahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_landtag\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"Landtagswahl\",\n  \"text\": \"Dies ist eine Landtagswahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "https://yourChoice.de/api/v1/election",
+							"protocol": "https",
+							"host": [
+								"yourChoice",
+								"de"
+							],
+							"path": [
+								"api",
+								"v1",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Landtag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "354a8f95-685b-4f22-8717-cd49f1323f57",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Landtagswahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_landtag}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_landtag}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election LandtagBW",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d8d5414-79dc-4c4c-a19a-37e1548fa9d8",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"LandtagswahlBW\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in BW\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_landtagbw\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"LandtagswahlBW\",\n  \"text\": \"Dies ist eine Landtagswahl in BW\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "https://yourChoice.de/api/v1/election",
+							"protocol": "https",
+							"host": [
+								"yourChoice",
+								"de"
+							],
+							"path": [
+								"api",
+								"v1",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election LandtagBW",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5fe81e8b-fd39-46af-90b9-6bce0b22b0fa",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"LandtagswahlBW\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in BW\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_landtagbw}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_landtagbw}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election LandtagSL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "385843ac-b7d2-4689-833e-869dc30a0714",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Landtagswahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in SL\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_landtagsl\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"LandtagswahlSL\",\n  \"text\": \"Dies ist eine Landtagswahl in SL\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "https://yourChoice.de/api/v1/election",
+							"protocol": "https",
+							"host": [
+								"yourChoice",
+								"de"
+							],
+							"path": [
+								"api",
+								"v1",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election LandtagSL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76e2fc64-7af2-49e6-bbb8-2fdb8e990d67",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Landtagswahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in SL\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_landtagsl}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_landtagsl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Buerger",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbfdfc03-b562-4f6a-a83c-dd2e872188ae",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Buergermeisterwahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Buergermeisterwahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_buerger\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "https://yourChoice.de/api/v1/election",
+							"protocol": "https",
+							"host": [
+								"yourChoice",
+								"de"
+							],
+							"path": [
+								"api",
+								"v1",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Buerger",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7097dd9e-f7e0-4494-95be-5db1b82c6319",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Buergermeisterwahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Buergermeisterwahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_buerger}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_buerger}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Europa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a5cd47aa-1828-4d01-b067-b4a4f6539855",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Europawahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Europawahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_europa\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"Europawahl\",\n  \"text\": \"Dies ist eine Europawahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "https://yourChoice.de/api/v1/election",
+							"protocol": "https",
+							"host": [
+								"yourChoice",
+								"de"
+							],
+							"path": [
+								"api",
+								"v1",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Europa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94aedd73-fcfd-4452-91b0-d5238d004c79",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Europawahl\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Europawahl\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_europa}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_europa}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Ref",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "36287f8e-7900-42e9-bd8d-032059075ec7",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Referendum\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist ein Referendum\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_ref\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"Referendum\",\n  \"text\": \"Dies ist ein Referendum\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "https://yourChoice.de/api/v1/election",
+							"protocol": "https",
+							"host": [
+								"yourChoice",
+								"de"
+							],
+							"path": [
+								"api",
+								"v1",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Ref",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "658b14e7-8e11-487c-9964-33581335925c",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Referendum\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist ein Referendum\");",
+									"});",
+									"",
+									"pm.test('Has start_date', function() {",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has end_date', function() {",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
+									"});",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_ref}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_ref}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "voter",
+			"description": null,
+			"item": [
+				{
+					"name": "voter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3ac61f1-67b9-4c01-9695-314f878cf115",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Has id_voter', function() {",
+									"    pm.expect(jsonData.id_voter).to.eql(pm.globals.get(\"id_voter\"));",
+									"});",
+									"",
+									"pm.test('Has last_name', function() {",
+									"    pm.expect(jsonData.last_name).to.eql(\"Misterson\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"    pm.expect(jsonData.first_name).to.eql(\"Mister\");",
+									"});",
+									"",
+									"pm.test('Has hash', function() {",
+									"    pm.expect(jsonData.hash).to.eql(\"asajhjuf76safhjsnfjsf8xxfxdfstgsd\");",
+									"});",
+									"",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_voter\", jsonData.id_voter);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"last_name\": \"Misterson\",\n  \"first_name\": \"Mister\",\n  \"hash\": \"asajhjuf76safhjsnfjsf8xxfxdfstgsd\",\n  \"consitiuency\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/voter",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"voter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "voter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d07441e-1bf4-4cee-9fb6-cd3ec8a9af14",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Has id_voter', function() {",
+									"    pm.expect(jsonData.id_voter).to.eql(pm.globals.get(\"id_voter\"));",
+									"});",
+									"",
+									"pm.test('Has last_name', function() {",
+									"    pm.expect(jsonData.last_name).to.eql(\"Misterson\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"    pm.expect(jsonData.first_name).to.eql(\"Mister\");",
+									"});",
+									"",
+									"pm.test('Has hash', function() {",
+									"    pm.expect(jsonData.hash).to.eql(\"asajhjuf76safhjsnfjsf8xxfxdfstgsd\");",
+									"});",
+									"",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://yourchoice.local/api/voter/{{id_voter}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"voter",
+								"{{id_voter}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "party",
+			"description": null,
+			"item": [
+				{
+					"name": "party Bund1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a505296-518c-49c3-87ef-edf9774d57f6",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"SPD\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_party_bund1\", jsonData.id_party);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"SPD\",\r\n\t\"text\": \"Infos zur SPD\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_bundestag}},\r\n\t\"vote\": \"34\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Bund1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76b69d76-d390-485e-898b-ef328e14a75c",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"SPD\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party/{{id_party_bund1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party",
+								"{{id_party_bund1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Bund2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d67ce95f-50cf-4c86-822e-b691c306a33d",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"CDU\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"20\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_party_bund2\", jsonData.id_party);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"CDU\",\r\n\t\"text\": \"Infos zur CDU\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_bundestag}},\r\n\t\"vote\": \"20\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Bund2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "450f7a0c-16fe-43cc-b1f8-abdd8ebe9039",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"CDU\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"20\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party/{{id_party_bund2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party",
+								"{{id_party_bund2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Landtag1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "058ad373-d8f3-4ede-b8c4-125a6d3633b0",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"SPD\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"20\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_party_landtag1\", jsonData.id_party);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"SPD\",\r\n\t\"text\": \"Infos zur SPD\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtag}},\r\n\t\"vote\": \"20\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Landtag1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "429a67f9-9575-49fa-b690-131fa6f9bca1",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"SPD\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"20\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party/{{id_party_landtag1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party",
+								"{{id_party_landtag1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Landtag2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "156872b9-7960-4373-812e-007bf20b0e5c",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"CDU\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_party_land2\", jsonData.id_party);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"CDU\",\r\n\t\"text\": \"Infos zur CDU\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtag}},\r\n\t\"vote\": \"34\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party Landtag2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94475311-cb54-4852-95b2-d0e0cf2e8b23",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"CDU\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party/{{id_party_land2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party",
+								"{{id_party_land2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party LandtagSL1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f84fb96-3d44-42bf-bbfd-9ed66f866923",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"Gruene\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur Gruene\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"15\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_party_landsl1\", jsonData.id_party);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Gruene\",\r\n\t\"text\": \"Infos zur Gruene\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtagsl}},\r\n\t\"vote\": \"15\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party LandtagSL1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5dfd3749-d5c4-45a5-85a7-76dbe66f6b64",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"Gruene\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur Gruene\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"15\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party/{{id_party_landsl1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party",
+								"{{id_party_landsl1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party LandtagSL2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0425d1e-120d-473f-9064-005ea3054c30",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"Linke\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur Linke\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"21\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_party_landsl2\", jsonData.id_party);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Linke\",\r\n\t\"text\": \"Infos zur Linke\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtagsl}},\r\n\t\"vote\": \"21\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "party LandtagSL2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7b190006-b7ef-421b-9610-635eb19702d5",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_party\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_party'); ",
+									"});",
+									"",
+									"pm.test('Has name', function() {",
+									"    pm.expect(jsonData.name).to.eql(\"Linke\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Infos zur Linke\");",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"21\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/party/{{id_party_landsl2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"party",
+								"{{id_party_landsl2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "candidate",
+			"description": null,
+			"item": [
+				{
+					"name": "candidate Bund1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c9ad8233-76c8-4731-927f-a19eed15b8eb",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller1\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans1\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_bund1\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller1\",\r\n\t\"first_name\": \"Hans1\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_bundestag}},\r\n\t\"vote\": \"34\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Bund1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7b53f84d-4dcf-4b65-99fe-e836da4a5a07",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans\");",
+									"});",
+									"",
+									"pm.test('Has party_id', function() {",
+									"  pm.expect(jsonData.party_id).to.eql(pm.globals.get(\"id_party\"));",
+									"});",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"2\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData.election_id).to.eql(pm.globals.get(\"id_election\"));",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Bund2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c2fe59a-0a23-4d5f-868e-8b5fe854919b",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller2\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans2\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"10\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_bund2\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller2\",\r\n\t\"first_name\": \"Hans2\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_bundestag}},\r\n\t\"vote\": \"10\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Bund2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5b0ebc4-34a1-4c8c-af1d-57babf9b708d",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller2\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans2\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"10\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_bund2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_bund2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Land1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8f4bb149-6b5d-4bb4-bea4-d0b949793a49",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller3\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans3\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"16\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_land1\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller3\",\r\n\t\"first_name\": \"Hans3\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtag}},\r\n\t\"vote\": \"16\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Land1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34f51759-307a-429d-9929-e168ff99d03d",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller3\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans3\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"16\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_land1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Land2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be542a24-5229-45d9-a037-d37c7a5cc569",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller4\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans4\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"45\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_land2\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller4\",\r\n\t\"first_name\": \"Hans4\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtag}},\r\n\t\"vote\": \"45\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Land2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66837277-3ea7-430c-9394-6ed32a1acf30",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller4\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans4\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"45\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_land2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate LandBW1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "baa2306b-22cc-4f9b-b51d-3ed2cc605505",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller5\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans5\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_landbw1\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller5\",\r\n\t\"first_name\": \"Hans5\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtagbw}},\r\n\t\"vote\": \"34\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate LandBW1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "05a6bea7-c082-43f0-af71-12212cbaf37e",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller5\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans5\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_landbw1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_landbw1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate LandBW2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d68ae2d7-049e-4818-9739-3ba8b7998ed8",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller6\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans6\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"31\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_landbw2\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller6\",\r\n\t\"first_name\": \"Hans6\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_landtagbw}},\r\n\t\"vote\": \"31\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate LandBW2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2bdac278-e0b2-499a-a3c0-e113ed895b36",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller6\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans6\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"31\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Buerger1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "35a57db8-219a-4acd-8834-74b9df29a24b",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller7\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans7\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"11\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_buerger1\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller7\",\r\n\t\"first_name\": \"Hans7\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_buerger}},\r\n\t\"vote\": \"11\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Buerger1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00d065a0-21ea-483e-b108-c538f5391fed",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller7\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans7\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"11\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_buerger1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_buerger1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Buerger2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a1fdfbf7-0fa6-4cfb-b651-4957ec6f907f",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller8\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans8\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"77\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_buerger2\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller8\",\r\n\t\"first_name\": \"Hans8\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_buerger}},\r\n\t\"vote\": \"77\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Buerger2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2008cd0-c6f5-46a6-ad4a-ff296781a6f7",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller8\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans8\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"77\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_buerger2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_buerger2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Europa1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a7fd02b-b737-4905-8987-77e2cc692a30",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller9\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans9\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_europa1\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller9\",\r\n\t\"first_name\": \"Hans9\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_europa}},\r\n\t\"vote\": \"34\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Europa1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c1d03c6f-d2d9-46d2-9fe3-ae50dbcccf05",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller9\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans9\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_europa1}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_europa1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Europa2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0fafcc7e-6b73-4454-826b-1fa1422ffe98",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller0\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans0\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"32\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_candidate_europa2\", jsonData.id_candidate);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"last_name\": \"Mueller0\",\r\n\t\"first_name\": \"Hans0\",\r\n\t\"consituency\": \"1\",\r\n\t\"election_id\": {{id_election_europa}},\r\n\t\"vote\": \"32\"\r\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "candidate Europa2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4afaf689-8fa2-4c15-b6c4-1c9e8da1e13a",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_candidate\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_candidate'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has last_name', function() {",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller0\");",
+									"});",
+									"",
+									"pm.test('Has first_name', function() {",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans0\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has consituency', function() {",
+									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"});",
+									"",
+									"pm.test('Has election_id', function() {",
+									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"});",
+									"",
+									"pm.test('Has vote', function() {",
+									"    pm.expect(jsonData.vote).to.eql(\"32\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_europa2}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"candidate",
+								"{{id_candidate_europa2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
