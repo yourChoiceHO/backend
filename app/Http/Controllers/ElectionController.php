@@ -87,4 +87,20 @@ class ElectionController extends Controller
         return $result->vote($request);
 
     }
+
+    public function addParties(Request $request, $id){
+        $result = Election::findOrFail($id);
+        return $result->addParties($request);
+    }
+
+    public function addCandidates(Request $request, $id){
+        $result = Election::findOrFail($id);
+        return $result->addCandidates($request);
+    }
+
+    public function addVoters(Request $request, $id){
+        $result = Election::findOrFail($id);
+        return $result->addVoters($request);
+    }
+
 }

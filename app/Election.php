@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Vote;
+use Illuminate\Http\Request;
 
 /**
  * App\Election
@@ -54,7 +55,6 @@ class Election extends Model
     protected $fillable = ['client_id', 'typ', 'text', 'start_date', 'end_date', 'state'];
     protected $guarded = ['id_election'];
     protected $primaryKey = 'id_election';
-
 
     // DEFINE RELATIONSHIPS --------------------------------------------------
 
@@ -255,6 +255,84 @@ class Election extends Model
             $party->save();
         }
 
+    }
+
+
+    public function addParties(Request $request){
+        $files = $request->file('upload');
+            $allParties[] = array();
+            $csv = array_map('str_getcsv', file($files));
+            array_walk($csv, function (&$a) use ($csv) {
+               $a = array_combine($csv[0], $a);
+            });
+            array_shift($csv);
+
+            foreach ($csv as $parties){
+                $party = array(
+                    'name' => $parties['name'],
+                    'text' => $parties['text'],
+                    'constituency' => $parties['constituency'],
+                    'election_id' => $this->id_election,
+                    'vote' => 0
+                );
+                $partyCreated = Party::create($party);
+                array_push($allParties, $partyCreated);
+            }
+        array_shift($allParties);
+
+        return $allParties;
+    }
+
+    public function addCandidates(Request $request){
+        $files = $request->file('upload');
+
+        $allCandidates[] = array();
+            $csv = array_map('str_getcsv', file($files));
+            array_walk($csv, function (&$a) use ($csv) {
+                $a = array_combine($csv[0], $a);
+            });
+            array_shift($csv);
+            foreach ($csv as $candidates){
+                $party = Party::whereElectionId($this->id_election)->where('name', $candidates['party'])->get()->get(0);
+                $candidate = array(
+                    'last_name' => $candidates['last_name'],
+                    'first_name' => $candidates['first_name'],
+                    'party_id' => $party->getAttribute('id_party'),
+                    'constituency' => $candidates['constituency'],
+                    'election_id' => $this->id_election,
+                    'vote' => 0
+                );
+                $candidateCreated = Candidate::create($candidate);
+                array_push($allCandidates, $candidateCreated);
+            }
+        array_shift($allCandidates);
+        return $allCandidates;
+    }
+
+    public function addVoters(Request $request)
+    {
+        $files = $request->file('upload');
+
+        $allVoters[] = array();
+
+            $csv = array_map('str_getcsv', file($files));
+            array_walk($csv, function (&$a) use ($csv) {
+                $a = array_combine($csv[0], $a);
+            });
+            array_shift($csv);
+            foreach ($csv as $voters){
+            $voter = array(
+                'last_name' => $voters['last_name'],
+                'first_name' => $voters['first_name'],
+                'hash' => $voters['hash'],
+                'constituency' => $voters['constituency']
+            );
+            $voterCreated = Voter::create($voter);
+            array_push($allVoters, $voterCreated);
+        }
+        array_shift($allVoters);
+
+        return $allVoters;
     }
 
 }
