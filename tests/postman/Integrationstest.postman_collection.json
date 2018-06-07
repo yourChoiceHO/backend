@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d4896420-7ca1-45da-b83e-affd0ee7b1e2",
+		"_postman_id": "0377c49e-cad9-4c7b-be34-dd12fe9b6ee2",
 		"name": "Integrationstest Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "81e0a194-dac4-43a9-a5df-6bbc21790cc6",
+								"id": "9e940580-70cc-47d5-ba41-19d6fa030f54",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -28,28 +28,25 @@
 									"   pm.expect(jsonData).to.have.property('id_election'); ",
 									"});",
 									"",
-									"pm.test('Has client_id', function() {",
-									"    pm.expect(jsonData.client_id).to.eql(pm.globals.get(\"client_id\"));",
-									"});",
 									"",
 									"pm.test('Has typ', function() {",
-									"    pm.expect(jsonData.typ).to.eql(\"asd\");",
+									"    pm.expect(jsonData.typ).to.eql(\"Bundestagswahl\");",
 									"});",
 									"",
 									"pm.test('Has text', function() {",
-									"    pm.expect(jsonData.text).to.eql(\"asd\");",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Bundestagswahl\");",
 									"});",
 									"",
 									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"asd\");",
+									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
 									"});",
 									"",
 									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"asd\");",
+									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
 									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"asd\");",
+									"    pm.expect(jsonData.state).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_bundestag\", jsonData.id_election);"
@@ -67,7 +64,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"client_id\": {{election_id}},\n  \"typ\": \"asd\",\n  \"text\": \"asd\",\n  \"start_date\": \"asd\",\n  \"end_date\": \"asd\",\n  \"state\": \"asd\"\n}"
+							"raw": "{\n  \"typ\": \"Bundestagswahl\",\n  \"text\": \"Dies ist eine Bundestagswahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/election",
@@ -90,7 +87,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1ba415cb-f4fe-413f-b6bb-1bea084916b7",
+								"id": "b9bdd120-daf6-4ba8-b972-cc5a2060115b",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -111,16 +108,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Bundestagswahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});",
 									""
 								]
@@ -156,7 +145,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1e5c3e1a-0877-421d-9085-825d6e2802d3",
+								"id": "219940ca-7aac-495e-a5ab-b823db8525d6",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -178,13 +167,6 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
 									"",
 									"pm.test('Has state', function() {",
 									"    pm.expect(jsonData.state).to.eql(\"1\");",
@@ -229,7 +211,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "354a8f95-685b-4f22-8717-cd49f1323f57",
+								"id": "3a0d410c-6016-4474-8009-8ba0ce4b9d6c",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -251,16 +233,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});"
 								]
 							}
@@ -295,7 +269,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1d8d5414-79dc-4c4c-a19a-37e1548fa9d8",
+								"id": "3a01105c-a3d8-47cf-a960-852068806806",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -315,14 +289,6 @@
 									"",
 									"pm.test('Has text', function() {",
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in BW\");",
-									"});",
-									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
 									"});",
 									"",
 									"pm.test('Has state', function() {",
@@ -368,7 +334,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5fe81e8b-fd39-46af-90b9-6bce0b22b0fa",
+								"id": "c061a618-a95e-4069-bf11-04974c92b76c",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -390,16 +356,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in BW\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});"
 								]
 							}
@@ -434,7 +392,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "385843ac-b7d2-4689-833e-869dc30a0714",
+								"id": "40efe3b2-a6b3-4513-9d68-7ba2a47f7180",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -454,14 +412,6 @@
 									"",
 									"pm.test('Has text', function() {",
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in SL\");",
-									"});",
-									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
 									"});",
 									"",
 									"pm.test('Has state', function() {",
@@ -507,7 +457,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "76e2fc64-7af2-49e6-bbb8-2fdb8e990d67",
+								"id": "5ab104ea-3099-4a6e-90d8-6bd5b1383203",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -529,16 +479,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Landtagswahl in SL\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});"
 								]
 							}
@@ -573,7 +515,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cbfdfc03-b562-4f6a-a83c-dd2e872188ae",
+								"id": "82e07945-c513-4a65-8ae0-a26478229e78",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -595,13 +537,6 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Buergermeisterwahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
 									"",
 									"pm.test('Has state', function() {",
 									"    pm.expect(jsonData.state).to.eql(\"1\");",
@@ -646,7 +581,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7097dd9e-f7e0-4494-95be-5db1b82c6319",
+								"id": "9054ce2c-585d-43ef-a7ad-0ac0e8f30138",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -668,16 +603,9 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Buergermeisterwahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});"
 								]
 							}
@@ -712,7 +640,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a5cd47aa-1828-4d01-b067-b4a4f6539855",
+								"id": "e23d388b-e767-4f4b-bbde-f2b4df39b385",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -734,16 +662,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Europawahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_europa\", jsonData.id_election);"
@@ -785,7 +705,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "94aedd73-fcfd-4452-91b0-d5238d004c79",
+								"id": "93f3dcc6-42a2-4ad3-8684-bff9b0e4dfae",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -807,16 +727,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Europawahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});"
 								]
 							}
@@ -851,7 +763,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "36287f8e-7900-42e9-bd8d-032059075ec7",
+								"id": "7bea3658-b100-4e46-8c66-6f677f598c6f",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -873,13 +785,6 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist ein Referendum\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
 									"",
 									"pm.test('Has state', function() {",
 									"    pm.expect(jsonData.state).to.eql(\"1\");",
@@ -924,7 +829,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "658b14e7-8e11-487c-9964-33581335925c",
+								"id": "3aed5579-d7b1-4465-b922-a4a7417d26e5",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -946,16 +851,8 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist ein Referendum\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
-									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(1);",
 									"});"
 								]
 							}
