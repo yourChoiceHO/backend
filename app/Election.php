@@ -175,6 +175,7 @@ class Election extends Model
     }
 
 
+    //TODO gibt Funktion ein true oder false zurück, oder ist vote() eine void Funktion?
     public function vote(Request $request){
 
         $id_election = $this->id_election;
@@ -192,7 +193,7 @@ class Election extends Model
                         $this->voteFor($candidate_id,$party_id);
                       }
 
-                      elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW || $this->typ == self::Kommunalwahl){//candidates
+                      elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW){//candidates
                           $candidate_id = $request->get("candidate_id");
                           $this->voteFor($candidate_id);
                       }
@@ -201,6 +202,15 @@ class Election extends Model
                         $party_id = $request->get('party_id');
                         $this->voteFor(null,$party_id);
                     }
+
+                    elseif ($this->typ == self::Kommunalwahl){
+                        $candidates=$request->get('candidate_id');
+                        foreach($candidates as $candidate_id){
+                            //TODO Array mit candidate-ids, wenn eine candidate_id 2 Stimmen bekommen hat, bekomme ich zweimal die ID übermittelt? So habe ich es zumindest erstmal implementiert.
+                            $this->voteFor($candidate_id);
+                        }
+                    }
+
                     elseif ($this->typ == self::Referendum) {//referendum
                         $referendum=$request->get('referendum');
                         $referendum_model=Referendum::where ('election_id','=',$id_election);
