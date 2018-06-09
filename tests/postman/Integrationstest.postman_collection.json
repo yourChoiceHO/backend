@@ -15,13 +15,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4f8fe6a2-749a-435c-8a70-12783ccdb0b9",
+								"id": "7fd8ce8e-cf52-4896-a8c7-fcb00f20aca6",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -80,7 +80,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "aefaecdf-2dd0-48e6-8dba-4ea50aa4db4b",
+								"id": "922d5f82-d774-4e20-b81a-b971b03cdf21",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -101,13 +101,6 @@
 									"    pm.expect(jsonData.text).to.eql(\"Dies ist eine Bundestagswahl\");",
 									"});",
 									"",
-									"pm.test('Has start_date', function() {",
-									"    pm.expect(jsonData.start_date).to.eql(\"1520726400\");",
-									"});",
-									"",
-									"pm.test('Has end_date', function() {",
-									"    pm.expect(jsonData.end_date).to.eql(\"1520726400\");",
-									"});",
 									"",
 									"pm.test('Has state', function() {",
 									"    pm.expect(jsonData.state).to.eql(1);",
@@ -146,13 +139,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e155b957-ca11-4a02-a399-53bdc549f919",
+								"id": "88ea57eb-8036-42ff-bbcb-763905d448f2",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -269,13 +262,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "be671ee2-56ce-45ae-a36d-8eac150db1cc",
+								"id": "e6409955-1e32-4b6c-a950-02c21c04b4d5",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -392,13 +385,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "24552f83-e939-43a1-9294-60fa5444fc5d",
+								"id": "cd02f11a-28e7-4a9a-a33f-7d3848f89240",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -407,7 +400,7 @@
 									"",
 									"",
 									"pm.test('Has typ', function() {",
-									"    pm.expect(jsonData.typ).to.eql(\"Landtagswahl\");",
+									"    pm.expect(jsonData.typ).to.eql(\"LandtagswahlSL\");",
 									"});",
 									"",
 									"pm.test('Has text', function() {",
@@ -456,7 +449,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "16ac6497-cf65-437e-863e-43f0492f3896",
+								"id": "8f98bd9e-5718-45cb-b022-13517af58d94",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -471,7 +464,7 @@
 									"",
 									"",
 									"pm.test('Has typ', function() {",
-									"    pm.expect(jsonData.typ).to.eql(\"Landtagswahl\");",
+									"    pm.expect(jsonData.typ).to.eql(\"LandtagswahlSL\");",
 									"});",
 									"",
 									"pm.test('Has text', function() {",
@@ -515,13 +508,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b881c8b2-ecd3-45d6-a377-cf59c6d700e3",
+								"id": "cc9cd209-ac2a-4ddd-8f16-cfeeefc04217",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -638,13 +631,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b6d4dfff-cdba-403c-971f-2d80a51397d6",
+								"id": "236b4d13-616d-471b-9fe6-e36045cb8d3a",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -761,13 +754,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "da0b7b7a-109b-4745-9541-de59c23761e0",
+								"id": "9549faf4-40ad-4adb-b23d-ff03b00b4f89",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_election\", function(){",
@@ -891,17 +884,17 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d3ac61f1-67b9-4c01-9695-314f878cf115",
+								"id": "b5900057-9a25-49aa-bc31-762ea2a79210",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test('Has id_voter', function() {",
-									"    pm.expect(jsonData.id_voter).to.eql(pm.globals.get(\"id_voter\"));",
+									"   pm.expect(jsonData).to.have.property('id_voter'); ",
 									"});",
 									"",
 									"pm.test('Has last_name', function() {",
@@ -936,7 +929,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"last_name\": \"Misterson\",\n  \"first_name\": \"Mister\",\n  \"hash\": \"asajhjuf76safhjsnfjsf8xxfxdfstgsd\",\n  \"consitiuency\": \"1\"\n}"
+							"raw": "{\n  \"last_name\": \"Misterson\",\n  \"first_name\": \"Mister\",\n  \"hash\": \"asajhjuf76safhjsnfjsf8xxfxdfstgsd\",\n  \"constituency\": \"1\"\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/voter",
@@ -959,7 +952,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0d07441e-1bf4-4cee-9fb6-cd3ec8a9af14",
+								"id": "b56f3442-5610-415b-961c-cab1631ed7c3",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -985,7 +978,7 @@
 									"});",
 									"",
 									"pm.test('Has constituency', function() {",
-									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									""
 								]
@@ -1024,13 +1017,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1a505296-518c-49c3-87ef-edf9774d57f6",
+								"id": "f4f906a8-ad6d-499d-b088-b86dd3a5f81c",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_party\", function(){",
@@ -1045,12 +1038,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1072,7 +1065,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"SPD\",\r\n  \"text\": \"Infos zur SPD\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"34\"\r\n}"
+							"raw": "{\r\n  \"name\": \"SPD\",\r\n  \"text\": \"Infos zur SPD\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"34\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1095,7 +1088,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "76b69d76-d390-485e-898b-ef328e14a75c",
+								"id": "0d568ddd-734e-4393-81b4-174da65ac93c",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1116,16 +1109,16 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"    pm.expect(jsonData.vote).to.eql(34);",
 									"});"
 								]
 							}
@@ -1160,13 +1153,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d67ce95f-50cf-4c86-822e-b691c306a33d",
+								"id": "fe1284c3-9e6c-4b0f-80a5-44d9d4ee5f76",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_party\", function(){",
@@ -1181,12 +1174,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1208,7 +1201,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"CDU\",\r\n  \"text\": \"Infos zur CDU\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"20\"\r\n}"
+							"raw": "{\r\n  \"name\": \"CDU\",\r\n  \"text\": \"Infos zur CDU\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"20\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1231,7 +1224,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "450f7a0c-16fe-43cc-b1f8-abdd8ebe9039",
+								"id": "d4e3ad9b-079e-4ccc-9176-0b1d53ac801c",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1252,16 +1245,16 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"20\");",
+									"    pm.expect(jsonData.vote).to.eql(20);",
 									"});",
 									""
 								]
@@ -1297,13 +1290,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "058ad373-d8f3-4ede-b8c4-125a6d3633b0",
+								"id": "f6427dab-3769-437e-bafd-dd02a211d880",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_party\", function(){",
@@ -1318,12 +1311,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1345,7 +1338,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"SPD\",\r\n  \"text\": \"Infos zur SPD\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"20\"\r\n}"
+							"raw": "{\r\n  \"name\": \"SPD\",\r\n  \"text\": \"Infos zur SPD\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"20\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1368,7 +1361,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "429a67f9-9575-49fa-b690-131fa6f9bca1",
+								"id": "656fb541-f378-4998-a6b5-728bf8c6bccf",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1389,16 +1382,16 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur SPD\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"20\");",
+									"    pm.expect(jsonData.vote).to.eql(20);",
 									"});"
 								]
 							}
@@ -1433,13 +1426,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "156872b9-7960-4373-812e-007bf20b0e5c",
+								"id": "814b865b-0504-4209-a237-8a346d393600",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_party\", function(){",
@@ -1454,12 +1447,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1481,7 +1474,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"CDU\",\r\n  \"text\": \"Infos zur CDU\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"34\"\r\n}"
+							"raw": "{\r\n  \"name\": \"CDU\",\r\n  \"text\": \"Infos zur CDU\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"34\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1504,7 +1497,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "94475311-cb54-4852-95b2-d0e0cf2e8b23",
+								"id": "c10287bd-d098-439c-ab76-42579359b824",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1525,16 +1518,16 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur CDU\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"    pm.expect(jsonData.vote).to.eql(34);",
 									"});"
 								]
 							}
@@ -1569,13 +1562,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0f84fb96-3d44-42bf-bbfd-9ed66f866923",
+								"id": "d7967400-da8c-4ebd-aaa3-3d9edb91b7ab",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_party\", function(){",
@@ -1590,12 +1583,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur Gruene\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1617,7 +1610,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Gruene\",\r\n  \"text\": \"Infos zur Gruene\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagsl}},\r\n  \"vote\": \"15\"\r\n}"
+							"raw": "{\r\n  \"name\": \"Gruene\",\r\n  \"text\": \"Infos zur Gruene\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagsl}},\r\n  \"vote\": \"15\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1640,7 +1633,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5dfd3749-d5c4-45a5-85a7-76dbe66f6b64",
+								"id": "de3ef086-42c3-403e-9dd3-749762f5fcab",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1661,16 +1654,16 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur Gruene\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"15\");",
+									"    pm.expect(jsonData.vote).to.eql(15);",
 									"});"
 								]
 							}
@@ -1705,13 +1698,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d0425d1e-120d-473f-9064-005ea3054c30",
+								"id": "dd57cbbc-b3be-4028-a402-f6bd2cb064a3",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_party\", function(){",
@@ -1726,12 +1719,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur Linke\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1753,7 +1746,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Linke\",\r\n  \"text\": \"Infos zur Linke\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagsl}},\r\n  \"vote\": \"21\"\r\n}"
+							"raw": "{\r\n  \"name\": \"Linke\",\r\n  \"text\": \"Infos zur Linke\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagsl}},\r\n  \"vote\": \"21\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1776,7 +1769,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7b190006-b7ef-421b-9610-635eb19702d5",
+								"id": "8655f72e-effb-446e-8c2c-c6a0abf5368b",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1797,16 +1790,16 @@
 									"    pm.expect(jsonData.text).to.eql(\"Infos zur Linke\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"21\");",
+									"    pm.expect(jsonData.vote).to.eql(21);",
 									"});"
 								]
 							}
@@ -1847,13 +1840,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c9ad8233-76c8-4731-927f-a19eed15b8eb",
+								"id": "8b03c447-1f5d-4d94-84c8-2d3076aca3cc",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -1870,12 +1863,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -1897,7 +1890,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller1\",\r\n  \"first_name\": \"Hans1\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"34\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller1\",\r\n  \"first_name\": \"Hans1\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"34\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -1920,13 +1913,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7b53f84d-4dcf-4b65-99fe-e836da4a5a07",
+								"id": "f195b5bf-0b9c-47c0-8d30-b5fe36158454",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -1935,28 +1928,26 @@
 									"",
 									"",
 									"pm.test('Has last_name', function() {",
-									"  pm.expect(jsonData.last_name).to.eql(\"Mueller\");",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller1\");",
 									"});",
 									"",
 									"pm.test('Has first_name', function() {",
-									"  pm.expect(jsonData.first_name).to.eql(\"Hans\");",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans1\");",
 									"});",
 									"",
-									"pm.test('Has party_id', function() {",
-									"  pm.expect(jsonData.party_id).to.eql(pm.globals.get(\"id_party\"));",
-									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"2\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData.election_id).to.eql(pm.globals.get(\"id_election\"));",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"34\");",
-									"});"
+									"    pm.expect(jsonData.vote).to.eql(34);",
+									"});",
+									""
 								]
 							}
 						}
@@ -1969,7 +1960,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_bund1}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1978,7 +1969,7 @@
 							"path": [
 								"api",
 								"candidate",
-								"{{id_candidate}}"
+								"{{id_candidate_bund1}}"
 							]
 						}
 					},
@@ -1990,13 +1981,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3c2fe59a-0a23-4d5f-868e-8b5fe854919b",
+								"id": "108e5eda-dde0-4e7e-9685-60aab653bf18",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2013,12 +2004,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2040,7 +2031,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller2\",\r\n  \"first_name\": \"Hans2\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"10\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller2\",\r\n  \"first_name\": \"Hans2\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"10\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2063,7 +2054,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d5b0ebc4-34a1-4c8c-af1d-57babf9b708d",
+								"id": "b1923875-f34a-47fb-a031-443776ba20ab",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2086,16 +2077,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"10\");",
+									"    pm.expect(jsonData.vote).to.eql(10);",
 									"});"
 								]
 							}
@@ -2130,13 +2121,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8f4bb149-6b5d-4bb4-bea4-d0b949793a49",
+								"id": "07365036-56f6-4606-95d9-74fcc7a522ef",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2153,12 +2144,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2180,7 +2171,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller3\",\r\n  \"first_name\": \"Hans3\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"16\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller3\",\r\n  \"first_name\": \"Hans3\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"16\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2198,12 +2189,12 @@
 					"response": []
 				},
 				{
-					"name": "candidate Copy",
+					"name": "candidate Land1",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "7b53f84d-4dcf-4b65-99fe-e836da4a5a07",
+								"id": "bcfba6b3-b4bb-4892-b371-6b6ef4e8126b",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2229,16 +2220,16 @@
 									"  pm.expect(jsonData.party_id).to.eql(pm.globals.get(\"id_party\"));",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"2\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData.election_id).to.eql(pm.globals.get(\"id_election\"));",
+									"    pm.expect(jsonData.election_id).to.eql(pm.globals.get(\"election_id\"));",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"    pm.expect(jsonData.vote).to.eql(34);",
 									"});"
 								]
 							}
@@ -2252,7 +2243,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land1}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2261,7 +2252,7 @@
 							"path": [
 								"api",
 								"candidate",
-								"{{id_candidate}}"
+								"{{id_candidate_land1}}"
 							]
 						}
 					},
@@ -2273,13 +2264,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "be542a24-5229-45d9-a037-d37c7a5cc569",
+								"id": "461233a6-9c4f-4e6a-a498-c8f32309fbb6",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2296,12 +2287,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2323,7 +2314,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller4\",\r\n  \"first_name\": \"Hans4\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"45\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller4\",\r\n  \"first_name\": \"Hans4\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"45\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2346,7 +2337,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "66837277-3ea7-430c-9394-6ed32a1acf30",
+								"id": "e46a6909-0995-4e65-9b4b-97da6b3a63df",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2369,16 +2360,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"45\");",
+									"    pm.expect(jsonData.vote).to.eql(45);",
 									"});"
 								]
 							}
@@ -2413,13 +2404,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "baa2306b-22cc-4f9b-b51d-3ed2cc605505",
+								"id": "a205fdec-64b3-4adb-853c-f0bab697bf81",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2436,12 +2427,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2463,7 +2454,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller5\",\r\n  \"first_name\": \"Hans5\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagbw}},\r\n  \"vote\": \"34\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller5\",\r\n  \"first_name\": \"Hans5\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagbw}},\r\n  \"vote\": \"34\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2486,7 +2477,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "05a6bea7-c082-43f0-af71-12212cbaf37e",
+								"id": "63638e83-4db5-49a4-80ad-0f563c025f16",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2509,16 +2500,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"    pm.expect(jsonData.vote).to.eql(34);",
 									"});"
 								]
 							}
@@ -2553,13 +2544,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d68ae2d7-049e-4818-9739-3ba8b7998ed8",
+								"id": "e2fd68d2-c434-4671-a950-5fefce5046f7",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2576,12 +2567,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2603,7 +2594,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller6\",\r\n  \"first_name\": \"Hans6\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagbw}},\r\n  \"vote\": \"31\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller6\",\r\n  \"first_name\": \"Hans6\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagbw}},\r\n  \"vote\": \"31\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2626,7 +2617,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2bdac278-e0b2-499a-a3c0-e113ed895b36",
+								"id": "c70bd9c1-7017-4fc7-9130-e296778160f4",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2649,16 +2640,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"31\");",
+									"    pm.expect(jsonData.vote).to.eql(31);",
 									"});"
 								]
 							}
@@ -2693,13 +2684,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "35a57db8-219a-4acd-8834-74b9df29a24b",
+								"id": "4f40397d-27cc-47a4-adf3-30b37e32d740",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2716,12 +2707,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2743,7 +2734,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller7\",\r\n  \"first_name\": \"Hans7\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_buerger}},\r\n  \"vote\": \"11\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller7\",\r\n  \"first_name\": \"Hans7\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_buerger}},\r\n  \"vote\": \"11\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2766,7 +2757,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "00d065a0-21ea-483e-b108-c538f5391fed",
+								"id": "35bcf2b6-9688-401b-afce-1c67a8a84708",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2789,16 +2780,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"11\");",
+									"    pm.expect(jsonData.vote).to.eql(11);",
 									"});"
 								]
 							}
@@ -2833,13 +2824,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a1fdfbf7-0fa6-4cfb-b651-4957ec6f907f",
+								"id": "93c5a0ed-6c0a-4c9e-bc9d-64fff66d7f4f",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2856,12 +2847,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -2883,7 +2874,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller8\",\r\n  \"first_name\": \"Hans8\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_buerger}},\r\n  \"vote\": \"77\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller8\",\r\n  \"first_name\": \"Hans8\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_buerger}},\r\n  \"vote\": \"77\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2906,7 +2897,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e2008cd0-c6f5-46a6-ad4a-ff296781a6f7",
+								"id": "43a7dd32-44a8-44d9-9aab-b6d34f1f59a4",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2929,16 +2920,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(id_election);",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"77\");",
+									"    pm.expect(jsonData.vote).to.eql(77);",
 									"});"
 								]
 							}
@@ -2973,13 +2964,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8a7fd02b-b737-4905-8987-77e2cc692a30",
+								"id": "68667cd9-194d-4a44-aad5-80b050b579b5",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2996,12 +2987,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -3023,7 +3014,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller9\",\r\n  \"first_name\": \"Hans9\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_europa}},\r\n  \"vote\": \"34\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller9\",\r\n  \"first_name\": \"Hans9\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_europa}},\r\n  \"vote\": \"34\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -3046,7 +3037,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c1d03c6f-d2d9-46d2-9fe3-ae50dbcccf05",
+								"id": "f18fc670-3683-4d08-80b0-1b39534c9760",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -3069,16 +3060,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"34\");",
+									"    pm.expect(jsonData.vote).to.eql(34);",
 									"});"
 								]
 							}
@@ -3113,13 +3104,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0fafcc7e-6b73-4454-826b-1fa1422ffe98",
+								"id": "d10a42d3-756a-4001-b0c3-1e786a72a833",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -3136,12 +3127,12 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -3163,7 +3154,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller0\",\r\n  \"first_name\": \"Hans0\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_europa}},\r\n  \"vote\": \"32\"\r\n}"
+							"raw": "{\r\n  \"last_name\": \"Mueller0\",\r\n  \"first_name\": \"Hans0\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_europa}},\r\n  \"vote\": \"32\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -3186,7 +3177,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4afaf689-8fa2-4c15-b6c4-1c9e8da1e13a",
+								"id": "bdb58e28-7c39-4851-906d-27454cdf7298",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -3209,16 +3200,16 @@
 									"});",
 									"",
 									"",
-									"pm.test('Has consituency', function() {",
-									"  pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"  pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"32\");",
+									"    pm.expect(jsonData.vote).to.eql(32);",
 									"});"
 								]
 							}
@@ -3259,13 +3250,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9f05bb81-ee34-44a1-bd9d-65ead6000c6c",
+								"id": "42428690-2e9e-489b-820a-75dfa68d060b",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_referendum\", function(){",
@@ -3276,12 +3267,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Wollen sie alles besser haben?\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
@@ -3307,7 +3298,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"text\": \"Wollen sie alles besser haben?\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_ref}},\r\n  \"yes\": \"80\",\r\n  \"no\": \"2\"\r\n}"
+							"raw": "{\r\n  \"text\": \"Wollen sie alles besser haben?\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_ref}},\r\n  \"yes\": \"80\",\r\n  \"no\": \"2\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/referendum",
@@ -3330,7 +3321,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4dd690c3-3a9f-40cc-ac0f-08822b6b5160",
+								"id": "f4382400-4c39-4f06-a095-08c5dd924774",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -3347,20 +3338,20 @@
 									"    pm.expect(jsonData.text).to.eql(\"Wollen sie alles besser haben?\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"80\");",
+									"    pm.expect(jsonData.vote).to.eql(80);",
 									"});",
 									"",
 									"pm.test('Has no', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"2\");",
+									"    pm.expect(jsonData.vote).to.eql(2);",
 									"});"
 								]
 							}
@@ -3392,13 +3383,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d6864891-abf4-4dc5-88ba-775d39e8a02f",
+								"id": "2663d3e8-9a64-449f-a481-b9cfbd28a647",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});",
 									"",
 									"pm.test(\"Has id_referendum\", function(){",
@@ -3409,12 +3400,12 @@
 									"    pm.expect(jsonData.text).to.eql(\"Wollen sie was dafuer tuen, dass alles besser wird?\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
@@ -3440,7 +3431,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"text\": \"Wollen sie was dafuer tuen, dass alles besser wird?\",\r\n  \"consituency\": \"1\",\r\n  \"election_id\": {{id_election_ref}},\r\n  \"yes\": \"1\",\r\n  \"no\": \"256\"\r\n}"
+							"raw": "{\r\n  \"text\": \"Wollen sie was dafuer tuen, dass alles besser wird?\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_ref}},\r\n  \"yes\": \"1\",\r\n  \"no\": \"256\"\r\n}"
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/referendum",
@@ -3463,7 +3454,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e043315a-2f8f-4ca6-9832-a7ea92454dfd",
+								"id": "fb73679a-be54-4813-ab39-c1ad788334ca",
 								"type": "text/javascript",
 								"exec": [
 									" const jsonData = pm.response.json();",
@@ -3480,20 +3471,20 @@
 									"    pm.expect(jsonData.text).to.eql(\"Wollen sie was dafuer tuen, dass alles besser wird?\");",
 									"});",
 									"",
-									"pm.test('Has consituency', function() {",
-									"    pm.expect(jsonData.consituency).to.eql(\"1\");",
+									"pm.test('Has constituency', function() {",
+									"    pm.expect(jsonData.constituency).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(\"id_election\");",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"1\");",
+									"    pm.expect(jsonData.vote).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has no', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"256\");",
+									"    pm.expect(jsonData.vote).to.eql(256);",
 									"});"
 								]
 							}
@@ -3531,7 +3522,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a4293c72-e079-4131-b3cb-71777ccbe036",
+								"id": "37a7c6a5-0fa0-4df0-bfc6-80d10accb583",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
