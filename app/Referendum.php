@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Referendum whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Referendum whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Referendum whereYes($value)
+ * @property int $client_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Referendum whereClientId($value)
  */
 class Referendum extends Model
 {

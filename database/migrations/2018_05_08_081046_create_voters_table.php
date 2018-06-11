@@ -18,8 +18,10 @@ class CreateVotersTable extends Migration
             $table->string('last_name');
             $table->string('first_name');
             $table->string('hash');
+            $table->string('password');
             $table->integer('constituency');
             $table->timestamps();
+
         });
     }
 

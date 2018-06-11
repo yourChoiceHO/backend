@@ -33,6 +33,9 @@ use Illuminate\Http\Request;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereTyp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Voter[] $voters
+ * @property int|null $election_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Election whereElectionId($value)
  */
 class Election extends Model
 {
@@ -72,6 +75,9 @@ class Election extends Model
      */
     public function parties() {
         return $this->hasMany('App\Party');
+    }
+    public function voters() {
+        return $this->hasMany('App\Voter');
     }
 
     //Eine election KANN GENAU EINEN candidates haben

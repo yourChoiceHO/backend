@@ -24,6 +24,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @property int $id_user
+ * @property int $client_id
+ * @property string $username
+ * @property int $role
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIdUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsername($value)
  */
 class User extends Authenticatable
 {
@@ -46,4 +54,5 @@ class User extends Authenticatable
     protected $hidden = [
         'client', 'password',
     ];
+
 }

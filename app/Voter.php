@@ -23,11 +23,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter whereIdVoter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter whereUpdatedAt($value)
+ * @property string $password
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter wherePassword($value)
+ * @property-read \App\Election $election
+ * @property int|null $election_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter whereElectionId($value)
  */
 class Voter extends Model
 {
     protected $table = 'voters';
-    protected $fillable = ['last_name', 'first_name', 'hash', 'constituency'];
+    protected $fillable = ['last_name', 'first_name', 'hash', 'password', 'constituency', 'election_id'];
     protected $guarded = ['id_voter'];
     protected $primaryKey = 'id_voter';
 
@@ -42,5 +47,9 @@ class Voter extends Model
     public function vote()
     {
         return $this->hasMany('App\Vote');
+    }
+
+    public function election() {
+        return $this->belongsTo('App\Election');
     }
 }

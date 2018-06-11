@@ -18,6 +18,7 @@ class CreateReferendumsTable extends Migration
             $table->string('text');
             $table->integer('constituency');
             $table->integer('election_id')->unsigned()->nullable();
+            $table->unsignedInteger('client_id')->nullable();
             $table->bigInteger('yes');
             $table->bigInteger('no');
             $table->timestamps();
@@ -26,6 +27,11 @@ class CreateReferendumsTable extends Migration
             $table->foreign('election_id')//FK
             ->references('id_election')//PK
             ->on('elections')//Table
+            ->onDelete('cascade');
+
+            $table->foreign('client_id')//FK
+            ->references('id_client')//PK
+            ->on('clients')//Table
             ->onDelete('cascade');
         });
     }

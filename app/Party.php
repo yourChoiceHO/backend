@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereVote($value)
+ * @property int $client_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Party whereClientId($value)
  */
 class Party extends Model
 {
@@ -40,7 +42,7 @@ class Party extends Model
     protected $table = 'parties';
 
     //Spalten auf die zugegriffen werden darf
-    protected $fillable = ['name', 'text', 'constituency', 'election_id','vote'];
+    protected $fillable = ['name', 'text', 'constituency', 'election_id','vote', 'client_id'];
     //election_id und id nicht, sollen generiert werden beim erstellen
     //und nur automatisch gesetzt werden können
     protected $guarded = ['id_party'];

@@ -21,6 +21,7 @@ class CreatePartiesTable extends Migration
             $table->integer('constituency');
             $table->integer('election_id')->unsigned();
             $table->bigInteger('vote');
+            $table->unsignedInteger('client_id')->nullable();
             $table->timestamps();
 
             // FK
@@ -35,6 +36,10 @@ class CreatePartiesTable extends Migration
             /*Schema::table('parties', function($table) {
                 $table->foreign('election_id')->references('id_election')->on('elections');
             });*/
+            $table->foreign('client_id')
+                ->references('id_client')
+                ->on('clients')
+                ->onDelete('cascade');
 
         });
         Schema::table('parties', function($table) {

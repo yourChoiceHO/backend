@@ -28,11 +28,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate wherePartyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereVote($value)
+ * @property int $client_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Candidate whereClientId($value)
  */
 class Candidate extends Model
 {
     protected $table = 'candidates';
-    protected $fillable = ['last_name', 'first_name', 'party_id', 'constituency', 'election_id', 'vote'];
+    protected $fillable = ['last_name', 'first_name', 'party_id', 'constituency', 'election_id', 'vote', 'client_id'];
     protected $guarded = ['id_candidate'];
     protected $primaryKey = 'id_candidate';
 

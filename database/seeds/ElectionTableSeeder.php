@@ -26,5 +26,13 @@ class ElectionTableSeeder extends Seeder
             'end_date' => date("Y-m-d H:i:s"),
             'state' => 0
         ]);
+
+        DB::table('elections')->insert([
+            'typ' => 'Landtagswahl',
+            'text' => 'noch nicht begonnene Landtag',
+            'start_date' => date("Y-m-d H:i:s"),
+            'end_date' => date("Y-m-d H:i:s"),
+            'state' => 0
+        ]);
     }
 }

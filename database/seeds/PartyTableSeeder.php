@@ -23,7 +23,7 @@ class PartyTableSeeder extends Seeder
             'constituency' => 4,
             //FK
             //Alternative:
-            // 'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' => $faker->randomElement($electionsIDs),
             'election_id' => 100,
             'vote' => 20
         ]);
@@ -33,7 +33,7 @@ class PartyTableSeeder extends Seeder
             'constituency' => 10,
             //FK
             //Alternative:
-            // 'election_id' => $faker->randomElement($electionsIDs),
+            'election_id' => $faker->randomElement($electionsIDs),
             'election_id' => 100,
             'vote' => 30
         ]);

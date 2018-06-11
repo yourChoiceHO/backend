@@ -24,6 +24,7 @@ class CreateCandidatesTable extends Migration
             $table->unsignedInteger('election_id');
             $table->bigInteger('vote');
             $table->timestamps();
+            $table->unsignedInteger('client_id')->nullable();
 
 
 
@@ -39,6 +40,10 @@ class CreateCandidatesTable extends Migration
             $table->foreign('election_id')
                 ->references('id_election')
                 ->on('elections')
+                ->onDelete('cascade');
+            $table->foreign('client_id')
+                ->references('id_client')
+                ->on('clients')
                 ->onDelete('cascade');
         });
     }
