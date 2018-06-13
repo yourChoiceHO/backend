@@ -6,11 +6,21 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     * Reihenfolge unbedingt beachten -> Constraints
      *
      * @return void
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call([
+            ClientTableSeeder::class,
+            ElectionTableSeeder::class,
+            ReferendumTableSeeder::class,
+            ElectionTableSeeder::class,
+            PartyTableSeeder::class,
+            CandidateTableSeeder::class,
+            VoterTableSeeder::class,
+            VoteTableSeeder::class
+        ]);
     }
 }
