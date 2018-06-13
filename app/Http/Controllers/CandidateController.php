@@ -49,12 +49,12 @@ class CandidateController extends Controller
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
-                'last_name' => $request->input('last_name'),
-                'first_name' => $request->input('first_name'),
-                'party_id' => $request->input('party_id'),
-                'constituency' => $request->input('constituency'),
-                'election_id' => $request->input('election_id'),
-                'vote' => $request->input('vote'),
+                'last_name' => $request->get('last_name'),
+                'first_name' => $request->get('first_name'),
+                'party_id' => $request->get('party_id'),
+                'constituency' => $request->get('constituency'),
+                'election_id' => $request->get('election_id'),
+                'vote' => $request->get('vote'),
                 'client_id' => $user->client_id
             );
             return Candidate::create($array);

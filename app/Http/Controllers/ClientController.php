@@ -19,7 +19,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $array = array(
-            'typ' => $request->input('typ')
+            'typ' => $request->get('typ')
         );
         Client::create($array);
     }

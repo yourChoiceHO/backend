@@ -49,11 +49,11 @@ class PartyController extends Controller
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
-                'name' => $request->input('name'),
-                'text' => $request->input('text'),
-                'constituency' => $request->input('constituency'),
-                'election_id' => $request->input('election_id'),
-                'vote' => $request->input('vote'),
+                'name' => $request->get('name'),
+                'text' => $request->get('text'),
+                'constituency' => $request->get('constituency'),
+                'election_id' => $request->get('election_id'),
+                'vote' => $request->get('vote'),
                 'client_id' => $user->client_id
             );
             return Party::create($array);

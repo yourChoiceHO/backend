@@ -18,12 +18,12 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         $array = array(
-            'voter_id' => $request->input('voter_id'),
-            'election_id' => $request->input('election_id'),
-            //'client_id' => $request->input('client_id'),
-            'first_vote' => $request->input('first_vote'),
-            'second_vote' => $request->input('second_vote'),
-            'valid' => $request->input('valid')
+            'voter_id' => $request->get('voter_id'),
+            'election_id' => $request->get('election_id'),
+            //'client_id' => $request->get('client_id'),
+            'first_vote' => $request->get('first_vote'),
+            'second_vote' => $request->get('second_vote'),
+            'valid' => $request->get('valid')
         );
         return Vote::create($array);
     }

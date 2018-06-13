@@ -47,10 +47,10 @@ class ReferendumController extends Controller
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
-                'text' => $request->input('text'),
-                'constituency' => $request->input('constituency'),
-                'yes' => $request->input('yes'),
-                'no' => $request->input('no'),
+                'text' => $request->get('text'),
+                'constituency' => $request->get('constituency'),
+                'yes' => $request->get('yes'),
+                'no' => $request->get('no'),
                 'client_id' => $user->client_id
             );
             Referendum::create($array);

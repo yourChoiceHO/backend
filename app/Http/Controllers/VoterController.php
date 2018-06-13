@@ -36,10 +36,10 @@ class VoterController extends Controller
             $array = array(
                 //client doesn't exists yet'
                 'client_id'=> $user->client_id,
-                'last_name' => $request->input('last_name'),
-                'first_name' => $request->input('first_name'),
-                'hash' => $request->input('hash'),
-                'constituency' => $request->input('constituency')
+                'last_name' => $request->get('last_name'),
+                'first_name' => $request->get('first_name'),
+                'hash' => $request->get('hash'),
+                'constituency' => $request->get('constituency')
             );
             return Voter::create($array);
         }

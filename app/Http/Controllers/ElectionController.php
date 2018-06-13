@@ -58,11 +58,11 @@ class ElectionController extends Controller
             $array = array(
                 //client doesn't exists yet'
                 'client_id'=> $user->client_id,
-                'typ' => $request->input('typ'),
-                'text' => $request->input('text'),
-                'start_date' => $request->input('start_date'),
-                'end_date' => $request->input('end_date'),
-                'state' => $request->input('state')
+                'typ' => $request->get('typ'),
+                'text' => $request->get('text'),
+                'start_date' => $request->get('start_date'),
+                'end_date' => $request->get('end_date'),
+                'state' => $request->get('state')
             );
             return Election::create($array);
         }
