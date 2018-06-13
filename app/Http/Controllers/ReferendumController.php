@@ -22,9 +22,23 @@ class ReferendumController extends Controller
                 return Referendum::findOrFail($id);
             }
         }else{
-            return Referendum::whereIdReferendum($id)->where('client_id', '=', $info);
+            return Referendum::whereIdReferendum($id)->where('client_id', '=', $info)->first();
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
+    }
+
+    public function all(Request $request){
+        $info = Token::getClientOrElectionId($request->get('token'));
+        if(is_array($info)){
+            $info = array_column($info, 'id_election');
+            $result = null;
+            foreach ($info as $id){
+                $result[] = Referendum::whereElectionId($id);
+            }
+        }else{
+            $result = Referendum::whereClientId($info);
+        }
+        return $result;
     }
 
     public function store(Request $request)
@@ -41,7 +55,7 @@ class ReferendumController extends Controller
             );
             Referendum::create($array);
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function update(Request $request, $id)
@@ -55,7 +69,7 @@ class ReferendumController extends Controller
             $newYes = $request->get('yes');
             $newNo = $request->get('no');
 
-            $referendum = Referendum::whereIdReferendum($id)->where('client_id', '=', $user->client_id);
+            $referendum = Referendum::whereIdReferendum($id)->where('client_id', '=', $user->client_id)->first();
             if($referendum) {
                 $referendum->text = $newText ? $newText : $referendum->text;
                 $referendum->constituency = $newConstituency ? $newConstituency : $referendum->constituency;
@@ -66,7 +80,7 @@ class ReferendumController extends Controller
                 return $referendum;
             }
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function destroy($id)

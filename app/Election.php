@@ -39,8 +39,9 @@ use Illuminate\Http\Request;
  */
 class Election extends Model
 {
-    const STATE_INAKTIVE = 0;
-    const STATE_AKTIVE = 1;
+    const BEARBEITUNG = 0;
+    const PRUEFUNG = 1;
+    const FREIGEGEBEN = 2;
 
     const Europawahl = "Europawahl";
     const Bundestagswahl = "Bundestagswahl";

@@ -55,4 +55,6 @@ class User extends Authenticatable
         'client', 'password',
     ];
 
+    protected $primaryKey = 'id_user';
+
 }

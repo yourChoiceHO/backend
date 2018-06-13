@@ -17,9 +17,11 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::post('/login', 'TokenController@auth');
+Route::post('/login/voter', 'TokenController@auth');
+Route::post('/login/user', 'TokenController@authUser');
 
 Route::get('/party/{id}','PartyController@show');
+Route::get('/party', 'PartyController@all');
 Route::post('/party', 'PartyController@store');
 Route::put('/party/{id}', 'PartyController@update');
 Route::delete('/party/{id}', 'PartyController@destroy');
@@ -27,10 +29,12 @@ Route::delete('/party/{id}', 'PartyController@destroy');
 Route::get('/test', 'ElectionController@test');
 
 Route::get('/election/{id}', 'ElectionController@show');
-Route::post('/election', 'ElectionController@store');
+Route::get('/election', 'ElectionController@all');
+Route::get('/election/{id}/evaluate', 'ElectionController@evaluate');
 Route::get('/election/{id}/parties', 'ElectionController@evaluate');
 Route::get('/election/{id}/candidates', 'ElectionController@evaluate');
 Route::get('/election/{id}/referendums', 'ElectionController@evaluate');
+Route::post('/election', 'ElectionController@store');
 Route::post('/election/{id}/vote', 'ElectionController@vote');
 Route::post('/election/{id}/addParties', 'ElectionController@addParties');
 Route::post('/election/{id}/addCandidates', 'ElectionController@addCandidates');
@@ -39,6 +43,7 @@ Route::put('/election/{id}', 'ElectionController@update');
 Route::delete('/election/{id}', 'ElectionController@destroy');
 
 Route::get('/candidate/{id}', 'CandidateController@show');
+Route::get('/candidate', 'CandidateController@all');
 Route::post('/candidate', 'CandidateController@store');
 Route::put('/candidate/{id}', 'CandidateController@update');
 Route::delete('/candidate/{id}', 'CandidateController@destroy');

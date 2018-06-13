@@ -25,12 +25,29 @@ class ElectionController extends Controller
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'id_election'))){
-                return Election::findOrFail($id);
+                return Election::whereElectionId($id)->where('state', '=', Election::FREIGEGEBEN)->first();
+            }
+        }elseif ($info){
+            return Election::whereIdElection($id)->where('client_id', '=', $info)->first();
+        }
+        abort(403, 'Access Denied');
+    }
+
+    public function all(Request $request){
+        $info = Token::getClientOrElectionId($request->get('token'));
+        if(is_array($info)){
+            $info = array_column($info, 'id_election');
+            $result = null;
+            foreach ($info as $id){
+                $election = Election::whereElectionId($id)->where('state', '=', Election::FREIGEGEBEN)->first();
+                if($election){
+                    $result[] = $election;
+                }
             }
         }else{
-            return Election::whereIdElection($id)->where('client_id', '=', $info);
+            $result = Election::whereClientId($info);
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        return $result;
     }
 
     public function store(Request $request)
@@ -49,7 +66,7 @@ class ElectionController extends Controller
             );
             return Election::create($array);
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function update(Request $request, $id)
@@ -63,7 +80,7 @@ class ElectionController extends Controller
             $newEndDate = $request->get('end_date');
             $newState = $request->get('state');
 
-            $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id);
+            $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if($election) {
                 $election->typ = $newTyp ? $newTyp : $election->typ;
                 $election->text = $newText ? $newText : $election->text;
@@ -75,7 +92,7 @@ class ElectionController extends Controller
                 return $election;
             }
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function destroy(Request $request, $id)
@@ -83,22 +100,34 @@ class ElectionController extends Controller
         $userArray = Token::getUserOrVoter($request->get('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
-            $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id);
+            $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if($election){
                 $destroyflag = $election->delete();
                 return $destroyflag;
             }
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function test(){
         $voter = \DB::select('SELECT e.id_election FROM elections e, parties p, candidates c, referendums r WHERE (p.constituency = 1 AND e.id_election = p.election_id) OR (c.constituency = 1 AND e.id_election = c.election_id) OR (r.constituency = 1 AND e.id_election = r.election_id) GROUP BY e.id_election');
+        $voter = array_column($voter, 'id_election');
         return $voter;
     }
 
     public function parties(Request $request, $id){
+        $election = $this->show($request, $id);
+        return $election->parties();
+    }
 
+    public function candidates(Request $request, $id){
+        $election = $this->show($request, $id);
+        return $election->candidates();
+    }
+
+    public function referendums(Request $request, $id){
+        $election = $this->show($request, $id);
+        return $election->referendums();
     }
 
 

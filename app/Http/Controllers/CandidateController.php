@@ -24,9 +24,23 @@ class CandidateController extends Controller
                 return Candidate::findOrFail($id);
             }
         }else{
-            return Candidate::whereIdCandidate($id)->where('client_id', '=', $info);
+            return Candidate::whereIdCandidate($id)->where('client_id', '=', $info)->first();
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
+    }
+
+    public function all(Request $request){
+        $info = Token::getClientOrElectionId($request->get('token'));
+        if(is_array($info)){
+            $info = array_column($info, 'id_election');
+            $result = null;
+            foreach ($info as $id){
+                $result[] = Candidate::whereElectionId($id);
+            }
+        }else{
+            $result = Candidate::whereClientId($info);
+        }
+        return $result;
     }
 
     public function store(Request $request)
@@ -45,7 +59,7 @@ class CandidateController extends Controller
             );
             return Candidate::create($array);
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function update(Request $request, $id)
@@ -60,7 +74,7 @@ class CandidateController extends Controller
             $newElectionId = $request->get('election_id');
             $newVote = $request->get('vote');
 
-            $candidate = Candidate::whereIdCandidate($id)->where('client_id', '=', $user->client_id);
+            $candidate = Candidate::whereIdCandidate($id)->where('client_id', '=', $user->client_id)->first();
             if($candidate) {
                 $candidate->last_name = $newLastName ? $newLastName : $candidate->last_name;
                 $candidate->first_name = $newFirstName ? $newFirstName : $candidate->first_name;
@@ -72,7 +86,7 @@ class CandidateController extends Controller
                 return $candidate;
             }
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function destroy($id)

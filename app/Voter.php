@@ -28,11 +28,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Election $election
  * @property int|null $election_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter whereElectionId($value)
+ * @property int $client_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Voter whereClientId($value)
  */
 class Voter extends Model
 {
     protected $table = 'voters';
-    protected $fillable = ['last_name', 'first_name', 'hash', 'password', 'constituency', 'election_id'];
+    protected $fillable = ['last_name', 'first_name', 'hash', 'password', 'constituency', 'client_id'];
     protected $guarded = ['id_voter'];
     protected $primaryKey = 'id_voter';
 

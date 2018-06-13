@@ -41,6 +41,7 @@ class Token extends Model
     protected $hidden = [
         'remember_token',
     ];
+    protected $primaryKey = 'id_token';
 
 
     public function user(){
@@ -62,21 +63,21 @@ class Token extends Model
                 return $result;
             }
         }
-        throw new \Symfony\Component\Finder\Exception\AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public static function getUserOrVoter($token){
-        $token = Token::whereRememberToken($token);
+        $token = Token::whereRememberToken($token)->first();
         if($token){
             if($token->user_id){
-                $user = User::whereIdUser($token->user());
-                return array('typ' => 'user', 'object' => $user);
+                $user = User::findOrFail($token->user_id);
+                return array('type' => 'user', 'object' => $user);
             }elseif ($token->voter_id){
-                $voter = Voter::whereIdVoter($token->voter_id);
-                return array('typ' => 'voter', 'object' => $voter);
+                $voter = Voter::findOrFail($token->voter_id);
+                return array('type' => 'voter', 'object' => $voter);
             }
         }
-        throw new \Symfony\Component\Finder\Exception\AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
 }

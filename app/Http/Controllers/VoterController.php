@@ -18,16 +18,33 @@ class VoterController extends Controller
     public function show($id){
         return Voter::findOrFail($id);
     }
+    public function all(Request $request){
+        $info = Token::getClientOrElectionId($request->get('token'));
+        if(is_array($info)){
+            abort(403, 'Access Denied');
+        }else{
+            $result = Voter::whereClientId($info);
+        }
+        return $result;
+    }
 
     public function store(Request $request)
     {
-        $array = array(
-            'last_name' => $request->input('last_name'),
-            'first_name' => $request->input('first_name'),
-            'hash' => $request->input('hash'),
-            'constituency' => $request->input('constituency')
-        );
-        return Voter::create($array);
+        $userArray = Token::getUserOrVoter($request->get('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $array = array(
+                //client doesn't exists yet'
+                'client_id'=> $user->client_id,
+                'last_name' => $request->input('last_name'),
+                'first_name' => $request->input('first_name'),
+                'hash' => $request->input('hash'),
+                'constituency' => $request->input('constituency')
+            );
+            return Voter::create($array);
+        }
+        abort(403, 'Access Denied');
+
     }
 
     public function update(Request $request, $id)

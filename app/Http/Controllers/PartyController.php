@@ -24,13 +24,23 @@ class PartyController extends Controller
                 return Party::findOrFail($id);
             }
         }else{
-            return Party::whereIdParty($id)->where('client_id', '=', $info);
+            return Party::whereIdParty($id)->where('client_id', '=', $info)->first();
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function all(Request $request){
-
+        $info = Token::getClientOrElectionId($request->get('token'));
+        if(is_array($info)){
+            $info = array_column($info, 'id_election');
+            $result = null;
+            foreach ($info as $id){
+                $result[] = Party::whereElectionId($id);
+            }
+        }else{
+            $result = Party::whereClientId($info);
+        }
+        return $result;
     }
 
     public function store(Request $request)
@@ -48,7 +58,7 @@ class PartyController extends Controller
             );
             return Party::create($array);
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function update(Request $request, $id)
@@ -62,7 +72,7 @@ class PartyController extends Controller
             $newElectionId = $request->get('election_id');
             $newVote = $request->get('vote');
 
-            $party = Party::whereIdParty($id)->where('client_id', '=', $user->client_id);
+            $party = Party::whereIdParty($id)->where('client_id', '=', $user->client_id)->first();
             if($party) {
                 $party->name = $newName ? $newName : $party->name;
                 $party->text = $newText ? $newText : $party->text;
@@ -73,7 +83,7 @@ class PartyController extends Controller
                 return $party;
             }
         }
-        throw new AccessDeniedException("Zugriff verweigert", 403);
+        abort(403, 'Access Denied');
     }
 
     public function destroy($id)
