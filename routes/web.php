@@ -12,8 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::any( '{catchall}', function ( $url ) {
+    // at this point we need to look up the url of the page...
+    return view('index');
+} )->where('catchall', '(.*)');
 //Route::get('/election', 'ElectionController@index');
 
 //Route::get('/candidate', 'CandidateController@index');
