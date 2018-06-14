@@ -6,6 +6,81 @@
 	},
 	"item": [
 		{
+			"name": "login",
+			"description": "",
+			"item": [
+				{
+					"name": "loginUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "63de79f4-4fb0-4964-bc10-656974293c87",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has token\", function(){",
+									"   pm.expect(jsonData).to.have.property('token'); ",
+									"});",
+									"",
+									"pm.test(\"Has role\", function(){",
+									"   pm.expect(jsonData).to.have.property('role'); ",
+									"});",
+									"",
+									"pm.globals.set(\"tokenUser\", jsonData.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "password1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Test1",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/login/user",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"login",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "election",
 			"description": null,
 			"item": [
@@ -52,12 +127,53 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Cookie",
+								"value": "XDEBUG_SESSION=PHPSTORM"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Bundestagswahl\",\n  \"text\": \"Dies ist eine Bundestagswahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "Bundestagswahl",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Bundestagswahl",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-16 08:25:03",
+									"description": "",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -112,13 +228,18 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "XDEBUG_SESSION=PHPSTORM"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_bundestag}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_bundestag}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -128,6 +249,12 @@
 								"api",
 								"election",
 								"{{id_election_bundestag}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -176,12 +303,49 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Landtagswahl\",\n  \"text\": \"Dies ist eine Landtagswahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "Landtagswahl",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Landtagswahl",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-24 08:25:03",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"description": "",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -241,7 +405,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_landtag}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_landtag}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -251,6 +415,12 @@
 								"api",
 								"election",
 								"{{id_election_landtag}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -884,8 +1054,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b5900057-9a25-49aa-bc31-762ea2a79210",
-								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
@@ -894,7 +1062,7 @@
 									"});",
 									"",
 									"pm.test('Has id_voter', function() {",
-									"   pm.expect(jsonData).to.have.property('id_voter'); ",
+									"    pm.expect(jsonData.id_voter).to.eql(pm.globals.get(\"id_voter\"));",
 									"});",
 									"",
 									"pm.test('Has last_name', function() {",
@@ -915,7 +1083,9 @@
 									"",
 									"pm.globals.set(\"id_voter\", jsonData.id_voter);",
 									""
-								]
+								],
+								"id": "4613113f-4f97-4725-a986-430fb5d2a649",
+								"type": "text/javascript"
 							}
 						}
 					],
