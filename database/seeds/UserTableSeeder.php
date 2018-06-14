@@ -5,6 +5,11 @@ use Faker\Factory as Faker;
 
 class UserTableSeeder extends Seeder
 {
+    const ADMIN = 0;
+    const MODERATOR = 2;
+    const SUPERVISOR = 1;
+    const VOTER = 3;
+
     /**
      * Run the database seeds.
      *
