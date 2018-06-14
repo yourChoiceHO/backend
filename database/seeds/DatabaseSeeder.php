@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             PartyTableSeeder::class,
             CandidateTableSeeder::class,
             VoterTableSeeder::class,
-            VoteTableSeeder::class
+            VoteTableSeeder::class,
+            UserTableSeeder::class
         ]);
     }
 }

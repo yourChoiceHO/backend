@@ -17,7 +17,7 @@ class CandidateController extends Controller
     }
 
     public function show(Request $request, $id){
-        $token = $request->get('token');
+        $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'id_election'))){
@@ -30,7 +30,7 @@ class CandidateController extends Controller
     }
 
     public function all(Request $request){
-        $info = Token::getClientOrElectionId($request->get('token'));
+        $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             $info = array_column($info, 'id_election');
             $result = null;
@@ -45,16 +45,16 @@ class CandidateController extends Controller
 
     public function store(Request $request)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
-                'last_name' => $request->get('last_name'),
-                'first_name' => $request->get('first_name'),
-                'party_id' => $request->get('party_id'),
-                'constituency' => $request->get('constituency'),
-                'election_id' => $request->get('election_id'),
-                'vote' => $request->get('vote'),
+                'last_name' => $request->input('last_name'),
+                'first_name' => $request->input('first_name'),
+                'party_id' => $request->input('party_id'),
+                'constituency' => $request->input('constituency'),
+                'election_id' => $request->input('election_id'),
+                'vote' => $request->input('vote'),
                 'client_id' => $user->client_id
             );
             return Candidate::create($array);
@@ -64,15 +64,15 @@ class CandidateController extends Controller
 
     public function update(Request $request, $id)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
-            $newLastName = $request->get('last_name');
-            $newFirstName = $request->get('first_name');
-            $newPartyId = $request->get('party_id');
-            $newConstituency = $request->get('constituency');
-            $newElectionId = $request->get('election_id');
-            $newVote = $request->get('vote');
+            $newLastName = $request->input('last_name');
+            $newFirstName = $request->input('first_name');
+            $newPartyId = $request->input('party_id');
+            $newConstituency = $request->input('constituency');
+            $newElectionId = $request->input('election_id');
+            $newVote = $request->input('vote');
 
             $candidate = Candidate::whereIdCandidate($id)->where('client_id', '=', $user->client_id)->first();
             if($candidate) {

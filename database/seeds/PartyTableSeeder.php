@@ -13,7 +13,7 @@ class PartyTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+       /* $faker = Faker::create();
         //hole alle Elemente in Election/id_election
         $electionsIDs = DB::table('elections')->pluck('id_election')->toArray();
 
@@ -98,6 +98,6 @@ class PartyTableSeeder extends Seeder
             //hier ok, da mehrere Party-Election many to one-Beziehung ist
             'election_id' => 100,
             'vote' => 20
-        ]);
+        ]);*/
     }
 }

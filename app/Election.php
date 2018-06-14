@@ -186,32 +186,32 @@ class Election extends Model
     public function vote(Request $request){
 
         $id_election = $this->id_election;
-        $voter_id = $request->get('voter_id');
+        $voter_id = $request->input('voter_id');
         $voter = Voter::where('election_id', '=', $id_election)->andWhere('voter_id', '=', $voter_id);
         if(!$voter){ //check if first vote for election
-                $valid = $request->get('valid');
-                $first_vote = $request->get('first_vote');
-                $second_vote= $request->get('second_vote');
+                $valid = $request->input('valid');
+                $first_vote = $request->input('first_vote');
+                $second_vote= $request->input('second_vote');
                 if($valid && $first_vote && $second_vote){
                     // save vote Model candidate / party
                     if($this->typ == self::Bundestagswahl|| $this->typ == self::Landtagswahl) { //candiates and party
-                        $party_id = $request->get('party_id');
-                        $candidate_id = $request->get("candidate_id");
+                        $party_id = $request->input('party_id');
+                        $candidate_id = $request->input("candidate_id");
                         $this->voteFor($candidate_id,$party_id);
                       }
 
                       elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW){//candidates
-                          $candidate_id = $request->get("candidate_id");
+                          $candidate_id = $request->input("candidate_id");
                           $this->voteFor($candidate_id);
                       }
 
                     elseif ($this->typ == self::LandtagswahlSL){//party
-                        $party_id = $request->get('party_id');
+                        $party_id = $request->input('party_id');
                         $this->voteFor(null,$party_id);
                     }
 
                     elseif ($this->typ == self::Kommunalwahl){
-                        $candidates=$request->get('candidate_id');
+                        $candidates=$request->input('candidate_id');
                         foreach($candidates as $candidate_id){
                             //TODO Array mit candidate-ids, wenn eine candidate_id 2 Stimmen bekommen hat, bekomme ich zweimal die ID übermittelt? So habe ich es zumindest erstmal implementiert.
                             $this->voteFor($candidate_id);
@@ -219,7 +219,7 @@ class Election extends Model
                     }
 
                     elseif ($this->typ == self::Referendum) {//referendum
-                        $referendum=$request->get('referendum');
+                        $referendum=$request->input('referendum');
                         $referendum_model=Referendum::where ('election_id','=',$id_election);
 
 

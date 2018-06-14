@@ -21,7 +21,7 @@ class ElectionController extends Controller
     }
 
     public function show(Request $request, $id){
-        $token = $request->get('token');
+        $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'id_election'))){
@@ -34,7 +34,7 @@ class ElectionController extends Controller
     }
 
     public function all(Request $request){
-        $info = Token::getClientOrElectionId($request->get('token'));
+        $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             $info = array_column($info, 'id_election');
             $result = null;
@@ -52,17 +52,17 @@ class ElectionController extends Controller
 
     public function store(Request $request)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
                 //client doesn't exists yet'
                 'client_id'=> $user->client_id,
-                'typ' => $request->get('typ'),
-                'text' => $request->get('text'),
-                'start_date' => $request->get('start_date'),
-                'end_date' => $request->get('end_date'),
-                'state' => $request->get('state')
+                'typ' => $request->input('typ'),
+                'text' => $request->input('text'),
+                'start_date' => $request->input('start_date'),
+                'end_date' => $request->input('end_date'),
+                'state' => $request->input('state')
             );
             return Election::create($array);
         }
@@ -71,14 +71,14 @@ class ElectionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
-            $newTyp = $request->get('typ');
-            $newText = $request->get('text');
-            $newStartDate = $request->get('start_date');
-            $newEndDate = $request->get('end_date');
-            $newState = $request->get('state');
+            $newTyp = $request->input('typ');
+            $newText = $request->input('text');
+            $newStartDate = $request->input('start_date');
+            $newEndDate = $request->input('end_date');
+            $newState = $request->input('state');
 
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if($election) {
@@ -97,7 +97,7 @@ class ElectionController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();

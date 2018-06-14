@@ -18,23 +18,23 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         $array = array(
-            'voter_id' => $request->get('voter_id'),
-            'election_id' => $request->get('election_id'),
-            //'client_id' => $request->get('client_id'),
-            'first_vote' => $request->get('first_vote'),
-            'second_vote' => $request->get('second_vote'),
-            'valid' => $request->get('valid')
+            'voter_id' => $request->input('voter_id'),
+            'election_id' => $request->input('election_id'),
+            //'client_id' => $request->input('client_id'),
+            'first_vote' => $request->input('first_vote'),
+            'second_vote' => $request->input('second_vote'),
+            'valid' => $request->input('valid')
         );
         return Vote::create($array);
     }
 
     public function update(Request $request, $id)
     {
-        $newElectionId = $request->get('election_id');
-        $newClientId = $request->get('client_id');
-        $newFirstVote = $request->get('first_vote');
-        $newSecondVote = $request->get('second_vote');
-        $newValid = $request->get('valid');
+        $newElectionId = $request->input('election_id');
+        $newClientId = $request->input('client_id');
+        $newFirstVote = $request->input('first_vote');
+        $newSecondVote = $request->input('second_vote');
+        $newValid = $request->input('valid');
 
         $vote = Vote::findOrFail($id);
         $vote->election_id = $newElectionId ? $newElectionId : $vote->election_id;

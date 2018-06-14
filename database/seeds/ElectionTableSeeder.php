@@ -13,7 +13,7 @@ class ElectionTableSeeder extends Seeder
     public function run()
     {
 
-        $faker = Faker::create();
+       /* $faker = Faker::create();
         //hole alle Elemente in Election/id_election
         $clientsIDs = DB::table('clients')->pluck('id_client')->toArray();
         //1
@@ -33,6 +33,6 @@ class ElectionTableSeeder extends Seeder
             'start_date' => date("Y-m-d H:i:s"),
             'end_date' => date("Y-m-d H:i:s"),
             'state' => 0
-        ]);
+        ]);*/
     }
 }

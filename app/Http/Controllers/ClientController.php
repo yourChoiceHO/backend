@@ -19,14 +19,14 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $array = array(
-            'typ' => $request->get('typ')
+            'typ' => $request->input('typ')
         );
         Client::create($array);
     }
 
     public function update(Request $request, $id)
     {
-        $newTyp = $request->get('typ');
+        $newTyp = $request->input('typ');
 
         $client = Client::findOrFail($id);
         $client->typ = $newTyp ? $newTyp: $client->typ;

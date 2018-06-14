@@ -17,8 +17,8 @@ class TokenController extends Controller
      * @throws \HttpException
      */
     public function authUser(Request $request){
-        $password = $request->get('password');
-        $username = $request->get('username');
+        $password = $request->input('password');
+        $username = $request->input('username');
         $password = hash('sha256', $password);
         $user = User::wherePassword($password)->where('username', '=', $username)->first();
         if($user){
@@ -30,7 +30,7 @@ class TokenController extends Controller
             $token->user_id = $user->id_user;
             $token->remember_token = str_random(50);
             $token->save();
-            return array('token' => $token->remember_token, 'role' => $user->role);
+            return array('token' => $token->remember_token, 'role' => $user->role, 'id' => $user->id_user);
         }
         abort(403, 'Wrong Password or Username');
     }
@@ -41,14 +41,14 @@ class TokenController extends Controller
      * @throws \HttpException
      */
     public function authVoter(Request $request){
-        $password = $request->get('password');
-        $hash = $request->get('hash');
+        $password = $request->input('password');
+        $hash = $request->input('hash');
         $voter = Voter::wherePassword($password)->where('hash', '=', $hash)->first();
         if($voter){
             $token = new Token();
             $token->voter_id = $voter->id_voter;
             $token->remember_token = str_random(50);
-            return array('token' => $token->remember_token, 'role' => 3);
+            return array('token' => $token->remember_token, 'role' => 3, 'id' => $voter->id_voter);
         }
         abort(403, 'Wrong Password or Username');
     }

@@ -52,10 +52,10 @@ class Token extends Model
     }
 
     public static function getClientOrElectionId($token){
-        $token = Token::whereRememberToken($token);
+        $token = Token::whereRememberToken($token)->first();
         if($token){
             if($token->user_id){
-                $user = User::whereIdUser($token->user());
+                $user = User::findOrFail($token->user_id);
                 return $user->client_id;
             }elseif ($token->voter_id){
                 $voter = Voter::whereIdVoter($token->voter_id);

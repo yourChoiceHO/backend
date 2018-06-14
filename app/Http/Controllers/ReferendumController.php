@@ -15,7 +15,7 @@ class ReferendumController extends Controller
     }
 
     public function show(Request $request, $id){
-        $token = $request->get('token');
+        $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'id_election'))){
@@ -28,7 +28,7 @@ class ReferendumController extends Controller
     }
 
     public function all(Request $request){
-        $info = Token::getClientOrElectionId($request->get('token'));
+        $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             $info = array_column($info, 'id_election');
             $result = null;
@@ -43,14 +43,14 @@ class ReferendumController extends Controller
 
     public function store(Request $request)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
-                'text' => $request->get('text'),
-                'constituency' => $request->get('constituency'),
-                'yes' => $request->get('yes'),
-                'no' => $request->get('no'),
+                'text' => $request->input('text'),
+                'constituency' => $request->input('constituency'),
+                'yes' => $request->input('yes'),
+                'no' => $request->input('no'),
                 'client_id' => $user->client_id
             );
             Referendum::create($array);
@@ -60,14 +60,14 @@ class ReferendumController extends Controller
 
     public function update(Request $request, $id)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
-            $newText = $request->get('text');
-            $newConstituency = $request->get('constituency');
-            $newElectionId = $request->get('election_id');
-            $newYes = $request->get('yes');
-            $newNo = $request->get('no');
+            $newText = $request->input('text');
+            $newConstituency = $request->input('constituency');
+            $newElectionId = $request->input('election_id');
+            $newYes = $request->input('yes');
+            $newNo = $request->input('no');
 
             $referendum = Referendum::whereIdReferendum($id)->where('client_id', '=', $user->client_id)->first();
             if($referendum) {

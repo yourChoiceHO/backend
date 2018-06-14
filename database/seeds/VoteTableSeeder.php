@@ -12,7 +12,7 @@ class VoteTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        /*$faker = Faker::create();
         //hole alle Elemente in Election/id_election
         $electionsIDs = DB::table('elections')->pluck('id_election')->toArray();
         $voterIDs = DB::table('voters')->pluck('id_voter')->toArray();
@@ -23,6 +23,6 @@ class VoteTableSeeder extends Seeder
             'first_vote' => '1',
             'second_vote' => '1',
             'valid'=> 0
-        ]);
+        ]);*/
     }
 }

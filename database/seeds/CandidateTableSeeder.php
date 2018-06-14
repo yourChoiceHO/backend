@@ -12,7 +12,7 @@ class CandidateTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        /*$faker = Faker::create();
         //hole alle Elemente in Election/id_election
         $electionsIDs = DB::table('elections')->pluck('id_election')->toArray();
         $partiesIDs = DB::table('parties')->pluck('id_party')->toArray();
@@ -69,6 +69,6 @@ class CandidateTableSeeder extends Seeder
             //'election_id' => $faker->randomElement($electionsIDs),
             'election_id' =>100,
             'vote' => 30
-        ]);
+        ]);*/
     }
 }

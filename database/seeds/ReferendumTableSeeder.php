@@ -12,7 +12,7 @@ class ReferendumTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+       /* $faker = Faker::create();
 
         //FK
         $ElectionIDs = DB::table('elections')->pluck('id_election')->toArray();
@@ -23,6 +23,6 @@ class ReferendumTableSeeder extends Seeder
             'election_id' => $faker->randomElement($ElectionIDs),
             'yes' => 1234,
             'no' => 1285
-        ]);
+        ]);*/
     }
 }

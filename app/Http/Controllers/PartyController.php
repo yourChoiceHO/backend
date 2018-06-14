@@ -17,7 +17,7 @@ class PartyController extends Controller
     }
 
     public function show(Request $request, $id){
-        $token = $request->get('token');
+        $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'id_election'))){
@@ -30,7 +30,7 @@ class PartyController extends Controller
     }
 
     public function all(Request $request){
-        $info = Token::getClientOrElectionId($request->get('token'));
+        $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             $info = array_column($info, 'id_election');
             $result = null;
@@ -45,15 +45,15 @@ class PartyController extends Controller
 
     public function store(Request $request)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
-                'name' => $request->get('name'),
-                'text' => $request->get('text'),
-                'constituency' => $request->get('constituency'),
-                'election_id' => $request->get('election_id'),
-                'vote' => $request->get('vote'),
+                'name' => $request->input('name'),
+                'text' => $request->input('text'),
+                'constituency' => $request->input('constituency'),
+                'election_id' => $request->input('election_id'),
+                'vote' => $request->input('vote'),
                 'client_id' => $user->client_id
             );
             return Party::create($array);
@@ -63,14 +63,14 @@ class PartyController extends Controller
 
     public function update(Request $request, $id)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
-            $newName = $request->get('name');
-            $newText = $request->get('text');
-            $newConstituency = $request->get('constituency');
-            $newElectionId = $request->get('election_id');
-            $newVote = $request->get('vote');
+            $newName = $request->input('name');
+            $newText = $request->input('text');
+            $newConstituency = $request->input('constituency');
+            $newElectionId = $request->input('election_id');
+            $newVote = $request->input('vote');
 
             $party = Party::whereIdParty($id)->where('client_id', '=', $user->client_id)->first();
             if($party) {

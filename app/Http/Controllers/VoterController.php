@@ -19,7 +19,7 @@ class VoterController extends Controller
         return Voter::findOrFail($id);
     }
     public function all(Request $request){
-        $info = Token::getClientOrElectionId($request->get('token'));
+        $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             abort(403, 'Access Denied');
         }else{
@@ -30,16 +30,16 @@ class VoterController extends Controller
 
     public function store(Request $request)
     {
-        $userArray = Token::getUserOrVoter($request->get('token'));
+        $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $array = array(
                 //client doesn't exists yet'
                 'client_id'=> $user->client_id,
-                'last_name' => $request->get('last_name'),
-                'first_name' => $request->get('first_name'),
-                'hash' => $request->get('hash'),
-                'constituency' => $request->get('constituency')
+                'last_name' => $request->input('last_name'),
+                'first_name' => $request->input('first_name'),
+                'hash' => $request->input('hash'),
+                'constituency' => $request->input('constituency')
             );
             return Voter::create($array);
         }
@@ -49,10 +49,10 @@ class VoterController extends Controller
 
     public function update(Request $request, $id)
     {
-        $newLastName = $request->get('last_name');
-        $newFirstName = $request->get('first_name');
-        $newHash = $request->get('hash');
-        $newConstituency = $request->get('constituency');
+        $newLastName = $request->input('last_name');
+        $newFirstName = $request->input('first_name');
+        $newHash = $request->input('hash');
+        $newConstituency = $request->input('constituency');
 
         $voter = Voter::findOrFail($id);
         $voter->last_name = $newLastName ? $newLastName : $voter->last_name;
