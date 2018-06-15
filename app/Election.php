@@ -187,7 +187,7 @@ class Election extends Model
 
         $id_election = $this->id_election;
         $voter_id = $request->input('voter_id');
-        $voter = Voter::where('election_id', '=', $id_election)->andWhere('voter_id', '=', $voter_id);
+        $voter = Voter::whereElectionId($id_election)->where('voter_id', '=', $voter_id)->first();
         if(!$voter){ //check if first vote for election
                 $valid = $request->input('valid');
                 $first_vote = $request->input('first_vote');
@@ -260,14 +260,14 @@ class Election extends Model
 
     private function voteFor($candidate_id = null, $party_id = null){
         if($candidate_id){
-            $candidate = Candidate::where("id_candidate", '=', $candidate_id);
+            $candidate = Candidate::whereIdCandidate($candidate_id)->first();
             $candidate->vote++;
             $candidate->save();
 
         }
 
         if($party_id){
-            $party = Party::where('id_party', '=', $party_id);
+            $party = Party::whereIdParty($party_id)->first();
             $party->vote++;
             $party->save();
         }
@@ -276,81 +276,99 @@ class Election extends Model
 
 
     public function addParties(Request $request){
-        $files = $request->file('upload');
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $files = $request->file('upload');
             $allParties[] = array();
             $csv = array_map('str_getcsv', file($files));
             array_walk($csv, function (&$a) use ($csv) {
-               $a = array_combine($csv[0], $a);
+                $a = array_combine($csv[0], $a);
             });
             array_shift($csv);
 
-            foreach ($csv as $parties){
+            foreach ($csv as $parties) {
                 $party = array(
                     'name' => $parties['name'],
                     'text' => $parties['text'],
                     'constituency' => $parties['constituency'],
                     'election_id' => $this->id_election,
+                    'client_id' => $user->client_id,
                     'vote' => 0
                 );
                 $partyCreated = Party::create($party);
                 array_push($allParties, $partyCreated);
             }
-        array_shift($allParties);
+            array_shift($allParties);
 
-        return $allParties;
+            return $allParties;
+        }
+        abort(403, 'Access Denied');
     }
 
     public function addCandidates(Request $request){
-        $files = $request->file('upload');
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $files = $request->file('upload');
 
-        $allCandidates[] = array();
+            $allCandidates[] = array();
             $csv = array_map('str_getcsv', file($files));
             array_walk($csv, function (&$a) use ($csv) {
                 $a = array_combine($csv[0], $a);
             });
             array_shift($csv);
-            foreach ($csv as $candidates){
-                $party = Party::whereElectionId($this->id_election)->where('name', $candidates['party'])->get()->get(0);
+            foreach ($csv as $candidates) {
+                $party = Party::whereElectionId($this->id_election)->where('name', $candidates['party'])->first();
                 $candidate = array(
                     'last_name' => $candidates['last_name'],
                     'first_name' => $candidates['first_name'],
-                    'party_id' => $party->getAttribute('id_party'),
+                    'party_id' => $party->id_party,
                     'constituency' => $candidates['constituency'],
                     'election_id' => $this->id_election,
+                    'client_id' => $user->client_id,
                     'vote' => 0
                 );
                 $candidateCreated = Candidate::create($candidate);
                 array_push($allCandidates, $candidateCreated);
             }
-        array_shift($allCandidates);
-        return $allCandidates;
+            array_shift($allCandidates);
+            return $allCandidates;
+        }
+        abort(403, 'Access Denied');
     }
 
     public function addVoters(Request $request)
     {
-        $files = $request->file('upload');
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $files = $request->file('upload');
 
-        $allVoters[] = array();
+            $allVoters[] = array();
 
             $csv = array_map('str_getcsv', file($files));
             array_walk($csv, function (&$a) use ($csv) {
                 $a = array_combine($csv[0], $a);
             });
             array_shift($csv);
-            foreach ($csv as $voters){
-            $voter = array(
-                'last_name' => $voters['last_name'],
-                'first_name' => $voters['first_name'],
-                'hash' => $voters['hash'],
-                'constituency' => $voters['constituency'],
-                'election_id' => $this->id_election,
-            );
-            $voterCreated = Voter::create($voter);
-            array_push($allVoters, $voterCreated);
-        }
-        array_shift($allVoters);
+            foreach ($csv as $voters) {
+                $voter = array(
+                    'last_name' => $voters['last_name'],
+                    'first_name' => $voters['first_name'],
+                    'hash' => $voters['hash'],
+                    'constituency' => $voters['constituency'],
+                    'election_id' => $this->id_election,
+                    'client_id' => $user->client_id
+                );
+                $voterCreated = Voter::create($voter);
+                array_push($allVoters, $voterCreated);
+            }
+            array_shift($allVoters);
 
-        return $allVoters;
+            return $allVoters;
+        }
+        abort(403, 'Access Denied');
     }
 
 }
