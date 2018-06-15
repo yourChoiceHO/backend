@@ -342,7 +342,8 @@ class Election extends Model
                 'last_name' => $voters['last_name'],
                 'first_name' => $voters['first_name'],
                 'hash' => $voters['hash'],
-                'constituency' => $voters['constituency']
+                'constituency' => $voters['constituency'],
+                'election_id' => $this->id_election,
             );
             $voterCreated = Voter::create($voter);
             array_push($allVoters, $voterCreated);

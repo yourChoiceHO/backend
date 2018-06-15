@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
 class Voter extends Model
 {
     protected $table = 'voters';
-    protected $fillable = ['last_name', 'first_name', 'hash', 'password', 'constituency', 'client_id'];
+    protected $fillable = ['last_name', 'first_name', 'hash', 'password', 'constituency', 'client_id', 'election_id'];
     protected $guarded = ['id_voter'];
     protected $primaryKey = 'id_voter';
 

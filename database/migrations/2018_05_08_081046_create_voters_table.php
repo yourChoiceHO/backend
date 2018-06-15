@@ -21,11 +21,17 @@ class CreateVotersTable extends Migration
             $table->string('password');
             $table->integer('constituency');
             $table->unsignedInteger('client_id');
+            $table->unsignedInteger('election_id');
             $table->timestamps();
 
             $table->foreign('client_id')
                 ->references('id_client')
                 ->on('clients')
+                ->onDelete('cascade');
+
+            $table->foreign('election_id')
+                ->references('id_election')
+                ->on('elections')
                 ->onDelete('cascade');
 
         });
