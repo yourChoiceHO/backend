@@ -464,12 +464,12 @@
 							"formdata": [
 								{
 									"key": "typ",
-									"value": "Landtagswahl",
+									"value": "LandtagswahlBW",
 									"type": "text"
 								},
 								{
 									"key": "text",
-									"value": "Dies ist eine Landtagswahl",
+									"value": "Dies ist eine Landtagswahl in BW",
 									"type": "text"
 								},
 								{
@@ -785,12 +785,12 @@
 							"formdata": [
 								{
 									"key": "typ",
-									"value": "LandtagswahlSL",
+									"value": "Buergermeisterwahl",
 									"type": "text"
 								},
 								{
 									"key": "text",
-									"value": "Dies ist eine Landtagswahl in SL",
+									"value": "Dies ist eine Buergermeisterwahl",
 									"type": "text"
 								},
 								{
@@ -1105,12 +1105,12 @@
 							"formdata": [
 								{
 									"key": "typ",
-									"value": "Europawahl",
+									"value": "Referendum",
 									"type": "text"
 								},
 								{
 									"key": "text",
-									"value": "Dies ist eine Europawahl",
+									"value": "Dies ist ein Referendum",
 									"type": "text"
 								},
 								{
@@ -1227,6 +1227,8 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "aba50555-edaf-457d-b12d-73084edd0ee2",
+								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
@@ -1235,7 +1237,7 @@
 									"});",
 									"",
 									"pm.test('Has id_voter', function() {",
-									"    pm.expect(jsonData.id_voter).to.eql(pm.globals.get(\"id_voter\"));",
+									"    pm.expect(jsonData).to.have.property(\"id_voter\");",
 									"});",
 									"",
 									"pm.test('Has last_name', function() {",
@@ -1256,9 +1258,7 @@
 									"",
 									"pm.globals.set(\"id_voter\", jsonData.id_voter);",
 									""
-								],
-								"id": "4613113f-4f97-4725-a986-430fb5d2a649",
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
@@ -1445,6 +1445,10 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "XDEBUG_SESSION=PHPSTORM"
 							}
 						],
 						"body": {
@@ -1461,7 +1465,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -1634,7 +1638,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -1808,7 +1812,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -1981,7 +1985,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -2154,7 +2158,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -2327,7 +2331,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -2446,7 +2450,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8b03c447-1f5d-4d94-84c8-2d3076aca3cc",
+								"id": "32b29ea0-209d-4f7f-ab78-872649c0d8d4",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2481,6 +2485,7 @@
 									"    pm.expect(jsonData.vote).to.eql(\"34\");",
 									"});",
 									"",
+									"",
 									"pm.globals.set(\"id_candidate_bund1\", jsonData.id_candidate);"
 								]
 							}
@@ -2498,12 +2503,17 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "text",
-									"value": "Wollen Sie alles besser haben?",
+									"key": "last_name",
+									"value": "Mueller1",
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "first_name",
+									"value": "Hans1",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -2513,13 +2523,8 @@
 									"type": "text"
 								},
 								{
-									"key": "yes",
-									"value": "80",
-									"type": "text"
-								},
-								{
-									"key": "no",
-									"value": "2",
+									"key": "vote",
+									"value": "34",
 									"type": "text"
 								},
 								{
@@ -2550,13 +2555,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f195b5bf-0b9c-47c0-8d30-b5fe36158454",
+								"id": "52a3899b-308f-4d31-9fb5-92c88ed6ba6d",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(201);",
+									"    pm.response.to.have.status(200);",
 									"});",
 									"",
 									"pm.test(\"Has id_candidate\", function(){",
@@ -2905,7 +2910,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "bcfba6b3-b4bb-4892-b371-6b6ef4e8126b",
+								"id": "f3fd34ac-1de0-44d7-b057-7abe3d9b2b46",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -2920,15 +2925,15 @@
 									"",
 									"",
 									"pm.test('Has last_name', function() {",
-									"  pm.expect(jsonData.last_name).to.eql(\"Mueller\");",
+									"  pm.expect(jsonData.last_name).to.eql(\"Mueller3\");",
 									"});",
 									"",
 									"pm.test('Has first_name', function() {",
-									"  pm.expect(jsonData.first_name).to.eql(\"Hans\");",
+									"  pm.expect(jsonData.first_name).to.eql(\"Hans3\");",
 									"});",
 									"",
 									"pm.test('Has party_id', function() {",
-									"  pm.expect(jsonData.party_id).to.eql(pm.globals.get(\"id_party\"));",
+									"  pm.expect(jsonData).to.have.property(\"party_id\");",
 									"});",
 									"",
 									"pm.test('Has constituency', function() {",
@@ -2936,11 +2941,11 @@
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData.election_id).to.eql(pm.globals.get(\"election_id\"));",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
-									"    pm.expect(jsonData.vote).to.eql(34);",
+									"    pm.expect(jsonData.vote).to.eql(16);",
 									"});"
 								]
 							}
@@ -3485,7 +3490,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}?token={{tokenUser}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_landbw2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -3494,7 +3499,7 @@
 							"path": [
 								"api",
 								"candidate",
-								"{{id_candidate}}"
+								"{{id_candidate_landbw2}}"
 							],
 							"query": [
 								{
@@ -3793,7 +3798,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "43a7dd32-44a8-44d9-9aab-b6d34f1f59a4",
+								"id": "df448386-21ce-4bd6-b352-8e207a0a716e",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -3821,7 +3826,7 @@
 									"});",
 									"",
 									"pm.test('Has election_id', function() {",
-									"    pm.expect(jsonData).to.have.property(id_election);",
+									"    pm.expect(jsonData).to.have.property(\"election_id\");",
 									"});",
 									"",
 									"pm.test('Has vote', function() {",
@@ -4226,7 +4231,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "42428690-2e9e-489b-820a-75dfa68d060b",
+								"id": "78ca2c4d-7436-4d3c-bced-91f2cdf53d57",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4240,7 +4245,7 @@
 									"});",
 									"",
 									"pm.test('Has text', function() {",
-									"    pm.expect(jsonData.text).to.eql(\"Wollen sie alles besser haben?\");",
+									"    pm.expect(jsonData.text).to.eql(\"Wollen Sie alles besser haben?\");",
 									"});",
 									"",
 									"pm.test('Has constituency', function() {",
@@ -4252,11 +4257,11 @@
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"80\");",
+									"    pm.expect(jsonData.yes).to.eql(\"80\");",
 									"});",
 									"",
 									"pm.test('Has no', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"2\");",
+									"    pm.expect(jsonData.no).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_referendum1\", jsonData.id_referendum);"
@@ -4270,6 +4275,10 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "XDEBUG_SESSION=PHPSTORM"
 							}
 						],
 						"body": {
@@ -4281,7 +4290,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -4328,7 +4337,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f4382400-4c39-4f06-a095-08c5dd924774",
+								"id": "e7752a38-969e-4151-9760-b17ce68a465d",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4342,7 +4351,7 @@
 									"});",
 									"",
 									"pm.test('Has text', function() {",
-									"    pm.expect(jsonData.text).to.eql(\"Wollen sie alles besser haben?\");",
+									"    pm.expect(jsonData.text).to.eql(\"Wollen Sie alles besser haben?\");",
 									"});",
 									"",
 									"pm.test('Has constituency', function() {",
@@ -4354,11 +4363,11 @@
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
-									"    pm.expect(jsonData.vote).to.eql(80);",
+									"    pm.expect(jsonData.yes).to.eql(80);",
 									"});",
 									"",
 									"pm.test('Has no', function() {",
-									"    pm.expect(jsonData.vote).to.eql(2);",
+									"    pm.expect(jsonData.no).to.eql(2);",
 									"});"
 								]
 							}
@@ -4399,7 +4408,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2663d3e8-9a64-449f-a481-b9cfbd28a647",
+								"id": "65b8e286-3970-4497-a702-6fa201f1546d",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4413,7 +4422,7 @@
 									"});",
 									"",
 									"pm.test('Has text', function() {",
-									"    pm.expect(jsonData.text).to.eql(\"Wollen sie was dafuer tuen, dass alles besser wird?\");",
+									"    pm.expect(jsonData.text).to.eql(\"Wollen sie was dafuer tun, dass alles besser wird?\");",
 									"});",
 									"",
 									"pm.test('Has constituency', function() {",
@@ -4425,11 +4434,11 @@
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"1\");",
+									"    pm.expect(jsonData.yes).to.eql(\"1\");",
 									"});",
 									"",
 									"pm.test('Has no', function() {",
-									"    pm.expect(jsonData.vote).to.eql(\"256\");",
+									"    pm.expect(jsonData.no).to.eql(\"256\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_referendum2\", jsonData.id_referendum);"
@@ -4443,6 +4452,10 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "XDEBUG_SESSION=PHPSTORM"
 							}
 						],
 						"body": {
@@ -4454,7 +4467,7 @@
 									"type": "text"
 								},
 								{
-									"key": "consituency",
+									"key": "constituency",
 									"value": "1",
 									"type": "text"
 								},
@@ -4501,7 +4514,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fb73679a-be54-4813-ab39-c1ad788334ca",
+								"id": "6f29db73-a41b-4570-8143-76e6c8677144",
 								"type": "text/javascript",
 								"exec": [
 									" const jsonData = pm.response.json();",
@@ -4515,7 +4528,7 @@
 									"});",
 									"",
 									"pm.test('Has text', function() {",
-									"    pm.expect(jsonData.text).to.eql(\"Wollen sie was dafuer tuen, dass alles besser wird?\");",
+									"    pm.expect(jsonData.text).to.eql(\"Wollen sie was dafuer tun, dass alles besser wird?\");",
 									"});",
 									"",
 									"pm.test('Has constituency', function() {",
@@ -4527,11 +4540,11 @@
 									"});",
 									"",
 									"pm.test('Has yes', function() {",
-									"    pm.expect(jsonData.vote).to.eql(1);",
+									"    pm.expect(jsonData.yes).to.eql(1);",
 									"});",
 									"",
 									"pm.test('Has no', function() {",
-									"    pm.expect(jsonData.vote).to.eql(256);",
+									"    pm.expect(jsonData.no).to.eql(256);",
 									"});"
 								]
 							}
@@ -4539,7 +4552,12 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "XDEBUG_SESSION=PHPSTORM"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -4578,7 +4596,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "37a7c6a5-0fa0-4df0-bfc6-80d10accb583",
+								"id": "50a5e7f5-99fa-4301-86d3-7c1040c4561f",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4596,11 +4614,11 @@
 									"});",
 									"",
 									"pm.test(\"Has parties\", function(){",
-									"   pm.expect(jsonData).to.have.property('parties'); ",
+									"   pm.expect(jsonData.general).to.have.property('parties'); ",
 									"});",
 									"",
 									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData).to.have.property('candidates'); ",
+									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
 									"});",
 									""
 								]
@@ -4649,7 +4667,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "87e9937d-5bfd-46a6-a151-9d1c5c55ce35",
+								"id": "6bbaa62f-c23e-4254-8772-93e9d3b43dfe",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4663,15 +4681,15 @@
 									"});",
 									"",
 									"pm.test(\"Has text\", function(){",
-									"   pm.expect(jsonData).to.have.property('text'); ",
+									"   pm.expect(jsonData.general).to.have.property('text'); ",
 									"});",
 									"",
 									"pm.test(\"Has yes\", function(){",
-									"   pm.expect(jsonData).to.have.property('yes'); ",
+									"   pm.expect(jsonData.general).to.have.property('yes'); ",
 									"});",
 									"",
 									"pm.test(\"Has no\", function(){",
-									"   pm.expect(jsonData).to.have.property('no'); ",
+									"   pm.expect(jsonData.general).to.have.property('no'); ",
 									"});",
 									""
 								]
@@ -4720,7 +4738,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "df079a88-df4d-41a1-b992-8882669b5d23",
+								"id": "998f9536-0ed5-4ed8-b0b7-0c7e90209f34",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4734,7 +4752,7 @@
 									"});",
 									"",
 									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData).to.have.property('candidates'); ",
+									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
 									"});",
 									""
 								]
@@ -4783,7 +4801,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ca94d3b4-52a4-4a2b-80ba-576588aa8ba5",
+								"id": "d4f72fc1-e99a-47ec-8882-6dacbc639109",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4797,7 +4815,7 @@
 									"});",
 									"",
 									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData).to.have.property('candidates'); ",
+									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
 									"});",
 									""
 								]
@@ -4846,7 +4864,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "71e24edd-d7f3-4f8c-9323-439bf6638c8b",
+								"id": "d64597d6-501d-43f6-88cd-2dff96ae619b",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4860,7 +4878,7 @@
 									"});",
 									"",
 									"pm.test(\"Has parties\", function(){",
-									"   pm.expect(jsonData).to.have.property('parties'); ",
+									"   pm.expect(jsonData.general).to.have.property('parties'); ",
 									"});",
 									"",
 									""
@@ -4910,7 +4928,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8bcb9f48-c7d8-4251-94cd-32b148de193c",
+								"id": "aacce12e-af9d-4f49-a525-f4df978e10ca",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4923,12 +4941,8 @@
 									"   pm.expect(jsonData).to.have.property('general'); ",
 									"});",
 									"",
-									"pm.test(\"Has constituency\", function(){",
-									"   pm.expect(jsonData).to.have.property('constituency'); ",
-									"});",
-									"",
 									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData).to.have.property('candidates'); ",
+									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
 									"});",
 									""
 								]
@@ -4977,7 +4991,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "dbd39522-3b63-4907-891b-10033f02fc87",
+								"id": "9686b7f0-0938-42c7-9584-965688a6571f",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -4995,11 +5009,11 @@
 									"});",
 									"",
 									"pm.test(\"Has parties\", function(){",
-									"   pm.expect(jsonData).to.have.property('parties'); ",
+									"   pm.expect(jsonData.general).to.have.property('parties'); ",
 									"});",
 									"",
 									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData).to.have.property('candidates'); ",
+									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
 									"});",
 									""
 								]
