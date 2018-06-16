@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Token;
 use Illuminate\Http\Request;
 use DB;
 use App\Voter;

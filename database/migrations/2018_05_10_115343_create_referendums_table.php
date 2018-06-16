@@ -17,8 +17,8 @@ class CreateReferendumsTable extends Migration
             $table->increments('id_referendum');//unsigned bigInteger, primary key
             $table->string('text');
             $table->integer('constituency');
-            $table->integer('election_id')->unsigned()->nullable();
-            $table->unsignedInteger('client_id')->nullable();
+            $table->unsignedInteger('election_id');
+            $table->unsignedInteger('client_id');
             $table->bigInteger('yes');
             $table->bigInteger('no');
             $table->timestamps();

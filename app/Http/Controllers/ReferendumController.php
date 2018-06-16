@@ -51,9 +51,10 @@ class ReferendumController extends Controller
                 'constituency' => $request->input('constituency'),
                 'yes' => $request->input('yes'),
                 'no' => $request->input('no'),
+                'election_id' => $request->input('election_id'),
                 'client_id' => $user->client_id
             );
-            Referendum::create($array);
+            return Referendum::create($array);
         }
         abort(403, 'Access Denied');
     }

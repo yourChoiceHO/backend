@@ -32,7 +32,7 @@ class Referendum extends Model
 {
     protected $table = 'referendums';
     // protected $fillable = ['typ'];// white list, wenn blacklist vorhanden, dann nicht erforderlich (laravel eloquent)
-    protected $guarded = ['id_referendum', 'election_id'];//blacklist
+    protected $guarded = ['id_referendum'];//blacklist
 
     protected $primaryKey = 'id_referendum';
 
