@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "0842df36-3a39-44f1-9863-1d543d723385",
-		"name": "Integrationstest Copy",
+		"_postman_id": "6f8ad89c-fa4c-4fc4-905f-233df16fa81e",
+		"name": "Integrationstest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -140,37 +140,31 @@
 								{
 									"key": "typ",
 									"value": "Bundestagswahl",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "text",
 									"value": "Dies ist eine Bundestagswahl",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "state",
 									"value": "1",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "token",
 									"value": "{{tokenUser}}",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "start_date",
 									"value": "2018-06-14 08:25:03",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "end_date",
 									"value": "2018-06-16 08:25:03",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -312,37 +306,31 @@
 								{
 									"key": "typ",
 									"value": "Landtagswahl",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "text",
 									"value": "Dies ist eine Landtagswahl",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "start_date",
 									"value": "2018-06-14 08:25:03",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "end_date",
 									"value": "2018-06-24 08:25:03",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "state",
 									"value": "1",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "token",
 									"value": "{{tokenUser}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -472,8 +460,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"LandtagswahlBW\",\n  \"text\": \"Dies ist eine Landtagswahl in BW\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "Landtagswahl",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Landtagswahl",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-24 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -534,7 +553,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_landtagbw}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_landtagbw}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -544,6 +563,12 @@
 								"api",
 								"election",
 								"{{id_election_landtagbw}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -591,12 +616,43 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"LandtagswahlSL\",\n  \"text\": \"Dies ist eine Landtagswahl in SL\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "LandtagswahlSL",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Landtagswahl in SL",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -657,7 +713,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_landtagsl}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_landtagsl}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -667,6 +723,12 @@
 								"api",
 								"election",
 								"{{id_election_landtagsl}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -719,8 +781,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "LandtagswahlSL",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Landtagswahl in SL",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -780,7 +873,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_buerger}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_buerger}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -790,6 +883,12 @@
 								"api",
 								"election",
 								"{{id_election_buerger}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -841,8 +940,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Europawahl\",\n  \"text\": \"Dies ist eine Europawahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "Europawahl",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Europawahl",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -903,7 +1033,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_europa}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_europa}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -913,6 +1043,12 @@
 								"api",
 								"election",
 								"{{id_election_europa}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -965,8 +1101,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Referendum\",\n  \"text\": \"Dies ist ein Referendum\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "Europawahl",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist eine Europawahl",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourChoice.local/api/election",
@@ -1027,7 +1194,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_ref}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_ref}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1037,6 +1204,12 @@
 								"api",
 								"election",
 								"{{id_election_ref}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1098,8 +1271,40 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"last_name\": \"Misterson\",\n  \"first_name\": \"Mister\",\n  \"hash\": \"asajhjuf76safhjsnfjsf8xxfxdfstgsd\",\n  \"constituency\": \"1\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Misterson",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Mister",
+									"type": "text"
+								},
+								{
+									"key": "hash",
+									"value": "asajhjuf76safhjsnfjsf8xxfxdfstgsd",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"description": "",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/voter",
@@ -1158,9 +1363,12 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "http://yourchoice.local/api/voter/{{id_voter}}",
+							"raw": "http://yourchoice.local/api/voter/{{id_voter}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1170,6 +1378,12 @@
 								"api",
 								"voter",
 								"{{id_voter}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1234,8 +1448,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"SPD\",\r\n  \"text\": \"Infos zur SPD\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"34\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "SPD",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Infos zur SPD",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_bundestag}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1302,7 +1547,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/party/{{id_party_bund1}}",
+							"raw": "http://yourchoice.local/api/party/{{id_party_bund1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1312,6 +1557,12 @@
 								"api",
 								"party",
 								"{{id_party_bund1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1370,8 +1621,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"CDU\",\r\n  \"text\": \"Infos zur CDU\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"20\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "CDU",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Infos zur CDU",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_bundestag}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1439,7 +1721,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/party/{{id_party_bund2}}",
+							"raw": "http://yourchoice.local/api/party/{{id_party_bund2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1449,6 +1731,12 @@
 								"api",
 								"party",
 								"{{id_party_bund2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1507,8 +1795,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"SPD\",\r\n  \"text\": \"Infos zur SPD\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"20\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "SPD",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Infos zur SPD",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtag}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1575,7 +1894,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/party/{{id_party_landtag1}}",
+							"raw": "http://yourchoice.local/api/party/{{id_party_landtag1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1585,6 +1904,12 @@
 								"api",
 								"party",
 								"{{id_party_landtag1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1643,8 +1968,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"CDU\",\r\n  \"text\": \"Infos zur CDU\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"34\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "CDU",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Infos zur CDU",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtag}},",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1711,7 +2067,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/party/{{id_party_land2}}",
+							"raw": "http://yourchoice.local/api/party/{{id_party_land2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1721,6 +2077,12 @@
 								"api",
 								"party",
 								"{{id_party_land2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1779,8 +2141,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Gruene\",\r\n  \"text\": \"Infos zur Gruene\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagsl}},\r\n  \"vote\": \"15\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Gruene",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Infos zur Gruene",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtagsl}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1847,7 +2240,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/party/{{id_party_landsl1}}",
+							"raw": "http://yourchoice.local/api/party/{{id_party_landsl1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1857,6 +2250,12 @@
 								"api",
 								"party",
 								"{{id_party_landsl1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -1915,8 +2314,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Linke\",\r\n  \"text\": \"Infos zur Linke\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagsl}},\r\n  \"vote\": \"21\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Linke",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Infos zur Linke",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtagsl}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "21",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/party",
@@ -1983,7 +2413,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/party/{{id_party_landsl2}}",
+							"raw": "http://yourchoice.local/api/party/{{id_party_landsl2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1993,6 +2423,12 @@
 								"api",
 								"party",
 								"{{id_party_landsl2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2059,8 +2495,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller1\",\r\n  \"first_name\": \"Hans1\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"34\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "Wollen Sie alles besser haben?",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_bundestag}}",
+									"type": "text"
+								},
+								{
+									"key": "yes",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "no",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2130,7 +2597,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_bund1}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_bund1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2140,6 +2607,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_bund1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2200,8 +2673,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller2\",\r\n  \"first_name\": \"Hans2\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_bundestag}},\r\n  \"vote\": \"10\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller2",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans2",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_bundestag}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2270,7 +2774,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_bund2}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_bund2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2280,6 +2784,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_bund2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2340,8 +2850,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller3\",\r\n  \"first_name\": \"Hans3\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"16\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller3",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans3",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtag}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "16",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2413,7 +2954,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land1}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2423,6 +2964,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_land1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2483,8 +3030,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller4\",\r\n  \"first_name\": \"Hans4\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtag}},\r\n  \"vote\": \"45\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller4",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans4",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtag}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "45",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2553,7 +3131,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land2}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_land2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2563,6 +3141,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_land2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2623,8 +3207,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller5\",\r\n  \"first_name\": \"Hans5\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagbw}},\r\n  \"vote\": \"34\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller5",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans5",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtagbw}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2693,7 +3308,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_landbw1}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_landbw1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2703,6 +3318,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_landbw1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2763,8 +3384,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller6\",\r\n  \"first_name\": \"Hans6\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_landtagbw}},\r\n  \"vote\": \"31\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller6",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans6",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_landtagbw}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "31",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2833,7 +3485,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2843,6 +3495,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -2903,8 +3561,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller7\",\r\n  \"first_name\": \"Hans7\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_buerger}},\r\n  \"vote\": \"11\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller7",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans7",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_buerger}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -2973,7 +3662,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_buerger1}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_buerger1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -2983,6 +3672,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_buerger1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3043,8 +3738,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller8\",\r\n  \"first_name\": \"Hans8\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_buerger}},\r\n  \"vote\": \"77\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller8",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans8",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_buerger}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "77",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -3113,7 +3839,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_buerger2}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_buerger2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -3123,6 +3849,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_buerger2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3183,8 +3915,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller9\",\r\n  \"first_name\": \"Hans9\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_europa}},\r\n  \"vote\": \"34\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller9",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans9",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_europa}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -3253,7 +4016,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_europa1}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_europa1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -3263,6 +4026,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_europa1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3323,8 +4092,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"last_name\": \"Mueller0\",\r\n  \"first_name\": \"Hans0\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_europa}},\r\n  \"vote\": \"32\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "last_name",
+									"value": "Mueller0",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Hans0",
+									"type": "text"
+								},
+								{
+									"key": "constituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_europa}}",
+									"type": "text"
+								},
+								{
+									"key": "vote",
+									"value": "32",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/candidate",
@@ -3393,7 +4193,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_europa2}}",
+							"raw": "http://yourchoice.local/api/candidate/{{id_candidate_europa2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -3403,6 +4203,12 @@
 								"api",
 								"candidate",
 								"{{id_candidate_europa2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3467,8 +4273,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"text\": \"Wollen sie alles besser haben?\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_ref}},\r\n  \"yes\": \"80\",\r\n  \"no\": \"2\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "Wollen Sie alles besser haben?",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_ref}}",
+									"type": "text"
+								},
+								{
+									"key": "yes",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "no",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/referendum",
@@ -3530,9 +4367,12 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "http://yourchoice.local/api/referendum/{{id_referendum1}}",
+							"raw": "http://yourchoice.local/api/referendum/{{id_referendum1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -3542,6 +4382,12 @@
 								"api",
 								"referendum",
 								"{{id_referendum1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3600,8 +4446,39 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"text\": \"Wollen sie was dafuer tuen, dass alles besser wird?\",\r\n  \"constituency\": \"1\",\r\n  \"election_id\": {{id_election_ref}},\r\n  \"yes\": \"1\",\r\n  \"no\": \"256\"\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "Wollen sie was dafuer tun, dass alles besser wird?",
+									"type": "text"
+								},
+								{
+									"key": "consituency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "election_id",
+									"value": "{{id_election_ref}}",
+									"type": "text"
+								},
+								{
+									"key": "yes",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "no",
+									"value": "256",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "http://yourchoice.local/api/referendum",
@@ -3663,9 +4540,12 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "http://yourchoice.local/api/referendum/{{id_referendum2}}",
+							"raw": "http://yourchoice.local/api/referendum/{{id_referendum2}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -3675,6 +4555,12 @@
 								"api",
 								"referendum",
 								"{{id_referendum2}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3684,7 +4570,7 @@
 		},
 		{
 			"name": "evaluate",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "evaluate Bundestag",
@@ -3735,7 +4621,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_bundestag}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_bundestag}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -3746,6 +4632,12 @@
 								"election",
 								"{{id_election_bundestag}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3800,7 +4692,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_ref}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_ref}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -3811,6 +4703,12 @@
 								"election",
 								"{{id_election_ref}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3857,7 +4755,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_europa}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_europa}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -3868,6 +4766,12 @@
 								"election",
 								"{{id_election_europa}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3914,7 +4818,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_buerger}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_buerger}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -3925,6 +4829,12 @@
 								"election",
 								"{{id_election_buerger}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -3972,7 +4882,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_landtagsl}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_landtagsl}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -3983,6 +4893,12 @@
 								"election",
 								"{{id_election_landtagsl}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -4033,7 +4949,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_landtagbw}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_landtagbw}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -4044,6 +4960,12 @@
 								"election",
 								"{{id_election_landtagbw}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
@@ -4098,7 +5020,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_landtag}}/evaluate",
+							"raw": "http://yourChoice.local/api/election/{{id_election_landtag}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -4109,6 +5031,12 @@
 								"election",
 								"{{id_election_landtag}}",
 								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
 							]
 						}
 					},
