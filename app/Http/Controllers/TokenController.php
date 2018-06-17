@@ -48,6 +48,7 @@ class TokenController extends Controller
             $token = new Token();
             $token->voter_id = $voter->id_voter;
             $token->remember_token = str_random(50);
+            $token->save();
             return array('token' => $token->remember_token, 'role' => 3, 'id' => $voter->id_voter);
         }
         abort(403, 'Wrong Password or Username');

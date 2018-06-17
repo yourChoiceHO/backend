@@ -38,7 +38,7 @@ class PartyController extends Controller
                 $result[] = Party::whereElectionId($id);
             }
         }else{
-            $result = Party::whereClientId($info);
+            $result = Party::whereClientId($info)->get();
         }
         return $result;
     }

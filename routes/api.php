@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::post('/login/voter', 'TokenController@auth');
+Route::post('/login/voter', 'TokenController@authVoter');
 Route::post('/login/user', 'TokenController@authUser');
 
 Route::get('/party/{id}','PartyController@show');
@@ -31,9 +31,9 @@ Route::get('/test', 'ElectionController@test');
 Route::get('/election/{id}', 'ElectionController@show');
 Route::get('/election', 'ElectionController@all');
 Route::get('/election/{id}/evaluate', 'ElectionController@evaluate');
-Route::get('/election/{id}/parties', 'ElectionController@evaluate');
-Route::get('/election/{id}/candidates', 'ElectionController@evaluate');
-Route::get('/election/{id}/referendums', 'ElectionController@evaluate');
+Route::get('/election/{id}/parties', 'ElectionController@parties');
+Route::get('/election/{id}/candidates', 'ElectionController@candidates');
+Route::get('/election/{id}/referendums', 'ElectionController@referendums');
 Route::post('/election', 'ElectionController@store');
 Route::post('/election/{id}/vote', 'ElectionController@vote');
 Route::post('/election/{id}/addParties', 'ElectionController@addParties');

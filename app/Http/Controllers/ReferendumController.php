@@ -36,7 +36,7 @@ class ReferendumController extends Controller
                 $result[] = Referendum::whereElectionId($id);
             }
         }else{
-            $result = Referendum::whereClientId($info);
+            $result = Referendum::whereClientId($info)->get();
         }
         return $result;
     }
