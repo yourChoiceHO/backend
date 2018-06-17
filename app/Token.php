@@ -58,9 +58,9 @@ class Token extends Model
                 $user = User::findOrFail($token->user_id);
                 return $user->client_id;
             }if ($token->voter_id){
-                $voter = Voter::whereIdVoter($token->voter_id);
-                //$voters = Voter::whereHash($voter->hash)->where('password', '=', $voter->password)->where('last_name', '=', $voter->last_name)->where('first_name', '=', $voter->first_name)->select('election_id');
-                $result = \DB::select('SELECT e.id_election FROM elections e, parties p, candidates c, referendums r WHERE (p.constituency = '.$voter->constituency.' AND e.id_election = p.election_id) OR (c.constituency = '.$voter->constituency.' AND e.id_election = c.election_id) OR (r.constituency = '.$voter->constituency.' AND e.id_election = r.election_id) GROUP BY e.id_election');
+                $voter = Voter::find($token->voter_id);
+                $result = Voter::whereHash($voter->hash)->where('password', '=', $voter->password)->where('last_name', '=', $voter->last_name)->where('first_name', '=', $voter->first_name)->get(array('election_id'))->toArray();
+                //$result = \DB::select('SELECT e.id_election FROM elections e, parties p, candidates c, referendums r WHERE (p.constituency = '.$voter->constituency.' AND e.id_election = p.election_id) OR (c.constituency = '.$voter->constituency.' AND e.id_election = c.election_id) OR (r.constituency = '.$voter->constituency.' AND e.id_election = r.election_id) GROUP BY e.id_election');
                 return $result;
             }
         }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Election;
 use App\Http\Resources\Candidate;
+use App\Party;
+use App\Referendum;
 use App\Token;
 use App\User;
 use App\Vote;
@@ -36,10 +38,10 @@ class ElectionController extends Controller
     public function all(Request $request){
         $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
-            $info = array_column($info, 'id_election');
+            $info = array_column($info, 'election_id');
             $result = null;
             foreach ($info as $id){
-                $election = Election::whereElectionId($id)->where('state', '=', Election::FREIGEGEBEN)->first();
+                $election = Election::whereIdElection($id)->where('state', '=', Election::FREIGEGEBEN)->first();
                 if($election){
                     $result[] = $election;
                 }
@@ -117,17 +119,17 @@ class ElectionController extends Controller
 
     public function parties(Request $request, $id){
         $election = $this->show($request, $id);
-        return $election->parties();
+        return Party::whereElectionId($election->id_election)->get();
     }
 
     public function candidates(Request $request, $id){
         $election = $this->show($request, $id);
-        return $election->candidates();
+        return \App\Candidate::whereElectionId($election->id_election)->get();
     }
 
     public function referendums(Request $request, $id){
         $election = $this->show($request, $id);
-        return $election->referendums();
+        return Referendum::whereElectionId($election->id_election)->get();
     }
 
 
