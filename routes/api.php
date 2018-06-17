@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::post('/login/voter', 'TokenController@auth');
+Route::post('/login/voter', 'TokenController@authVoter');
 Route::post('/login/user', 'TokenController@authUser');
 
 Route::get('/party/{id}','PartyController@show');

@@ -40,6 +40,7 @@ class VoterController extends Controller
                 'last_name' => $request->input('last_name'),
                 'first_name' => $request->input('first_name'),
                 'hash' => $request->input('hash'),
+                'password' => $request->input('password'),
                 'constituency' => $request->input('constituency'),
                 'election_id' => $request->input('election_id')
             );
