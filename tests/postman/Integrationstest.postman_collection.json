@@ -90,7 +90,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7fd8ce8e-cf52-4896-a8c7-fcb00f20aca6",
+								"id": "d8cb4915-ea49-45f5-8a7f-93592bba7268",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -114,7 +114,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_bundestag\", jsonData.id_election);"
@@ -190,7 +190,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "922d5f82-d774-4e20-b81a-b971b03cdf21",
+								"id": "c2cd422f-c5bf-490c-82d4-64e707ee5bfa",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -213,7 +213,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});",
 									""
 								]
@@ -260,7 +260,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "88ea57eb-8036-42ff-bbcb-763905d448f2",
+								"id": "cdf15902-72c9-4d8a-8c49-d525483713d1",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -284,7 +284,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_landtag\", jsonData.id_election);"
@@ -356,7 +356,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "89b53779-6d25-4546-bdec-93ac4304ae79",
+								"id": "436af8ac-5cf0-4737-8701-b0a6ed30b654",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -379,7 +379,7 @@
 									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});"
 								]
 							}
@@ -420,7 +420,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e6409955-1e32-4b6c-a950-02c21c04b4d5",
+								"id": "7134b669-b266-477c-8b10-55d9d6d4ffb6",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -443,7 +443,7 @@
 									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_landtagbw\", jsonData.id_election);"
@@ -515,7 +515,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "36778b1c-081f-449c-aeb3-3889c02b1541",
+								"id": "4e3df607-df5d-4acf-8f8f-bf401aa3ab04",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -539,7 +539,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});"
 								]
 							}
@@ -580,7 +580,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cd02f11a-28e7-4a9a-a33f-7d3848f89240",
+								"id": "59d29bd8-523b-45b7-aef0-c2cd00688bee",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -603,7 +603,7 @@
 									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_landtagsl\", jsonData.id_election);"
@@ -675,7 +675,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8f98bd9e-5718-45cb-b022-13517af58d94",
+								"id": "7080eb50-b7b7-45c8-b23a-f1af8da95407",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -699,7 +699,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});"
 								]
 							}
@@ -740,7 +740,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cc9cd209-ac2a-4ddd-8f16-cfeeefc04217",
+								"id": "02b48d13-a3ab-48f9-9b88-a580ef1329e6",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -764,7 +764,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_buerger\", jsonData.id_election);"
@@ -836,7 +836,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "56fca39c-8fcf-4646-964d-7d3dfd7a19ca",
+								"id": "6a6c9670-822d-44e3-8b7f-ddb938930ea7",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -859,7 +859,7 @@
 									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});"
 								]
 							}
@@ -900,7 +900,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "236b4d13-616d-471b-9fe6-e36045cb8d3a",
+								"id": "c8e07986-b28e-4343-91ae-0c1b0b889618",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -923,7 +923,7 @@
 									"});",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_europa\", jsonData.id_election);"
@@ -995,7 +995,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fa540d67-279a-4858-9e5b-0e5214008c5c",
+								"id": "0e0afb2b-de5b-4c35-a99c-edec92e81013",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1019,7 +1019,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});"
 								]
 							}
@@ -1060,7 +1060,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9549faf4-40ad-4adb-b23d-ff03b00b4f89",
+								"id": "ade76477-5a31-487b-809f-bdbdecf6984a",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1084,7 +1084,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(\"1\");",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
 									"pm.globals.set(\"id_election_ref\", jsonData.id_election);"
@@ -1156,7 +1156,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5daf151b-95d0-4be8-925f-ec6b4a316997",
+								"id": "87920de6-aac2-4f88-bb28-7f6253834c30",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1180,7 +1180,7 @@
 									"",
 									"",
 									"pm.test('Has state', function() {",
-									"    pm.expect(jsonData.state).to.eql(1);",
+									"    pm.expect(jsonData.state).to.eql(2);",
 									"});"
 								]
 							}
