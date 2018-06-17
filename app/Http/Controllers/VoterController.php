@@ -24,7 +24,7 @@ class VoterController extends Controller
         if(is_array($info)){
             abort(403, 'Access Denied');
         }else{
-            $result = Voter::whereClientId($info);
+            $result = Voter::whereClientId($info)->get();
         }
         return $result;
     }
@@ -40,7 +40,8 @@ class VoterController extends Controller
                 'last_name' => $request->input('last_name'),
                 'first_name' => $request->input('first_name'),
                 'hash' => $request->input('hash'),
-                'constituency' => $request->input('constituency')
+                'constituency' => $request->input('constituency'),
+                'election_id' => $request->input('election_id')
             );
             return Voter::create($array);
         }

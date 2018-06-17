@@ -38,7 +38,7 @@ class CandidateController extends Controller
                 $result[] = Candidate::whereElectionId($id);
             }
         }else{
-            $result = Candidate::whereClientId($info);
+            $result = Candidate::whereClientId($info)->get();
         }
         return $result;
     }

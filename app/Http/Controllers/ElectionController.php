@@ -45,7 +45,7 @@ class ElectionController extends Controller
                 }
             }
         }else{
-            $result = Election::whereClientId($info);
+            $result = Election::whereClientId($info)->get();
         }
         return $result;
     }
