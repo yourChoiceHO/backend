@@ -40,6 +40,7 @@ Route::post('/election/{id}/vote', 'ElectionController@vote');
 Route::post('/election/{id}/addParties', 'ElectionController@addParties');
 Route::post('/election/{id}/addCandidates', 'ElectionController@addCandidates');
 Route::post('/election/{id}/addVoters', 'ElectionController@addVoters');
+Route::post('/election/{id}/addReferendums', 'ElectionController@addReferendums');
 Route::put('/election/{id}', 'ElectionController@update');
 Route::delete('/election/{id}', 'ElectionController@destroy');
 

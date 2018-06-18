@@ -170,4 +170,9 @@ class ElectionController extends Controller
         return $result->addVoters($request);
     }
 
+    public function addReferendums(Request $request, $id){
+        $result = Election::findOrFail($id);
+        return $result->addReferendums($request);
+    }
+
 }

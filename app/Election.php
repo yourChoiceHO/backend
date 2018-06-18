@@ -383,4 +383,37 @@ class Election extends Model
         abort(403, 'Access Denied');
     }
 
+    public function addReferendums(Request $request)
+    {
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $files = $request->file('upload');
+
+            $allReferendums[] = array();
+
+            $csv = array_map('str_getcsv', file($files));
+            array_walk($csv, function (&$a) use ($csv) {
+                $a = array_combine($csv[0], $a);
+            });
+            array_shift($csv);
+            foreach ($csv as $referendum) {
+                $array = array(
+                    'text' => $referendum['text'],
+                    'constituency' => $referendum['constituency'],
+                    'yes' => 0,
+                    'no' => 0,
+                    'election_id' => $this->election_id,
+                    'client_id' => $user->client_id
+                );
+                $referendumCreated = Voter::create($array);
+                array_push($allReferendums, $referendumCreated);
+            }
+            array_shift($allReferendums);
+
+            return $allReferendums;
+        }
+        abort(403, 'Access Denied');
+    }
+
 }
