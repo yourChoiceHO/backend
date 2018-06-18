@@ -255,7 +255,7 @@ class Election extends Model
                     abort(404,'vote not saved');
                 }
         }
-
+        return "true";
     }
 
 
