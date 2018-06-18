@@ -132,17 +132,16 @@ class ElectionController extends Controller
     }
 
 
-    /**
-     * @param $id
-     * @return Election|array
-     * @throws \Exception
-     */
-    public function evaluate($id){
+    public function evaluate($id, Request $request){
         /**
          * @var Election $result
          */
-        $result = Election::findOrFail($id);
-        return $result->evaluate();
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $result = Election::findOrFail($id);
+            return $result->evaluate();
+        }
+        abort(403, 'Access Denied');
     }
 
     /**
