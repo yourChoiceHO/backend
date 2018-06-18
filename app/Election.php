@@ -161,7 +161,7 @@ class Election extends Model
     }
 
     public function evaluate(){
-        $result = null;
+        $result['general']['election'] = $this;
         if($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl){
             $result['general']['parties'] = $this->getVotesForParties();
             $result['general']['candidates'] = $this->getVotesForCandidates();
