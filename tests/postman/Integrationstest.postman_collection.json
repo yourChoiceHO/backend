@@ -1055,12 +1055,12 @@
 					"response": []
 				},
 				{
-					"name": "election Ref",
+					"name": "election Ref1",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "ade76477-5a31-487b-809f-bdbdecf6984a",
+								"id": "f0ef6301-c9f6-4e0f-a3bd-eaeb15ee751c",
 								"type": "text/javascript",
 								"exec": [
 									"const jsonData = pm.response.json();",
@@ -1087,7 +1087,7 @@
 									"    pm.expect(jsonData.state).to.eql(\"2\");",
 									"});",
 									"",
-									"pm.globals.set(\"id_election_ref\", jsonData.id_election);"
+									"pm.globals.set(\"id_election_ref1\", jsonData.id_election);"
 								]
 							}
 						}
@@ -1151,7 +1151,7 @@
 					"response": []
 				},
 				{
-					"name": "election Ref",
+					"name": "election Ref1",
 					"event": [
 						{
 							"listen": "test",
@@ -1194,7 +1194,7 @@
 							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
 						},
 						"url": {
-							"raw": "http://yourchoice.local/api/election/{{id_election_ref}}?token={{tokenUser}}",
+							"raw": "http://yourchoice.local/api/election/{{id_election_ref1}}?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourchoice",
@@ -1203,7 +1203,168 @@
 							"path": [
 								"api",
 								"election",
-								"{{id_election_ref}}"
+								"{{id_election_ref1}}"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Ref2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "23668389-61d9-407a-883a-fd14da5503d7",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Referendum\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist ein Referendum\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(\"2\");",
+									"});",
+									"",
+									"pm.globals.set(\"id_election_ref2\", jsonData.id_election);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "typ",
+									"value": "Referendum",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "Dies ist ein Referendum",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2018-06-14 08:25:03",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{tokenUser}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://yourChoice.local/api/election",
+							"protocol": "http",
+							"host": [
+								"yourChoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "election Ref2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "87920de6-aac2-4f88-bb28-7f6253834c30",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has id_election\", function(){",
+									"   pm.expect(jsonData).to.have.property('id_election'); ",
+									"});",
+									"",
+									"",
+									"pm.test('Has typ', function() {",
+									"    pm.expect(jsonData.typ).to.eql(\"Referendum\");",
+									"});",
+									"",
+									"pm.test('Has text', function() {",
+									"    pm.expect(jsonData.text).to.eql(\"Dies ist ein Referendum\");",
+									"});",
+									"",
+									"",
+									"pm.test('Has state', function() {",
+									"    pm.expect(jsonData.state).to.eql(2);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"election:_id\": {{election_id}},\n  \"first_vote\": \"asd\",\n  \"second_vote\": \"asd\",\n  \"valid\": \"asd\"\n}"
+						},
+						"url": {
+							"raw": "http://yourchoice.local/api/election/{{id_election_ref2}}?token={{tokenUser}}",
+							"protocol": "http",
+							"host": [
+								"yourchoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_ref2}}"
 							],
 							"query": [
 								{
@@ -5346,7 +5507,7 @@
 								},
 								{
 									"key": "election_id",
-									"value": "{{id_election_ref}}",
+									"value": "{{id_election_ref1}}",
 									"type": "text"
 								},
 								{
@@ -5523,7 +5684,7 @@
 								},
 								{
 									"key": "election_id",
-									"value": "{{id_election_ref}}",
+									"value": "{{id_election_ref2}}",
 									"type": "text"
 								},
 								{
@@ -5712,7 +5873,7 @@
 					"response": []
 				},
 				{
-					"name": "evaluate Ref",
+					"name": "evaluate Ref1",
 					"event": [
 						{
 							"listen": "test",
@@ -5760,7 +5921,7 @@
 							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_ref}}/evaluate?token={{tokenUser}}",
+							"raw": "http://yourChoice.local/api/election/{{id_election_ref1}}/evaluate?token={{tokenUser}}",
 							"protocol": "http",
 							"host": [
 								"yourChoice",
@@ -5769,7 +5930,78 @@
 							"path": [
 								"api",
 								"election",
-								"{{id_election_ref}}",
+								"{{id_election_ref1}}",
+								"evaluate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{tokenUser}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "evaluate Ref2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6bbaa62f-c23e-4254-8772-93e9d3b43dfe",
+								"type": "text/javascript",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Has general\", function(){",
+									"   pm.expect(jsonData).to.have.property('general'); ",
+									"});",
+									"",
+									"pm.test(\"Has text\", function(){",
+									"   pm.expect(jsonData.general).to.have.property('text'); ",
+									"});",
+									"",
+									"pm.test(\"Has yes\", function(){",
+									"   pm.expect(jsonData.general).to.have.property('yes'); ",
+									"});",
+									"",
+									"pm.test(\"Has no\", function(){",
+									"   pm.expect(jsonData.general).to.have.property('no'); ",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "http://yourChoice.local/api/election/{{id_election_ref2}}/evaluate?token={{tokenUser}}",
+							"protocol": "http",
+							"host": [
+								"yourChoice",
+								"local"
+							],
+							"path": [
+								"api",
+								"election",
+								"{{id_election_ref2}}",
 								"evaluate"
 							],
 							"query": [

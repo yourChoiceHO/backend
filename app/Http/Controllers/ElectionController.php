@@ -26,8 +26,8 @@ class ElectionController extends Controller
         $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
-            if(in_array($id, array_column($info, 'id_election'))){
-                return Election::whereElectionId($id)->where('state', '=', Election::FREIGEGEBEN)->first();
+            if(in_array($id, array_column($info, 'election_id'))){
+                return Election::whereIdElection($id)->where('state', '=', Election::FREIGEGEBEN)->first();
             }
         }elseif ($info){
             return Election::whereIdElection($id)->where('client_id', '=', $info)->first();
@@ -104,8 +104,7 @@ class ElectionController extends Controller
             $user = $userArray['object'];
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if($election){
-                $destroyflag = $election->delete();
-                return $destroyflag;
+                $election->delete();
             }
         }
         abort(403, 'Access Denied');

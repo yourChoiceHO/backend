@@ -20,7 +20,7 @@ class PartyController extends Controller
         $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
-            if(in_array($id, array_column($info, 'id_election'))){
+            if(in_array($id, array_column($info, 'election_id'))){
                 return Party::findOrFail($id);
             }
         }else{
@@ -32,7 +32,7 @@ class PartyController extends Controller
     public function all(Request $request){
         $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
-            $info = array_column($info, 'id_election');
+            $info = array_column($info, 'election_id');
             $result = null;
             foreach ($info as $id){
                 $result[] = Party::whereElectionId($id);
