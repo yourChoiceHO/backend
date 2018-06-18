@@ -31,6 +31,7 @@ Route::get('/test', 'ElectionController@test');
 Route::get('/election/{id}', 'ElectionController@show');
 Route::get('/election', 'ElectionController@all');
 Route::get('/election/{id}/evaluate', 'ElectionController@evaluate');
+Route::post('/election/{id}/evaluate', 'ElectionController@evaluate');
 Route::get('/election/{id}/parties', 'ElectionController@parties');
 Route::get('/election/{id}/candidates', 'ElectionController@candidates');
 Route::get('/election/{id}/referendums', 'ElectionController@referendums');
