@@ -2511,7 +2511,7 @@
 								},
 								{
 									"key": "election_id",
-									"value": "{{id_election_ref}}",
+									"value": "{{id_election_ref1}}",
 									"description": "",
 									"type": "text"
 								}
