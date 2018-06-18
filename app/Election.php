@@ -320,7 +320,7 @@ class Election extends Model
             });
             array_shift($csv);
             foreach ($csv as $candidates) {
-                $party = Party::whereElectionId($this->id_election)->where('name', $candidates['party'])->first();
+                $party = Party::whereElectionId($this->id_election)->where('name', $candidates['party'])->where('constituency', '=', $candidates['constituency'])->first();
                 if(!($party)){
                     $array = array(
                         'name' => $candidates['party'],
