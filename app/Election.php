@@ -188,7 +188,7 @@ class Election extends Model
 
         $id_election = $this->id_election;
         $voter_id = $request->input('voter_id');
-        $voter = Voter::whereElectionId($id_election)->where('voter_id', '=', $voter_id)->first();
+        $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
         if(!$voter){ //check if first vote for election
                 $valid = $request->input('valid');
                 $first_vote = $request->input('first_vote');
@@ -221,7 +221,7 @@ class Election extends Model
 
                     elseif ($this->typ == self::Referendum) {//referendum
                         $referendum=$request->input('referendum');
-                        $referendum_model=Referendum::where ('election_id','=',$id_election);
+                        $referendum_model=Referendum::whereElectionId($id_election)->first();
 
 
                         if($referendum=='yes'){
@@ -231,7 +231,7 @@ class Election extends Model
                             $referendum_model->no++;
                         }
                         else{
-                            throw new \InvalidArgumentException('referendum vote is null');
+                            abort( 404,'referendum vote is null');
                         }
                     }
 
@@ -252,10 +252,10 @@ class Election extends Model
                     $vote->valid = false;
                     $vote->save();
                 }else{
-                    throw new \InvalidArgumentException('vote not saved');
+                    abort(404,'vote not saved');
                 }
         }
-
+        return "true";
     }
 
 
@@ -379,6 +379,39 @@ class Election extends Model
             array_shift($allVoters);
 
             return $allVoters;
+        }
+        abort(403, 'Access Denied');
+    }
+
+    public function addReferendums(Request $request)
+    {
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $files = $request->file('upload');
+
+            $allReferendums[] = array();
+
+            $csv = array_map('str_getcsv', file($files));
+            array_walk($csv, function (&$a) use ($csv) {
+                $a = array_combine($csv[0], $a);
+            });
+            array_shift($csv);
+            foreach ($csv as $referendum) {
+                $array = array(
+                    'text' => $referendum['text'],
+                    'constituency' => $referendum['constituency'],
+                    'yes' => 0,
+                    'no' => 0,
+                    'election_id' => $this->election_id,
+                    'client_id' => $user->client_id
+                );
+                $referendumCreated = Voter::create($array);
+                array_push($allReferendums, $referendumCreated);
+            }
+            array_shift($allReferendums);
+
+            return $allReferendums;
         }
         abort(403, 'Access Denied');
     }

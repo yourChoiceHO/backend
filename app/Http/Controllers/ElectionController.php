@@ -132,17 +132,16 @@ class ElectionController extends Controller
     }
 
 
-    /**
-     * @param $id
-     * @return Election|array
-     * @throws \Exception
-     */
-    public function evaluate($id){
+    public function evaluate($id, Request $request){
         /**
          * @var Election $result
          */
-        $result = Election::findOrFail($id);
-        return $result->evaluate();
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $result = Election::findOrFail($id);
+            return $result->evaluate();
+        }
+        abort(403, 'Access Denied');
     }
 
     /**
@@ -169,6 +168,11 @@ class ElectionController extends Controller
     public function addVoters(Request $request, $id){
         $result = Election::findOrFail($id);
         return $result->addVoters($request);
+    }
+
+    public function addReferendums(Request $request, $id){
+        $result = Election::findOrFail($id);
+        return $result->addReferendums($request);
     }
 
 }
