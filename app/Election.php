@@ -163,25 +163,30 @@ class Election extends Model
     }
 
     public function evaluate(){
-        $result['general']['election'] = $this;
-        if($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl){
-            $result['general']['parties'] = $this->getVotesForParties();
-            $result['general']['candidates'] = $this->getVotesForCandidates();
-            $result['constituency'] = $this->getVotesForConstituency();
-        } elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW){
-            $result['general']['candidates'] = $this->getVotesForConstituency(false);
-        } elseif ($this->typ == self::LandtagswahlSL){
-            $result['general']['parties'] = $this->getVotesForConstituency(true, false);
-        } elseif ($this->typ == self::Referendum) {
-            $max_vote = Referendum::whereElectionId($this->id_election)->selectRaw("(yes + no) as votes")->get()->get(0)->getAttribute('votes');
-            $referendum = Referendum::whereElectionId($this->id_election)->get()->get(0);
-            $result['general']['text'] = $referendum->getAttribute("text");
-            $result['general']['yes']['vote_number'] = $referendum->getAttribute("yes");
-            $result['general']['yes']['vote_percent'] = number_format((($referendum->getAttribute("yes") / $max_vote) * 100), 2);
-            $result['general']['no']['vote_number'] = $referendum->getAttribute("no");
-            $result['general']['no']['vote_percent'] = number_format((($referendum->getAttribute("no") / $max_vote) * 100), 2);
+        if($this->state == self::ABGESCHLOSSEN) {
+            $result['general']['election'] = $this;
+            if ($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl) {
+                $result['general']['parties'] = $this->getVotesForParties();
+                $result['general']['candidates'] = $this->getVotesForCandidates();
+                $result['constituency'] = $this->getVotesForConstituency();
+            } elseif ($this->typ == self::Buergermeisterwahl || $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW) {
+                $result['general']['candidates'] = $this->getVotesForConstituency(false);
+            } elseif ($this->typ == self::LandtagswahlSL) {
+                $result['general']['parties'] = $this->getVotesForConstituency(true, false);
+            } elseif ($this->typ == self::Referendum) {
+                $max_vote = Referendum::whereElectionId($this->id_election)->selectRaw("(yes + no) as votes")->get()->get(0)->getAttribute('votes');
+                $referendum = Referendum::whereElectionId($this->id_election)->get()->get(0);
+                $result['general']['text'] = $referendum->getAttribute("text");
+                $result['general']['yes']['vote_number'] = $referendum->getAttribute("yes");
+                $result['general']['yes']['vote_percent'] = number_format((($referendum->getAttribute("yes") / $max_vote) * 100),
+                    2);
+                $result['general']['no']['vote_number'] = $referendum->getAttribute("no");
+                $result['general']['no']['vote_percent'] = number_format((($referendum->getAttribute("no") / $max_vote) * 100),
+                    2);
+            }
+            return $result;
         }
-        return $result;
+        abort(404, "Wahl muss erst abgeschlossen sein");
     }
 
 
