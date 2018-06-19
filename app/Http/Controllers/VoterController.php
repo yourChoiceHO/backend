@@ -20,13 +20,17 @@ class VoterController extends Controller
         return Voter::findOrFail($id);
     }
     public function all(Request $request){
+        $result = null;
         $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             abort(403, 'Access Denied');
         }else{
             $result = Voter::whereClientId($info)->get();
         }
-        return $result;
+        if($result) {
+            return $result;
+        }
+        abort (404, 'No Election found');
     }
 
     public function store(Request $request)
