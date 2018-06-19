@@ -9,6 +9,7 @@ use App\Referendum;
 use App\Token;
 use App\User;
 use App\Vote;
+use App\Voter;
 use Illuminate\Http\Request;
 use DB;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -41,13 +42,40 @@ class ElectionController extends Controller
             $info = array_column($info, 'election_id');
             $result = null;
             foreach ($info as $id){
-                $election = Election::whereIdElection($id)->where('state', '=', Election::FREIGEGEBEN)->first();
-                if($election){
-                    $result[] = $election;
+                $election = Election::whereIdElection($id)->whereIn('state', [Election::FREIGEGEBEN, Election::IM_GANGE])->first();
+                $voters = Token::getVoters($request->input('token'));
+                $votes = Vote::whereIn('voter_id', $voters)->get(array('election_id'))->toArray();
+
+                if($election) {
+                    if(!(in_array($election->getAttribute('id_election'), array_column($votes, 'election_id')))) {
+                        if ($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= time()) {
+                            $election->setAttribute('state', Election::IM_GANGE);
+                            $election->save();
+                        }
+                        if (($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= time()) {
+                            $election->setAttribute('state', Election::ABGESCHLOSSEN);
+                            $election->save();
+                            continue;
+
+                        }
+                        $result[] = $election;
+                    }
                 }
             }
         }else{
-            $result = Election::whereClientId($info)->get();
+            $elections= Election::whereClientId($info)->get();
+            foreach ($elections as $election){
+                if($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= time()){
+                    $election->setAttribute('state', Election::IM_GANGE);
+                    $election->save();
+                }
+                if(($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) >= time()){
+                    $election->setAttribute('state', Election::ABGESCHLOSSEN);
+                    $election->save();
+
+                }
+                $result[] = $election;
+            }
         }
         return $result;
     }
@@ -106,6 +134,7 @@ class ElectionController extends Controller
             if($election){
                 $election->delete();
             }
+            return "true";
         }
         abort(403, 'Access Denied');
     }
@@ -150,28 +179,28 @@ class ElectionController extends Controller
      * @return mixed
      */
     public function vote($id, Request $request){
-        $result = Election::findOrFail($id);
+        $result = Election::find($id);
         return $result->vote($request);
 
     }
 
     public function addParties(Request $request, $id){
-        $result = Election::findOrFail($id);
+        $result = Election::find($id);
         return $result->addParties($request);
     }
 
     public function addCandidates(Request $request, $id){
-        $result = Election::findOrFail($id);
+        $result = Election::find($id);
         return $result->addCandidates($request);
     }
 
     public function addVoters(Request $request, $id){
-        $result = Election::findOrFail($id);
+        $result = Election::find($id);
         return $result->addVoters($request);
     }
 
     public function addReferendums(Request $request, $id){
-        $result = Election::findOrFail($id);
+        $result = Election::find($id);
         return $result->addReferendums($request);
     }
 

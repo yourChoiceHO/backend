@@ -81,4 +81,11 @@ class Token extends Model
         abort(403, 'Access Denied');
     }
 
+    public static function getVoters($token){
+        $token = Token::whereRememberToken($token)->first();
+        $voter = Voter::find($token->voter_id);
+        $voters = Voter::whereHash($voter->hash)->where('password', '=', $voter->password)->where('last_name', '=', $voter->last_name)->where('first_name', '=', $voter->first_name)->get(array('id_voter'))->toArray();
+        return $voters;
+    }
+
 }
