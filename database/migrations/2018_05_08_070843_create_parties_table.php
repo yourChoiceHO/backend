@@ -41,10 +41,11 @@ class CreatePartiesTable extends Migration
                 ->on('clients')
                 ->onDelete('cascade');
 
+            $table->foreign('election_id')
+                ->references('id_election')
+                ->on('parties')
+                ->onDelete('cascade');
         });
-        Schema::table('parties', function($table) {
-                $table->foreign('election_id')->references('id_election')->on('elections');
-            });
     }
 
     /**
