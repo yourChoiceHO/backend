@@ -161,7 +161,7 @@ class Election extends Model
     }
 
     public function evaluate(){
-        $result = null;
+        $result['general']['election'] = $this;
         if($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl){
             $result['general']['parties'] = $this->getVotesForParties();
             $result['general']['candidates'] = $this->getVotesForCandidates();
@@ -320,22 +320,26 @@ class Election extends Model
             });
             array_shift($csv);
             foreach ($csv as $candidates) {
-                $party = Party::whereElectionId($this->id_election)->where('name', $candidates['party'])->where('constituency', '=', $candidates['constituency'])->first();
-                if(!($party)){
-                    $array = array(
-                        'name' => $candidates['party'],
-                        'constituency' => $candidates['constituency'],
-                        'client_id' => $user->client_id,
-                        'election_id' => $this->election_id,
-                        'vote' => 0,
-                        'text' => ''
-                    );
-                    $party = Party::create($array);
+                $party = null;
+                if($candidates['party']) {
+                    $party = Party::whereElectionId($this->id_election)->where('name',
+                        $candidates['party'])->where('constituency', '=', $candidates['constituency'])->first();
+                    if (!($party)) {
+                        $array = array(
+                            'name' => $candidates['party'],
+                            'constituency' => $candidates['constituency'],
+                            'client_id' => $user->client_id,
+                            'election_id' => $this->id_election,
+                            'vote' => 0,
+                            'text' => ''
+                        );
+                        $party = Party::create($array);
+                    }
                 }
                 $candidate = array(
                     'last_name' => $candidates['last_name'],
                     'first_name' => $candidates['first_name'],
-                    'party_id' => $party->id_party,
+                    'party_id' => $party ? $party->id_party : null,
                     'constituency' => $candidates['constituency'],
                     'election_id' => $this->id_election,
                     'client_id' => $user->client_id,
@@ -403,7 +407,7 @@ class Election extends Model
                     'constituency' => $referendum['constituency'],
                     'yes' => 0,
                     'no' => 0,
-                    'election_id' => $this->election_id,
+                    'election_id' => $this->id_election,
                     'client_id' => $user->client_id
                 );
                 $referendumCreated = Voter::create($array);
