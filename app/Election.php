@@ -42,6 +42,8 @@ class Election extends Model
     const BEARBEITUNG = 0;
     const PRUEFUNG = 1;
     const FREIGEGEBEN = 2;
+    const IM_GANGE = 3;
+    const ABGESCHLOSSEN = 4;
 
     const Europawahl = "Europawahl";
     const Bundestagswahl = "Bundestagswahl";
