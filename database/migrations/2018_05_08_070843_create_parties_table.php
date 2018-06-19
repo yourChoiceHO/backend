@@ -43,7 +43,7 @@ class CreatePartiesTable extends Migration
 
             $table->foreign('election_id')
                 ->references('id_election')
-                ->on('parties')
+                ->on('elections')
                 ->onDelete('cascade');
         });
     }
