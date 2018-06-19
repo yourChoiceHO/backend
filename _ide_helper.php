@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.25 on 2018-06-18 19:19:02.
+ * Generated for Laravel 5.6.24 on 2018-06-19 12:30:56.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1929,17 +1929,6 @@ namespace Illuminate\Support\Facades {
         public static function authenticate()
         {
             return \Illuminate\Auth\SessionGuard::authenticate();
-        }
-        
-        /**
-         * Determine if the guard has a user instance.
-         *
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasUser()
-        {
-            return \Illuminate\Auth\SessionGuard::hasUser();
         }
         
         /**
@@ -10684,12 +10673,12 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $name
          * @param mixed $disk
-         * @return $this 
+         * @return void 
          * @static 
          */ 
         public static function set($name, $disk)
         {
-            return \Illuminate\Filesystem\FilesystemManager::set($name, $disk);
+            \Illuminate\Filesystem\FilesystemManager::set($name, $disk);
         }
         
         /**
@@ -14321,7 +14310,7 @@ namespace  {
              * Constrain the query to the next "page" of results after a given ID.
              *
              * @param int $perPage
-             * @param int|null $lastId
+             * @param int $lastId
              * @param string $column
              * @return \Illuminate\Database\Query\Builder|static 
              * @static 

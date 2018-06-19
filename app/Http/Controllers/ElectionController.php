@@ -9,6 +9,7 @@ use App\Referendum;
 use App\Token;
 use App\User;
 use App\Vote;
+use App\Voter;
 use Illuminate\Http\Request;
 use DB;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -42,6 +43,8 @@ class ElectionController extends Controller
             $result = null;
             foreach ($info as $id){
                 $election = Election::whereIdElection($id)->where('state', '=', Election::FREIGEGEBEN)->first();
+                $voters = Token::getVoters($request->input('token'));
+                $test = Voter::findMany($voters);
                 if($election){
                     $result[] = $election;
                 }
