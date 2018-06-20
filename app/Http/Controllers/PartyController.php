@@ -21,10 +21,16 @@ class PartyController extends Controller
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'election_id'))){
-                return Party::findOrFail($id);
+                $party = Party::findOrFail($id);
+                if($party){
+                    return $party;
+                }
             }
         }else{
-            return Party::whereIdParty($id)->where('client_id', '=', $info)->first();
+            $party = Party::whereIdParty($id)->where('client_id', '=', $info)->first();
+            if($party){
+                return $party;
+            }
         }
         abort(403, 'Access Denied');
     }

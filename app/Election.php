@@ -117,7 +117,7 @@ class Election extends Model
         foreach ($result as $party){
             $party['vote_percent'] = number_format((($party->getAttribute('vote_number') / $votes_parties) * 100), 2);
         }
-        $result['votes_parties'] = $votes_parties;
+        //$result['votes_parties'] = $votes_parties;
         return $result;
     }
 
@@ -131,10 +131,10 @@ class Election extends Model
             $candidate['vote_percent'] = number_format( (($candidate->getAttribute('vote') / $max_vote )* 100), 2);
             if(key_exists($constituency,$result)){
                 if($candidate->getAttribute('vote') > $result[$constituency]->getAttribute('vote')){
-                    $result[$constituency] = $candidate;
+                    $result[] = $candidate;
                 }
             }else{
-                $result[$constituency] = $candidate;
+                $result[] = $candidate;
             }
         }
         return $result;
@@ -147,7 +147,7 @@ class Election extends Model
                 $constituency = $candidate->getAttribute('constituency');
                 $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
                 $candidate['vote_percent'] = number_format((($candidate->getAttribute('vote') / $max_vote) * 100), 2);
-                $result[$constituency]['candidate'][] = $candidate;
+                $result['constituency']['candidate'][] = $candidate;
             }
         }
         if($withParty) {
@@ -156,7 +156,7 @@ class Election extends Model
                 $constituency = $party->getAttribute('constituency');
                 $max_vote = Party::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
                 $party['vote_percent'] = number_format((($party->getAttribute('vote') / $max_vote) * 100), 2);
-                $result[$constituency]['parties'][] = $party;
+                $result['constituency']['parties'][] = $party;
             }
         }
         return $result;
@@ -169,10 +169,15 @@ class Election extends Model
                 $result['general']['parties'] = $this->getVotesForParties();
                 $result['general']['candidates'] = $this->getVotesForCandidates();
                 $result['constituency'] = $this->getVotesForConstituency();
+                $result['general']['election']['max_vote_party'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
+                $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::Buergermeisterwahl || $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW) {
                 $result['general']['candidates'] = $this->getVotesForConstituency(false);
+                $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::LandtagswahlSL) {
                 $result['general']['parties'] = $this->getVotesForConstituency(true, false);
+                $result['general']['election']['max_vote_party'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
+                $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::Referendum) {
                 $max_vote = Referendum::whereElectionId($this->id_election)->selectRaw("(yes + no) as votes")->get()->get(0)->getAttribute('votes');
                 $referendum = Referendum::whereElectionId($this->id_election)->get()->get(0);
@@ -192,77 +197,75 @@ class Election extends Model
 
     //TODO gibt Funktion ein true oder false zurück, oder ist vote() eine void Funktion?
     public function vote(Request $request){
-
-        $id_election = $this->id_election;
-        $voter_id = $request->input('voter_id');
-        $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
-        if(!$voter){ //check if first vote for election
-                $valid = $request->input('valid');
-                $first_vote = $request->input('first_vote');
-                $second_vote= $request->input('second_vote');
-                if($valid && $first_vote && $second_vote){
-                    // save vote Model candidate / party
-                    if($this->typ == self::Bundestagswahl|| $this->typ == self::Landtagswahl) { //candiates and party
-                        $party_id = $request->input('party_id');
-                        $candidate_id = $request->input("candidate_id");
-                        $this->voteFor($candidate_id,$party_id);
-                      }
-
-                      elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW){//candidates
-                          $candidate_id = $request->input("candidate_id");
-                          $this->voteFor($candidate_id);
-                      }
-
-                    elseif ($this->typ == self::LandtagswahlSL){//party
-                        $party_id = $request->input('party_id');
-                        $this->voteFor(null,$party_id);
-                    }
-
-                    elseif ($this->typ == self::Kommunalwahl){
-                        $candidates=$request->input('candidate_id');
-                        foreach($candidates as $candidate_id){
-                            //TODO Array mit candidate-ids, wenn eine candidate_id 2 Stimmen bekommen hat, bekomme ich zweimal die ID übermittelt? So habe ich es zumindest erstmal implementiert.
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'voter') {
+            $voter = $userArray['object'];
+            $voter = Voter::whereIdVoter($voter->id_voter)->where('hash', '=', $request->input('hash'))->first();
+            if($voter) {
+                $id_election = $this->id_election;
+                $voter_id = $request->input('voter_id');
+                $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
+                if (!$voter) { //check if first vote for election
+                    $valid = $request->input('valid');
+                    $first_vote = $request->input('first_vote');
+                    $second_vote = $request->input('second_vote');
+                    if ($valid && $first_vote && $second_vote) {
+                        // save vote Model candidate / party
+                        if ($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl) { //candiates and party
+                            $party_id = $request->input('party_id');
+                            $candidate_id = $request->input("candidate_id");
+                            $this->voteFor($candidate_id, $party_id);
+                        } elseif ($this->typ == self::Buergermeisterwahl || $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW) {//candidates
+                            $candidate_id = $request->input("candidate_id");
                             $this->voteFor($candidate_id);
+                        } elseif ($this->typ == self::LandtagswahlSL) {//party
+                            $party_id = $request->input('party_id');
+                            $this->voteFor(null, $party_id);
+                        } elseif ($this->typ == self::Kommunalwahl) {
+                            $candidates = $request->input('candidate_id');
+                            foreach ($candidates as $candidate_id) {
+                                //TODO Array mit candidate-ids, wenn eine candidate_id 2 Stimmen bekommen hat, bekomme ich zweimal die ID übermittelt? So habe ich es zumindest erstmal implementiert.
+                                $this->voteFor($candidate_id);
+                            }
+                        } elseif ($this->typ == self::Referendum) {//referendum
+                            $referendum = $request->input('referendum');
+                            $referendum_model = Referendum::whereElectionId($id_election)->first();
+
+
+                            if ($referendum == 'yes') {
+                                $referendum_model->yes++;
+                            } elseif ($referendum == 'no') {
+                                $referendum_model->no++;
+                            } else {
+                                abort(404, 'referendum vote is null');
+                            }
                         }
+
+                        //save vote Model vote
+                        $vote = new Vote();
+                        $vote->election_id = $id_election;
+                        $vote->voter_id = $voter_id;
+                        $vote->first_vote = true;
+                        $vote->second_vote = true;
+                        $vote->valid = true;
+                        $vote->save();
+                    } elseif ($first_vote && $second_vote) {//vote is not valid
+                        $vote = new Vote();
+                        $vote->election_id = $id_election;
+                        $vote->voter_id = $voter_id;
+                        $vote->first_vote = true;
+                        $vote->second_vote = true;
+                        $vote->valid = false;
+                        $vote->save();
+                    } else {
+                        abort(404, 'vote not saved');
                     }
-
-                    elseif ($this->typ == self::Referendum) {//referendum
-                        $referendum=$request->input('referendum');
-                        $referendum_model=Referendum::whereElectionId($id_election)->first();
-
-
-                        if($referendum=='yes'){
-                            $referendum_model->yes++;
-                        }
-                        elseif($referendum=='no'){
-                            $referendum_model->no++;
-                        }
-                        else{
-                            abort( 404,'referendum vote is null');
-                        }
-                    }
-
-                      //save vote Model vote
-                    $vote = new Vote();
-                    $vote->election_id = $id_election;
-                    $vote->voter_id = $voter_id;
-                    $vote->first_vote = true;
-                    $vote->second_vote = true;
-                    $vote->valid = true;
-                    $vote->save();
-                }elseif($first_vote && $second_vote){//vote is not valid
-                    $vote = new Vote();
-                    $vote->election_id = $id_election;
-                    $vote->voter_id = $voter_id;
-                    $vote->first_vote = true;
-                    $vote->second_vote = true;
-                    $vote->valid = false;
-                    $vote->save();
-                }else{
-                    abort(404,'vote not saved');
                 }
+                return "true";
+            }
+            abort(403,'Wrong hash');
         }
-        return "true";
+        abort(403,'Only Voter can vote');
     }
 
 

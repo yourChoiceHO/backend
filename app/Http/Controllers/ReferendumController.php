@@ -19,10 +19,16 @@ class ReferendumController extends Controller
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'election_id'))){
-                return Referendum::findOrFail($id);
+                $referendum = Referendum::findOrFail($id);
+                if($referendum){
+                    return $referendum;
+                }
             }
         }else{
-            return Referendum::whereIdReferendum($id)->where('client_id', '=', $info)->first();
+            $referendum = Referendum::whereIdReferendum($id)->where('client_id', '=', $info)->first();
+            if($referendum){
+                return $referendum;
+            }
         }
         abort(403, 'Access Denied');
     }

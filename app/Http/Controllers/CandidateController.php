@@ -21,10 +21,16 @@ class CandidateController extends Controller
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'election_id'))){
-                return Candidate::findOrFail($id);
+                $candidate = Candidate::findOrFail($id);
+                if($candidate){
+                    return $candidate;
+                }
             }
         }else{
-            return Candidate::whereIdCandidate($id)->where('client_id', '=', $info)->first();
+            $candidate =  Candidate::whereIdCandidate($id)->where('client_id', '=', $info)->first();
+            if($candidate){
+                return $candidate;
+            }
         }
         abort(403, 'Access Denied');
     }
