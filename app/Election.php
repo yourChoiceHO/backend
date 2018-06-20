@@ -200,8 +200,8 @@ class Election extends Model
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'voter') {
             $voter = $userArray['object'];
-            $voter = Voter::whereIdVoter($voter->id_voter)->where('hash', '=', $request->input('hash'))->first();
-            if($voter) {
+            //$voter = Voter::whereIdVoter($voter->id_voter)->where('hash', '=', $request->input('hash'))->first();
+            //if($voter) {
                 $id_election = $this->id_election;
                 $voter_id = $request->input('voter_id');
                 $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
@@ -262,8 +262,8 @@ class Election extends Model
                     }
                 }
                 return "true";
-            }
-            abort(403,'Wrong hash');
+            //}
+            //abort(403,'Wrong hash');
         }
         abort(403,'Only Voter can vote');
     }
