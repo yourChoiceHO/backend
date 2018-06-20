@@ -12,35 +12,45 @@ class UserTableSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
      * @return void
      */
     public function run()
     {
         $faker = Faker::create();
         //hole alle Elemente in Election/id_election
-        $clientId= DB::table('clients')->pluck('id_client')->toArray();
+        $clientId = DB::table('clients')->pluck('id_client')->toArray();
 
-        //Kandidat 1
+        $id1 = $faker->randomElement($clientId);
         DB::table('users')->insert([
             'name' => 'Test1 Testico1',
-            'client_id' => $faker->randomElement($clientId),
+            'client_id' => $id1,
             'username' => 'Test1',
-            'password' => hash('sha256','password1'),
+            'password' => hash('sha256', 'password1'),
             'role' => 1
         ]);
         DB::table('users')->insert([
             'name' => 'Test1 Testico2',
-            'client_id' => $faker->randomElement($clientId),
+            'client_id' => $id1,
             'username' => 'Test2',
-            'password' => hash('sha256','password2'),
+            'password' => hash('sha256', 'password2'),
+            'role' => 2
+        ]);
+
+        while(($id2 = $faker->randomElement($clientId)) == $id1);
+
+        DB::table('users')->insert([
+            'name' => 'Test1 Testico3',
+            'client_id' => $id2,
+            'username' => 'Test3',
+            'password' => hash('sha256', 'password3'),
             'role' => 1
-        ]);        DB::table('users')->insert([
-        'name' => 'Test1 Testico3',
-        'client_id' => $faker->randomElement($clientId),
-        'username' => 'Test3',
-        'password' => hash('sha256','password3'),
-        'role' => 2
-    ]);
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Test1 Testico4',
+            'client_id' => $id2,
+            'username' => 'Test4',
+            'password' => hash('sha256', 'password4'),
+            'role' => 2
+        ]);
     }
 }
