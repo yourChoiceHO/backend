@@ -291,6 +291,10 @@ class Election extends Model
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $files = $request->file('upload');
+            $checksum = $request->input('checksum');
+            if($checksum) {
+                $this->checkChecksum($files, $checksum);
+            }
             $allParties[] = array();
             $csv = array_map('str_getcsv', file($files));
             array_walk($csv, function (&$a) use ($csv) {
@@ -322,9 +326,13 @@ class Election extends Model
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $files = $request->file('upload');
+            $checksum = $request->input('checksum');
 
             $allCandidates[] = array();
             $csv = array_map('str_getcsv', file($files));
+            if($checksum) {
+                $this->checkChecksum($csv, $checksum);
+            }
             array_walk($csv, function (&$a) use ($csv) {
                 $a = array_combine($csv[0], $a);
             });
@@ -370,10 +378,12 @@ class Election extends Model
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $files = $request->file('upload');
-
+            $checksum = $request->input('checksum');
             $allVoters[] = array();
-
             $csv = array_map('str_getcsv', file($files));
+            if($checksum) {
+                $this->checkChecksum($csv, $checksum);
+            }
             array_walk($csv, function (&$a) use ($csv) {
                 $a = array_combine($csv[0], $a);
             });
@@ -403,10 +413,14 @@ class Election extends Model
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $files = $request->file('upload');
+            $checksum = $request->input('checksum');
 
             $allReferendums[] = array();
 
             $csv = array_map('str_getcsv', file($files));
+            if($checksum) {
+                $this->checkChecksum($csv, $checksum);
+            }
             array_walk($csv, function (&$a) use ($csv) {
                 $a = array_combine($csv[0], $a);
             });
@@ -428,6 +442,15 @@ class Election extends Model
             return $allReferendums;
         }
         abort(403, 'Access Denied');
+    }
+
+    private function checkChecksum($files, $checksum){
+        $csv = file_get_contents($files);
+        //$csv = trim(preg_replace('/\n+/', '', $csv));
+        $check = dechex(crc32($csv));
+        if($checksum != $check){
+            abort (403, "Checksum is not equal");
+        }
     }
 
 }
