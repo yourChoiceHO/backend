@@ -95,11 +95,18 @@ class CandidateController extends Controller
         abort(403, 'Access Denied');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $candidate = Candidate::findOrFail($id);
-
-        $destroyflag = $candidate->delete();
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $candidate = Candidate::whereIdCandidate($id)->where('client_id', '=', $user->client_id)->first();
+            if($candidate){
+                $candidate->delete();
+                return "true";
+            }
+        }
+        abort(403, 'Access Denied');
     }
 
 }

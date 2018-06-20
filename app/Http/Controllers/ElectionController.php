@@ -143,8 +143,8 @@ class ElectionController extends Controller
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if($election){
                 $election->delete();
+                return "true";
             }
-            return "true";
         }
         abort(403, 'Access Denied');
     }
