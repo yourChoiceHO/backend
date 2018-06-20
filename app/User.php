@@ -36,7 +36,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    const ADMIN = 0;
+    const WAHLLEITER = 1;
+    const MODERATOR = 2;
     /**
      * The attributes that are mass assignable.
      *

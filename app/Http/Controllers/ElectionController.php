@@ -43,10 +43,10 @@ class ElectionController extends Controller
     }
 
     public function all(Request $request){
+        $result = null;
         $info = Token::getClientOrElectionId($request->input('token'));
         if(is_array($info)){
             $info = array_column($info, 'election_id');
-            $result = null;
             foreach ($info as $id){
                 $election = Election::whereIdElection($id)->whereIn('state', [Election::FREIGEGEBEN, Election::IM_GANGE])->first();
                 $voters = Token::getVoters($request->input('token'));
@@ -75,7 +75,7 @@ class ElectionController extends Controller
                     $election->setAttribute('state', Election::IM_GANGE);
                     $election->save();
                 }
-                if(($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) >= time()){
+                if(($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= time()){
                     $election->setAttribute('state', Election::ABGESCHLOSSEN);
                     $election->save();
 
@@ -88,6 +88,9 @@ class ElectionController extends Controller
 
     public function store(Request $request)
     {
+        /**
+         * @var User $user
+         */
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
@@ -98,7 +101,7 @@ class ElectionController extends Controller
                 'text' => $request->input('text'),
                 'start_date' => $request->input('start_date'),
                 'end_date' => $request->input('end_date'),
-                'state' => $request->input('state')
+                'state' => $user->role == User::WAHLLEITER ? $request->input('state') : 1
             );
             return Election::create($array);
         }
@@ -118,11 +121,12 @@ class ElectionController extends Controller
 
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if($election) {
+                $newState = $newState ?? $election->state;
                 $election->typ = $newTyp ? $newTyp : $election->typ;
                 $election->text = $newText ? $newText : $election->text;
                 $election->start_date = $newStartDate ? $newStartDate : $election->start_date;
                 $election->end_date = $newEndDate ? $newEndDate : $election->end_date;
-                $election->state = $newState ? $newState : $election->state;
+                $election->state = $user->role == User::WAHLLEITER ? $newState : $election->state;
 
                 $election->save();
                 return $election;

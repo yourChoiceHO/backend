@@ -192,77 +192,75 @@ class Election extends Model
 
     //TODO gibt Funktion ein true oder false zurück, oder ist vote() eine void Funktion?
     public function vote(Request $request){
-
-        $id_election = $this->id_election;
-        $voter_id = $request->input('voter_id');
-        $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
-        if(!$voter){ //check if first vote for election
-                $valid = $request->input('valid');
-                $first_vote = $request->input('first_vote');
-                $second_vote= $request->input('second_vote');
-                if($valid && $first_vote && $second_vote){
-                    // save vote Model candidate / party
-                    if($this->typ == self::Bundestagswahl|| $this->typ == self::Landtagswahl) { //candiates and party
-                        $party_id = $request->input('party_id');
-                        $candidate_id = $request->input("candidate_id");
-                        $this->voteFor($candidate_id,$party_id);
-                      }
-
-                      elseif($this->typ == self::Buergermeisterwahl|| $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW){//candidates
-                          $candidate_id = $request->input("candidate_id");
-                          $this->voteFor($candidate_id);
-                      }
-
-                    elseif ($this->typ == self::LandtagswahlSL){//party
-                        $party_id = $request->input('party_id');
-                        $this->voteFor(null,$party_id);
-                    }
-
-                    elseif ($this->typ == self::Kommunalwahl){
-                        $candidates=$request->input('candidate_id');
-                        foreach($candidates as $candidate_id){
-                            //TODO Array mit candidate-ids, wenn eine candidate_id 2 Stimmen bekommen hat, bekomme ich zweimal die ID übermittelt? So habe ich es zumindest erstmal implementiert.
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'voter') {
+            $voter = $userArray['object'];
+            $voter = Voter::whereIdVoter($voter->id_voter)->where('hash', '=', $request->input('hash'))->first();
+            if($voter) {
+                $id_election = $this->id_election;
+                $voter_id = $request->input('voter_id');
+                $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
+                if (!$voter) { //check if first vote for election
+                    $valid = $request->input('valid');
+                    $first_vote = $request->input('first_vote');
+                    $second_vote = $request->input('second_vote');
+                    if ($valid && $first_vote && $second_vote) {
+                        // save vote Model candidate / party
+                        if ($this->typ == self::Bundestagswahl || $this->typ == self::Landtagswahl) { //candiates and party
+                            $party_id = $request->input('party_id');
+                            $candidate_id = $request->input("candidate_id");
+                            $this->voteFor($candidate_id, $party_id);
+                        } elseif ($this->typ == self::Buergermeisterwahl || $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW) {//candidates
+                            $candidate_id = $request->input("candidate_id");
                             $this->voteFor($candidate_id);
+                        } elseif ($this->typ == self::LandtagswahlSL) {//party
+                            $party_id = $request->input('party_id');
+                            $this->voteFor(null, $party_id);
+                        } elseif ($this->typ == self::Kommunalwahl) {
+                            $candidates = $request->input('candidate_id');
+                            foreach ($candidates as $candidate_id) {
+                                //TODO Array mit candidate-ids, wenn eine candidate_id 2 Stimmen bekommen hat, bekomme ich zweimal die ID übermittelt? So habe ich es zumindest erstmal implementiert.
+                                $this->voteFor($candidate_id);
+                            }
+                        } elseif ($this->typ == self::Referendum) {//referendum
+                            $referendum = $request->input('referendum');
+                            $referendum_model = Referendum::whereElectionId($id_election)->first();
+
+
+                            if ($referendum == 'yes') {
+                                $referendum_model->yes++;
+                            } elseif ($referendum == 'no') {
+                                $referendum_model->no++;
+                            } else {
+                                abort(404, 'referendum vote is null');
+                            }
                         }
+
+                        //save vote Model vote
+                        $vote = new Vote();
+                        $vote->election_id = $id_election;
+                        $vote->voter_id = $voter_id;
+                        $vote->first_vote = true;
+                        $vote->second_vote = true;
+                        $vote->valid = true;
+                        $vote->save();
+                    } elseif ($first_vote && $second_vote) {//vote is not valid
+                        $vote = new Vote();
+                        $vote->election_id = $id_election;
+                        $vote->voter_id = $voter_id;
+                        $vote->first_vote = true;
+                        $vote->second_vote = true;
+                        $vote->valid = false;
+                        $vote->save();
+                    } else {
+                        abort(404, 'vote not saved');
                     }
-
-                    elseif ($this->typ == self::Referendum) {//referendum
-                        $referendum=$request->input('referendum');
-                        $referendum_model=Referendum::whereElectionId($id_election)->first();
-
-
-                        if($referendum=='yes'){
-                            $referendum_model->yes++;
-                        }
-                        elseif($referendum=='no'){
-                            $referendum_model->no++;
-                        }
-                        else{
-                            abort( 404,'referendum vote is null');
-                        }
-                    }
-
-                      //save vote Model vote
-                    $vote = new Vote();
-                    $vote->election_id = $id_election;
-                    $vote->voter_id = $voter_id;
-                    $vote->first_vote = true;
-                    $vote->second_vote = true;
-                    $vote->valid = true;
-                    $vote->save();
-                }elseif($first_vote && $second_vote){//vote is not valid
-                    $vote = new Vote();
-                    $vote->election_id = $id_election;
-                    $vote->voter_id = $voter_id;
-                    $vote->first_vote = true;
-                    $vote->second_vote = true;
-                    $vote->valid = false;
-                    $vote->save();
-                }else{
-                    abort(404,'vote not saved');
                 }
+                return "true";
+            }
+            abort(403,'Wrong hash');
         }
-        return "true";
+        abort(403,'Only Voter can vote');
     }
 
 
