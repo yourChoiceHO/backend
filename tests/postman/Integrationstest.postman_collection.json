@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "6f8ad89c-fa4c-4fc4-905f-233df16fa81e",
-		"name": "Integrationstest",
+		"_postman_id": "b1195748-c0cf-4a7e-b468-edd986a85e03",
+		"name": "Integrationstest without evaluate",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "login",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "loginUser",
@@ -51,13 +51,11 @@
 								{
 									"key": "password",
 									"value": "password1",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "username",
 									"value": "Test1",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -1462,13 +1460,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_bundestag}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -1636,13 +1632,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_landtag}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -1810,13 +1804,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_landtagbw}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -1984,13 +1976,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_landtagsl}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -2158,13 +2148,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_buerger}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -2332,13 +2320,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_europa}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -2506,13 +2492,11 @@
 								{
 									"key": "password",
 									"value": "123456789",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "election_id",
 									"value": "{{id_election_ref1}}",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -5784,549 +5768,6 @@
 								"api",
 								"referendum",
 								"{{id_referendum2}}"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "evaluate",
-			"description": null,
-			"item": [
-				{
-					"name": "evaluate Bundestag",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "50a5e7f5-99fa-4301-86d3-7c1040c4561f",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has constituency\", function(){",
-									"   pm.expect(jsonData).to.have.property('constituency'); ",
-									"});",
-									"",
-									"pm.test(\"Has parties\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('parties'); ",
-									"});",
-									"",
-									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_bundestag}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_bundestag}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate Ref1",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "6bbaa62f-c23e-4254-8772-93e9d3b43dfe",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has text\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('text'); ",
-									"});",
-									"",
-									"pm.test(\"Has yes\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('yes'); ",
-									"});",
-									"",
-									"pm.test(\"Has no\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('no'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_ref1}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_ref1}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate Ref2",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "6bbaa62f-c23e-4254-8772-93e9d3b43dfe",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has text\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('text'); ",
-									"});",
-									"",
-									"pm.test(\"Has yes\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('yes'); ",
-									"});",
-									"",
-									"pm.test(\"Has no\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('no'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_ref2}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_ref2}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate Europa",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "998f9536-0ed5-4ed8-b0b7-0c7e90209f34",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_europa}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_europa}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate Buerger",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "d4f72fc1-e99a-47ec-8882-6dacbc639109",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_buerger}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_buerger}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate LandtagSL",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "d64597d6-501d-43f6-88cd-2dff96ae619b",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has parties\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('parties'); ",
-									"});",
-									"",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_landtagsl}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_landtagsl}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate LandtagBW",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "aacce12e-af9d-4f49-a525-f4df978e10ca",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_landtagbw}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_landtagbw}}",
-								"evaluate"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "{{tokenUser}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "evaluate Landtag",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "9686b7f0-0938-42c7-9584-965688a6571f",
-								"type": "text/javascript",
-								"exec": [
-									"const jsonData = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Has general\", function(){",
-									"   pm.expect(jsonData).to.have.property('general'); ",
-									"});",
-									"",
-									"pm.test(\"Has constituency\", function(){",
-									"   pm.expect(jsonData).to.have.property('constituency'); ",
-									"});",
-									"",
-									"pm.test(\"Has parties\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('parties'); ",
-									"});",
-									"",
-									"pm.test(\"Has candidates\", function(){",
-									"   pm.expect(jsonData.general).to.have.property('candidates'); ",
-									"});",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"typ\": \"Buergermeisterwahl\",\n  \"text\": \"Dies ist eine Buergermeisterwahl\",\n  \"start_date\": \"1520726400\",\n  \"end_date\": \"1520726400\",\n  \"state\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "http://yourChoice.local/api/election/{{id_election_landtag}}/evaluate?token={{tokenUser}}",
-							"protocol": "http",
-							"host": [
-								"yourChoice",
-								"local"
-							],
-							"path": [
-								"api",
-								"election",
-								"{{id_election_landtag}}",
-								"evaluate"
 							],
 							"query": [
 								{

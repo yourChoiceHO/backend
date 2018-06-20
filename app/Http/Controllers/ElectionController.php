@@ -28,7 +28,7 @@ class ElectionController extends Controller
         $info = Token::getClientOrElectionId($token);
         if(is_array($info)){
             if(in_array($id, array_column($info, 'election_id'))){
-                $election = Election::whereIdElection($id)->where('state', '=', Election::FREIGEGEBEN)->first();
+                $election = Election::whereIdElection($id)->where('state', '=', Election::IM_GANGE)->first();
                 if($election) {
                     return $election;
                 }
