@@ -200,7 +200,8 @@ class Election extends Model
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'voter') {
             $voter = $userArray['object'];
-            $voter = Voter::whereIdVoter($voter->id_voter)->where('hash', '=', $request->input('hash'))->first();
+            $hash = $request->input('hash');
+            $voter = $hash ? Voter::whereIdVoter($voter->id_voter)->where('hash', '=', $hash)->first() : 1;
             if($voter) {
                 $id_election = $this->id_election;
                 $voter_id = $request->input('voter_id');
