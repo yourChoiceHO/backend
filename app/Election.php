@@ -147,7 +147,7 @@ class Election extends Model
                 $constituency = $candidate->getAttribute('constituency');
                 $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
                 $candidate['vote_percent'] = number_format((($candidate->getAttribute('vote') / $max_vote) * 100), 2);
-                $result['constituency']['candidate'][] = $candidate;
+                $result['candidate'][] = $candidate;
             }
         }
         if($withParty) {
@@ -156,7 +156,7 @@ class Election extends Model
                 $constituency = $party->getAttribute('constituency');
                 $max_vote = Party::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
                 $party['vote_percent'] = number_format((($party->getAttribute('vote') / $max_vote) * 100), 2);
-                $result['constituency']['parties'][] = $party;
+                $result['parties'][] = $party;
             }
         }
         return $result;
@@ -172,10 +172,10 @@ class Election extends Model
                 $result['general']['election']['max_vote_party'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
                 $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::Buergermeisterwahl || $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW) {
-                $result['general']['candidates'] = $this->getVotesForConstituency(false);
+                $result['general'] = $this->getVotesForConstituency(false);
                 $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::LandtagswahlSL) {
-                $result['general']['parties'] = $this->getVotesForConstituency(true, false);
+                $result['general']= $this->getVotesForConstituency(true, false);
                 $result['general']['election']['max_vote_party'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
                 $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::Referendum) {

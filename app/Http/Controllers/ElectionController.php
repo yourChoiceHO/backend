@@ -94,6 +94,8 @@ class ElectionController extends Controller
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
             $user = $userArray['object'];
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
             $array = array(
                 //client doesn't exists yet'
                 'client_id'=> $user->client_id,
