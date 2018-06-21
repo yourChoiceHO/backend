@@ -191,6 +191,7 @@ class Election extends Model
                 $result['general']['no']['vote_percent'] = number_format((($referendum->getAttribute("no") / $max_vote) * 100),
                     2);
             }
+
             return $result;
         }
         abort(404, "Wahl muss erst abgeschlossen sein");

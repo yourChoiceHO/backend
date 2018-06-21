@@ -96,16 +96,26 @@ class ElectionController extends Controller
             $user = $userArray['object'];
             $start_date = $request->input('start_date');
             $end_date = $request->input('end_date');
-            $array = array(
-                //client doesn't exists yet'
-                'client_id'=> $user->client_id,
-                'typ' => $request->input('typ'),
-                'text' => $request->input('text'),
-                'start_date' => $request->input('start_date'),
-                'end_date' => $request->input('end_date'),
-                'state' => $user->role == User::WAHLLEITER ? $request->input('state') : 1
-            );
-            return Election::create($array);
+            $date1 = new \DateTime($start_date);
+            $date2 = new \DateTime($end_date);
+            $diff = date_diff($date1, $date2);
+            $date2->getTimestamp();
+            if(date('i', $date2->getTimestamp()) == 0 && date('H', $date2->getTimestamp()) == 18) {
+                if ($diff->days >= 14) {
+                    $array = array(
+                        //client doesn't exists yet'
+                        'client_id' => $user->client_id,
+                        'typ' => $request->input('typ'),
+                        'text' => $request->input('text'),
+                        'start_date' => $request->input('start_date'),
+                        'end_date' => $request->input('end_date'),
+                        'state' => $user->role == User::WAHLLEITER ? $request->input('state') : 1
+                    );
+                    return Election::create($array);
+                }
+                abort(401, 'Start Datum und End Datum muessen mindestens zwei Wochen auseinander sein');
+            }
+            abort(404, "Wahl muss um 18 Uhr Enden");
         }
         abort(403, 'Access Denied');
     }
