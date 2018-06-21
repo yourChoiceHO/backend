@@ -71,11 +71,11 @@ class ElectionController extends Controller
         }else{
             $elections= Election::whereClientId($info)->get();
             foreach ($elections as $election){
-                if($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= time()){
+                if($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= (time() + (3600*2))){
                     $election->setAttribute('state', Election::IM_GANGE);
                     $election->save();
                 }
-                if(($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= time()){
+                if(($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= (time() + (3600*2))){
                     $election->setAttribute('state', Election::ABGESCHLOSSEN);
                     $election->save();
 
