@@ -70,10 +70,17 @@ class VoterController extends Controller
         $voter->save();
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $voter = Voter::findOrFail($id);
-
-        $destroyflag = $voter->delete();
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $voter = Voter::whereIdVoter($id)->where('client_id', '=', $user->client_id)->first();
+            if($voter){
+                $voter->delete();
+                return "true";
+            }
+        }
+        abort(403, 'Access Denied');
     }
 }

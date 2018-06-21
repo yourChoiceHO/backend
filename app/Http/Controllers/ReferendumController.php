@@ -90,11 +90,18 @@ class ReferendumController extends Controller
         abort(403, 'Access Denied');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $referendum = Referendum::findOrFail($id);
-
-        $destroyflag = $referendum->delete();
+        $userArray = Token::getUserOrVoter($request->input('token'));
+        if($userArray['type'] == 'user') {
+            $user = $userArray['object'];
+            $referendum = Referendum::whereIdReferendum($id)->where('client_id', '=', $user->client_id)->first();
+            if($referendum){
+                $referendum->delete();
+                return "true";
+            }
+        }
+        abort(403, 'Access Denied');
     }
 
 
