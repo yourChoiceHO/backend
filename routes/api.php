@@ -35,6 +35,7 @@ Route::post('/election/{id}/evaluate', 'ElectionController@evaluate');
 Route::get('/election/{id}/parties', 'ElectionController@parties');
 Route::get('/election/{id}/candidates', 'ElectionController@candidates');
 Route::get('/election/{id}/referendums', 'ElectionController@referendums');
+Route::get('/election/{id}/constituency', 'ElectionController@constituency');
 Route::post('/election', 'ElectionController@store');
 Route::post('/election/{id}/vote', 'ElectionController@vote');
 Route::post('/election/{id}/addParties', 'ElectionController@addParties');
@@ -43,6 +44,7 @@ Route::post('/election/{id}/addVoters', 'ElectionController@addVoters');
 Route::post('/election/{id}/addReferendums', 'ElectionController@addReferendums');
 Route::put('/election/{id}', 'ElectionController@update');
 Route::delete('/election/{id}', 'ElectionController@destroy');
+
 
 Route::get('/candidate/{id}', 'CandidateController@show');
 Route::get('/candidate', 'CandidateController@all');

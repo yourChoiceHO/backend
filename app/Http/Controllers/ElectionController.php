@@ -170,7 +170,20 @@ class ElectionController extends Controller
         return Referendum::whereElectionId($election->id_election)->get();
     }
 
-
+    public function constituency(Request $request, $id){
+        $constituency = $request->input('constituency');
+        if($constituency){
+            $result['candidates'] = \App\Candidate::whereElectionId($id)->where('constituency', '=', $constituency)->get();
+            $result['party'] = Party::whereElectionId($id)->where('constituency', '=', $constituency)->get();
+            $result['voter'] = Voter::whereElectionId($id)->where('constituency', '=', $constituency)->get();
+            return $result;
+        }else{
+            $result['candidates'] = \App\Candidate::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+            $result['party'] = Party::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+            $result['voter'] = Voter::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+            return $result;
+        }
+    }
     public function evaluate($id, Request $request){
         /**
          * @var Election $result
