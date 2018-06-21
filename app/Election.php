@@ -173,9 +173,11 @@ class Election extends Model
                 $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::Buergermeisterwahl || $this->typ == self::Europawahl || $this->typ == self::LandtagswahlBW) {
                 $result['general'] = $this->getVotesForConstituency(false);
+                $result['general']['election'] = $this;
                 $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::LandtagswahlSL) {
                 $result['general']= $this->getVotesForConstituency(true, false);
+                $result['general']['election'] = $this;
                 $result['general']['election']['max_vote_party'] = Party::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
                 $result['general']['election']['max_vote_candidate'] = Candidate::whereElectionId($this->id_election)->groupBy('election_id')->sum('vote');
             } elseif ($this->typ == self::Referendum) {
