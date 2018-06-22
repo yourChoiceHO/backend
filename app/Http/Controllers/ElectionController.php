@@ -104,7 +104,7 @@ class ElectionController extends Controller
             $date2 = new \DateTime($end_date);
             $diff = date_diff($date1, $date2);
             $date2->getTimestamp();
-            if (date('i', $date2->getTimestamp()) == 0 && date('H', $date2->getTimestamp()) == 16) {
+            if (date('i', $date2->getTimestamp()) == 0 && (date('H', $date2->getTimestamp()) == 16 || date('H', $date2->getTimestamp()) == 18)) {
                 if ($diff->days >= 14) {
                     $array = array(
                         //client doesn't exists yet'
