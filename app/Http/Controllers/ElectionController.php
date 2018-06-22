@@ -137,6 +137,9 @@ class ElectionController extends Controller
 
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
             if ($election) {
+                if($election->typ == Election::IM_GANGE || $election->typ == Election::ABGESCHLOSSEN){
+                    abort(403, "Abgeschlossene oder laufende Wahlen dürfen nicht bearbeitet werden");
+                }
                 $newState = $newState ?? $election->state;
                 $election->typ = $newTyp ? $newTyp : $election->typ;
                 $election->text = $newText ? $newText : $election->text;
