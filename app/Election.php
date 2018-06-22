@@ -295,34 +295,38 @@ class Election extends Model
     public function addParties(Request $request){
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
-            $user = $userArray['object'];
-            $files = $request->file('upload');
-            $checksum = $request->input('checksum');
-            if($checksum) {
-                $this->checkChecksum($files, $checksum);
-            }
-            $allParties[] = array();
-            $csv = array_map('str_getcsv', file($files));
-            array_walk($csv, function (&$a) use ($csv) {
-                $a = array_combine($csv[0], $a);
-            });
-            array_shift($csv);
+            try {
+                $user = $userArray['object'];
+                $files = $request->file('upload');
+                $checksum = $request->input('checksum');
+                if ($checksum) {
+                    $this->checkChecksum($files, $checksum);
+                }
+                $allParties[] = array();
+                $csv = array_map('str_getcsv', file($files));
+                array_walk($csv, function (&$a) use ($csv) {
+                    $a = array_combine($csv[0], $a);
+                });
+                array_shift($csv);
 
-            foreach ($csv as $parties) {
-                $party = array(
-                    'name' => $parties['name'],
-                    'text' => $parties['text'],
-                    'constituency' => $parties['constituency'],
-                    'election_id' => $this->id_election,
-                    'client_id' => $user->client_id,
-                    'vote' => 0
-                );
-                $partyCreated = Party::create($party);
-                array_push($allParties, $partyCreated);
-            }
-            array_shift($allParties);
+                foreach ($csv as $parties) {
+                    $party = array(
+                        'name' => $parties['name'],
+                        'text' => $parties['text'],
+                        'constituency' => $parties['constituency'],
+                        'election_id' => $this->id_election,
+                        'client_id' => $user->client_id,
+                        'vote' => 0
+                    );
+                    $partyCreated = Party::create($party);
+                    array_push($allParties, $partyCreated);
+                }
+                array_shift($allParties);
 
-            return $allParties;
+                return $allParties;
+            }catch (\Exception $ex){
+                abort(404, "Couldn't add Party");
+            }
         }
         abort(403, 'Access Denied');
     }
@@ -330,50 +334,54 @@ class Election extends Model
     public function addCandidates(Request $request){
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
-            $user = $userArray['object'];
-            $files = $request->file('upload');
-            $checksum = $request->input('checksum');
+            try {
+                $user = $userArray['object'];
+                $files = $request->file('upload');
+                $checksum = $request->input('checksum');
 
-            $allCandidates[] = array();
-            $csv = array_map('str_getcsv', file($files));
-            if($checksum) {
-                $this->checkChecksum($csv, $checksum);
-            }
-            array_walk($csv, function (&$a) use ($csv) {
-                $a = array_combine($csv[0], $a);
-            });
-            array_shift($csv);
-            foreach ($csv as $candidates) {
-                $party = null;
-                if($candidates['party']) {
-                    $party = Party::whereElectionId($this->id_election)->where('name',
-                        $candidates['party'])->where('constituency', '=', $candidates['constituency'])->first();
-                    if (!($party)) {
-                        $array = array(
-                            'name' => $candidates['party'],
-                            'constituency' => $candidates['constituency'],
-                            'client_id' => $user->client_id,
-                            'election_id' => $this->id_election,
-                            'vote' => 0,
-                            'text' => ''
-                        );
-                        $party = Party::create($array);
-                    }
+                $allCandidates[] = array();
+                $csv = array_map('str_getcsv', file($files));
+                if ($checksum) {
+                    $this->checkChecksum($csv, $checksum);
                 }
-                $candidate = array(
-                    'last_name' => $candidates['last_name'],
-                    'first_name' => $candidates['first_name'],
-                    'party_id' => $party ? $party->id_party : null,
-                    'constituency' => $candidates['constituency'],
-                    'election_id' => $this->id_election,
-                    'client_id' => $user->client_id,
-                    'vote' => 0
-                );
-                $candidateCreated = Candidate::create($candidate);
-                array_push($allCandidates, $candidateCreated);
+                array_walk($csv, function (&$a) use ($csv) {
+                    $a = array_combine($csv[0], $a);
+                });
+                array_shift($csv);
+                foreach ($csv as $candidates) {
+                    $party = null;
+                    if ($candidates['party']) {
+                        $party = Party::whereElectionId($this->id_election)->where('name',
+                            $candidates['party'])->where('constituency', '=', $candidates['constituency'])->first();
+                        if (!($party)) {
+                            $array = array(
+                                'name' => $candidates['party'],
+                                'constituency' => $candidates['constituency'],
+                                'client_id' => $user->client_id,
+                                'election_id' => $this->id_election,
+                                'vote' => 0,
+                                'text' => ''
+                            );
+                            $party = Party::create($array);
+                        }
+                    }
+                    $candidate = array(
+                        'last_name' => $candidates['last_name'],
+                        'first_name' => $candidates['first_name'],
+                        'party_id' => $party ? $party->id_party : null,
+                        'constituency' => $candidates['constituency'],
+                        'election_id' => $this->id_election,
+                        'client_id' => $user->client_id,
+                        'vote' => 0
+                    );
+                    $candidateCreated = Candidate::create($candidate);
+                    array_push($allCandidates, $candidateCreated);
+                }
+                array_shift($allCandidates);
+                return $allCandidates;
+            }catch (\Exception $ex){
+                abort(404, "Couldn't add Party");
             }
-            array_shift($allCandidates);
-            return $allCandidates;
         }
         abort(403, 'Access Denied');
     }
@@ -382,33 +390,37 @@ class Election extends Model
     {
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
-            $user = $userArray['object'];
-            $files = $request->file('upload');
-            $checksum = $request->input('checksum');
-            $allVoters[] = array();
-            $csv = array_map('str_getcsv', file($files));
-            if($checksum) {
-                $this->checkChecksum($csv, $checksum);
-            }
-            array_walk($csv, function (&$a) use ($csv) {
-                $a = array_combine($csv[0], $a);
-            });
-            array_shift($csv);
-            foreach ($csv as $voters) {
-                $voter = array(
-                    'last_name' => $voters['last_name'],
-                    'first_name' => $voters['first_name'],
-                    'hash' => $voters['hash'],
-                    'constituency' => $voters['constituency'],
-                    'election_id' => $this->id_election,
-                    'client_id' => $user->client_id
-                );
-                $voterCreated = Voter::create($voter);
-                array_push($allVoters, $voterCreated);
-            }
-            array_shift($allVoters);
+            try {
+                $user = $userArray['object'];
+                $files = $request->file('upload');
+                $checksum = $request->input('checksum');
+                $allVoters[] = array();
+                $csv = array_map('str_getcsv', file($files));
+                if ($checksum) {
+                    $this->checkChecksum($csv, $checksum);
+                }
+                array_walk($csv, function (&$a) use ($csv) {
+                    $a = array_combine($csv[0], $a);
+                });
+                array_shift($csv);
+                foreach ($csv as $voters) {
+                    $voter = array(
+                        'last_name' => $voters['last_name'],
+                        'first_name' => $voters['first_name'],
+                        'hash' => $voters['hash'],
+                        'constituency' => $voters['constituency'],
+                        'election_id' => $this->id_election,
+                        'client_id' => $user->client_id
+                    );
+                    $voterCreated = Voter::create($voter);
+                    array_push($allVoters, $voterCreated);
+                }
+                array_shift($allVoters);
 
-            return $allVoters;
+                return $allVoters;
+            }catch (\Exception $ex){
+                abort(404, "Couldn't add Party");
+            }
         }
         abort(403, 'Access Denied');
     }
@@ -417,35 +429,39 @@ class Election extends Model
     {
         $userArray = Token::getUserOrVoter($request->input('token'));
         if($userArray['type'] == 'user') {
-            $user = $userArray['object'];
-            $files = $request->file('upload');
-            $checksum = $request->input('checksum');
+            try {
+                $user = $userArray['object'];
+                $files = $request->file('upload');
+                $checksum = $request->input('checksum');
 
-            $allReferendums[] = array();
+                $allReferendums[] = array();
 
-            $csv = array_map('str_getcsv', file($files));
-            if($checksum) {
-                $this->checkChecksum($csv, $checksum);
+                $csv = array_map('str_getcsv', file($files));
+                if ($checksum) {
+                    $this->checkChecksum($csv, $checksum);
+                }
+                array_walk($csv, function (&$a) use ($csv) {
+                    $a = array_combine($csv[0], $a);
+                });
+                array_shift($csv);
+                foreach ($csv as $referendum) {
+                    $array = array(
+                        'text' => $referendum['text'],
+                        'constituency' => $referendum['constituency'],
+                        'yes' => 0,
+                        'no' => 0,
+                        'election_id' => $this->id_election,
+                        'client_id' => $user->client_id
+                    );
+                    $referendumCreated = Voter::create($array);
+                    array_push($allReferendums, $referendumCreated);
+                }
+                array_shift($allReferendums);
+
+                return $allReferendums;
+            }catch (\Exception $ex){
+                abort(404, "Couldn't add Party");
             }
-            array_walk($csv, function (&$a) use ($csv) {
-                $a = array_combine($csv[0], $a);
-            });
-            array_shift($csv);
-            foreach ($csv as $referendum) {
-                $array = array(
-                    'text' => $referendum['text'],
-                    'constituency' => $referendum['constituency'],
-                    'yes' => 0,
-                    'no' => 0,
-                    'election_id' => $this->id_election,
-                    'client_id' => $user->client_id
-                );
-                $referendumCreated = Voter::create($array);
-                array_push($allReferendums, $referendumCreated);
-            }
-            array_shift($allReferendums);
-
-            return $allReferendums;
         }
         abort(403, 'Access Denied');
     }
