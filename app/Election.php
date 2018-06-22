@@ -208,7 +208,7 @@ class Election extends Model
             if($voter) {
                 $id_election = $this->id_election;
                 $voter_id = $request->input('voter_id');
-                $voter = Voter::whereElectionId($id_election)->where('id_voter', '=', $voter_id)->first();
+                $voter = Vote::whereElectionId($id_election)->where('voter_id', '=', $voter_id)->first();
                 if (!$voter) { //check if first vote for election
                     $valid = $request->input('valid');
                     $first_vote = $request->input('first_vote');
@@ -264,8 +264,10 @@ class Election extends Model
                     } else {
                         abort(404, 'vote not saved');
                     }
+                }else{
+                    abort(400, "Waehler hat bereits gewählt");
                 }
-                return "true";
+                return "success";
             }
             abort(403,'Wrong hash');
         }
