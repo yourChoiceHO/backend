@@ -58,11 +58,11 @@ class ElectionController extends Controller
 
                 if ($election) {
                     if (!(in_array($election->getAttribute('id_election'), array_column($votes, 'election_id')))) {
-                        if ($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= time()) {
+                        if ($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= (time() + (3600 * 2))) {
                             $election->setAttribute('state', Election::IM_GANGE);
                             $election->save();
                         }
-                        if (($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= time()) {
+                        if (($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= (time() + (3600 * 2))) {
                             $election->setAttribute('state', Election::ABGESCHLOSSEN);
                             $election->save();
                             continue;
