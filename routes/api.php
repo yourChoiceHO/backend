@@ -36,6 +36,7 @@ Route::get('/election/{id}/parties', 'ElectionController@parties');
 Route::get('/election/{id}/candidates', 'ElectionController@candidates');
 Route::get('/election/{id}/referendums', 'ElectionController@referendums');
 Route::get('/election/{id}/constituency', 'ElectionController@constituency');
+Route::get('/election/{id}/constituency/{cid}', 'ElectionController@constituencyWithId');
 Route::post('/election', 'ElectionController@store');
 Route::post('/election/{id}/vote', 'ElectionController@vote');
 Route::post('/election/{id}/addParties', 'ElectionController@addParties');
@@ -44,6 +45,11 @@ Route::post('/election/{id}/addVoters', 'ElectionController@addVoters');
 Route::post('/election/{id}/addReferendums', 'ElectionController@addReferendums');
 Route::put('/election/{id}', 'ElectionController@update');
 Route::delete('/election/{id}', 'ElectionController@destroy');
+Route::delete('/election/{id}/removeParties/{cid}', 'ElectionController@removeParties');
+Route::delete('/election/{id}/removeCandidates/{cid}', 'ElectionController@removeCandidates');
+Route::delete('/election/{id}/removeVoters/{cid}', 'ElectionController@removeVoters');
+Route::delete('/election/{id}/removeReferendums/{cid}', 'ElectionController@removeReferendums');
+Route::delete('/election/{id}/constituency//{cid}', 'ElectionController@removeConstituency');
 
 
 Route::get('/candidate/{id}', 'CandidateController@show');

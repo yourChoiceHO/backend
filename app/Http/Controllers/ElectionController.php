@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Election;
-use App\Http\Resources\Candidate;
+use App\Candidate;
 use App\Party;
 use App\Referendum;
 use App\Token;
@@ -16,44 +16,48 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ElectionController extends Controller
 {
-     //
-    public function index(){
+    //
+    public function index()
+    {
         //return "Hi i#m election";
         $election = DB::table('elections')->get();
         return $election;//view('viewapp')->with('elections', $election);
     }
 
-    public function show(Request $request, $id){
+    public function show(Request $request, $id)
+    {
         $token = $request->input('token');
         $info = Token::getClientOrElectionId($token);
-        if(is_array($info)){
-            if(in_array($id, array_column($info, 'election_id'))){
+        if (is_array($info)) {
+            if (in_array($id, array_column($info, 'election_id'))) {
                 $election = Election::whereIdElection($id)->where('state', '=', Election::IM_GANGE)->first();
-                if($election) {
+                if ($election) {
                     return $election;
                 }
             }
-        }elseif ($info){
-            $election =  Election::whereIdElection($id)->where('client_id', '=', $info)->first();
-            if($election) {
+        } elseif ($info) {
+            $election = Election::whereIdElection($id)->where('client_id', '=', $info)->first();
+            if ($election) {
                 return $election;
             }
         }
         abort(403, 'Access Denied');
     }
 
-    public function all(Request $request){
+    public function all(Request $request)
+    {
         $result = null;
         $info = Token::getClientOrElectionId($request->input('token'));
-        if(is_array($info)){
+        if (is_array($info)) {
             $info = array_column($info, 'election_id');
-            foreach ($info as $id){
-                $election = Election::whereIdElection($id)->whereIn('state', [Election::FREIGEGEBEN, Election::IM_GANGE])->first();
+            foreach ($info as $id) {
+                $election = Election::whereIdElection($id)->whereIn('state',
+                    [Election::FREIGEGEBEN, Election::IM_GANGE])->first();
                 $voters = Token::getVoters($request->input('token'));
                 $votes = Vote::whereIn('voter_id', $voters)->get(array('election_id'))->toArray();
 
-                if($election) {
-                    if(!(in_array($election->getAttribute('id_election'), array_column($votes, 'election_id')))) {
+                if ($election) {
+                    if (!(in_array($election->getAttribute('id_election'), array_column($votes, 'election_id')))) {
                         if ($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= time()) {
                             $election->setAttribute('state', Election::IM_GANGE);
                             $election->save();
@@ -68,14 +72,14 @@ class ElectionController extends Controller
                     }
                 }
             }
-        }else{
-            $elections= Election::whereClientId($info)->get();
-            foreach ($elections as $election){
-                if($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= (time() + (3600*2))){
+        } else {
+            $elections = Election::whereClientId($info)->get();
+            foreach ($elections as $election) {
+                if ($election->getAttribute('state') == Election::FREIGEGEBEN && strtotime($election->getAttribute('start_date')) <= (time() + (3600 * 2))) {
                     $election->setAttribute('state', Election::IM_GANGE);
                     $election->save();
                 }
-                if(($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= (time() + (3600*2))){
+                if (($election->getAttribute('state') == Election::FREIGEGEBEN || $election->getAttribute('state') == Election::IM_GANGE) && strtotime($election->getAttribute('end_date')) <= (time() + (3600 * 2))) {
                     $election->setAttribute('state', Election::ABGESCHLOSSEN);
                     $election->save();
 
@@ -92,7 +96,7 @@ class ElectionController extends Controller
          * @var User $user
          */
         $userArray = Token::getUserOrVoter($request->input('token'));
-        if($userArray['type'] == 'user') {
+        if ($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $start_date = $request->input('start_date');
             $end_date = $request->input('end_date');
@@ -100,7 +104,7 @@ class ElectionController extends Controller
             $date2 = new \DateTime($end_date);
             $diff = date_diff($date1, $date2);
             $date2->getTimestamp();
-            if(date('i', $date2->getTimestamp()) == 0 && date('H', $date2->getTimestamp()) == 18) {
+            if (date('i', $date2->getTimestamp()) == 0 && date('H', $date2->getTimestamp()) == 18) {
                 if ($diff->days >= 14) {
                     $array = array(
                         //client doesn't exists yet'
@@ -123,7 +127,7 @@ class ElectionController extends Controller
     public function update(Request $request, $id)
     {
         $userArray = Token::getUserOrVoter($request->input('token'));
-        if($userArray['type'] == 'user') {
+        if ($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $newTyp = $request->input('typ');
             $newText = $request->input('text');
@@ -132,7 +136,7 @@ class ElectionController extends Controller
             $newState = $request->input('state');
 
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
-            if($election) {
+            if ($election) {
                 $newState = $newState ?? $election->state;
                 $election->typ = $newTyp ? $newTyp : $election->typ;
                 $election->text = $newText ? $newText : $election->text;
@@ -150,10 +154,10 @@ class ElectionController extends Controller
     public function destroy(Request $request, $id)
     {
         $userArray = Token::getUserOrVoter($request->input('token'));
-        if($userArray['type'] == 'user') {
+        if ($userArray['type'] == 'user') {
             $user = $userArray['object'];
             $election = Election::whereIdElection($id)->where('client_id', '=', $user->client_id)->first();
-            if($election){
+            if ($election) {
                 $election->delete();
                 return "true";
             }
@@ -161,47 +165,67 @@ class ElectionController extends Controller
         abort(403, 'Access Denied');
     }
 
-    public function test(){
+    public function test()
+    {
         $voter = \DB::select('SELECT e.id_election FROM elections e, parties p, candidates c, referendums r WHERE (p.constituency = 1 AND e.id_election = p.election_id) OR (c.constituency = 1 AND e.id_election = c.election_id) OR (r.constituency = 1 AND e.id_election = r.election_id) GROUP BY e.id_election');
         $voter = array_column($voter, 'id_election');
         return $voter;
     }
 
-    public function parties(Request $request, $id){
+    public function parties(Request $request, $id)
+    {
         $election = $this->show($request, $id);
         return Party::whereElectionId($election->id_election)->get();
     }
 
-    public function candidates(Request $request, $id){
+    public function candidates(Request $request, $id)
+    {
         $election = $this->show($request, $id);
-        return \App\Candidate::whereElectionId($election->id_election)->get();
+        return Candidate::whereElectionId($election->id_election)->get();
     }
 
-    public function referendums(Request $request, $id){
+    public function referendums(Request $request, $id)
+    {
         $election = $this->show($request, $id);
         return Referendum::whereElectionId($election->id_election)->get();
     }
 
-    public function constituency(Request $request, $id){
-        $constituency = $request->input('constituency');
-        if($constituency){
-            $result['candidates'] = \App\Candidate::whereElectionId($id)->where('constituency', '=', $constituency)->get();
-            $result['party'] = Party::whereElectionId($id)->where('constituency', '=', $constituency)->get();
-            $result['voter'] = Voter::whereElectionId($id)->where('constituency', '=', $constituency)->get();
-            return $result;
-        }else{
-            $result['candidates'] = \App\Candidate::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
-            $result['party'] = Party::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
-            $result['voter'] = Voter::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
-            return $result;
-        }
+    public function constituency(Request $request, $id)
+    {
+        $election = $this->show($request,$id);
+        $id = $election->id_election;
+        $result['candidates'] = Candidate::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+        $result['party'] = Party::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+        $result['voter'] = Voter::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+        return $result;
+
     }
-    public function evaluate($id, Request $request){
+
+    public function constituencyWithId(Request $request, $id, $cid)
+    {
+        $election = $this->show($request, $id);
+        $id = $election->id_election;
+        $result['candidates'] = Candidate::whereElectionId($id)->where('constituency', '=', $cid)->get();
+        $result['party'] = Party::whereElectionId($id)->where('constituency', '=', $cid)->get();
+        $result['voter'] = Voter::whereElectionId($id)->where('constituency', '=', $cid)->get();
+        return $result;
+    }
+
+    public function removeConstituency(Request $request, $id, $cid){
+        $this->removeParties($request, $id, $cid);
+        $this->removeCandidates($request, $id, $cid);
+        $this->removeReferendums($request, $id, $cid);
+        $this->removeVoters($request, $id, $cid);
+        return 'success';
+    }
+
+    public function evaluate($id, Request $request)
+    {
         /**
          * @var Election $result
          */
         $userArray = Token::getUserOrVoter($request->input('token'));
-        if($userArray['type'] == 'user') {
+        if ($userArray['type'] == 'user') {
             $result = Election::findOrFail($id);
             return $result->evaluate();
         }
@@ -213,30 +237,75 @@ class ElectionController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function vote($id, Request $request){
+    public function vote($id, Request $request)
+    {
         $result = Election::find($id);
         return $result->vote($request);
 
     }
 
-    public function addParties(Request $request, $id){
+    public function addParties(Request $request, $id)
+    {
         $result = Election::find($id);
         return $result->addParties($request);
     }
 
-    public function addCandidates(Request $request, $id){
+    public function addCandidates(Request $request, $id)
+    {
         $result = Election::find($id);
         return $result->addCandidates($request);
     }
 
-    public function addVoters(Request $request, $id){
+    public function addVoters(Request $request, $id)
+    {
         $result = Election::find($id);
         return $result->addVoters($request);
     }
 
-    public function addReferendums(Request $request, $id){
-        $result = Election::find($id);
+    public function addReferendums(Request $request, $id)
+    {
+        $result = $this->show($request, $id);
         return $result->addReferendums($request);
+    }
+
+    public function removeParties(Request $request, $id, $cid)
+    {
+        $election = $this->show($request, $id);
+        $parties = Party::whereElectionId($election->id_election)->where('constituency', '=', $cid)->get();
+        foreach ($parties as $party) {
+            $party->delete();
+        }
+        return 'success';
+    }
+
+    public function removeCandidates(Request $request, $id, $cid)
+    {
+        $election = $this->show($request, $id);
+        $candidates = Candidate::whereElectionId($election->id_election)->where('constituency', '=', $cid)->get();
+        foreach ($candidates as $candidate) {
+            $candidate->delete();
+        }
+        return 'success';
+    }
+
+    public function removeVoters(Request $request, $id, $cid)
+    {
+        $election = $this->show($request, $id);
+        $voters = Voter::whereElectionId($election->id_election)->where('constituency', '=', $cid)->get();
+        foreach ($voters as $voter) {
+            $voter->delete();
+        }
+        return 'success';
+    }
+
+    public function removeReferendums(Request $request, $id, $cid)
+    {
+        $election = $this->show($request, $id);
+        $referendums = Referendum::whereElectionId($election->id_election)->where('constituency', '=', $cid)->get();
+        foreach ($referendums as $referendum) {
+            $referendum->delete();
+        }
+        return 'success';
     }
 
 }
