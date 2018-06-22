@@ -197,6 +197,7 @@ class ElectionController extends Controller
         $result['candidates'] = Candidate::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
         $result['party'] = Party::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
         $result['voter'] = Voter::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
+        $result['referendum'] = Referendum::whereElectionId($id)->groupBy(array('constituency'))->get(array('constituency'));
         return $result;
 
     }
@@ -208,6 +209,7 @@ class ElectionController extends Controller
         $result['candidates'] = Candidate::whereElectionId($id)->where('constituency', '=', $cid)->get();
         $result['party'] = Party::whereElectionId($id)->where('constituency', '=', $cid)->get();
         $result['voter'] = Voter::whereElectionId($id)->where('constituency', '=', $cid)->get();
+        $result['referendum'] = Referendum::whereElectionId($id)->where('constituency', '=', $cid)->get();
         return $result;
     }
 
