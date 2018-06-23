@@ -325,7 +325,7 @@ class Election extends Model
 
                 return $allParties;
             }catch (\Exception $ex){
-                abort(404, "Couldn't add Party");
+                abort(404, "Couldn't add Parties:\n".$ex->getMessage());
             }
         }
         abort(403, 'Access Denied');
@@ -380,7 +380,7 @@ class Election extends Model
                 array_shift($allCandidates);
                 return $allCandidates;
             }catch (\Exception $ex){
-                abort(404, "Couldn't add Party");
+                abort(404, "Couldn't add Candidates:\n".$ex->getMessage());
             }
         }
         abort(403, 'Access Denied');
@@ -420,7 +420,7 @@ class Election extends Model
 
                 return $allVoters;
             }catch (\Exception $ex){
-                abort(404, "Couldn't add Party");
+                abort(404, "Couldn't add Voters:\n".$ex->getMessage());
             }
         }
         abort(403, 'Access Denied');
@@ -461,7 +461,7 @@ class Election extends Model
 
                 return $allReferendums;
             }catch (\Exception $ex){
-                abort(404, "Couldn't add Party");
+                abort(404, "Couldn't add Referendum:\n".$ex->getMessage());
             }
         }
         abort(403, 'Access Denied');
