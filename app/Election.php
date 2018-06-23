@@ -408,6 +408,7 @@ class Election extends Model
                         'last_name' => $voters['last_name'],
                         'first_name' => $voters['first_name'],
                         'hash' => $voters['hash'],
+                        'password' => $voters['password'],
                         'constituency' => $voters['constituency'],
                         'election_id' => $this->id_election,
                         'client_id' => $user->client_id
