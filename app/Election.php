@@ -147,7 +147,7 @@ class Election extends Model
                 $constituency = $candidate->getAttribute('constituency');
                 $max_vote = Candidate::whereElectionId($this->id_election)->where('constituency', '=', $constituency)->sum('vote');
                 $candidate['vote_percent'] = number_format((($candidate->getAttribute('vote') / $max_vote) * 100), 2);
-                $result['candidate'][] = $candidate;
+                $result['candidates'][] = $candidate;
             }
         }
         if($withParty) {
